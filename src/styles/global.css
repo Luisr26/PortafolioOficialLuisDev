@@ -1,5 +1,1 @@
 @import "tailwindcss";
-
-.medida-hero {
-  height: calc(100vh - -130px);
-}
