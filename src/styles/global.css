@@ -1,1 +1,11 @@
 @import "tailwindcss";
+
+.medida-section {
+  height: calc(100vh - -130px);
+}
+
+@media screen and (max-width: 768px) {
+    .medida-section {
+        height: calc(100vh - -460px);
+    }
+}
