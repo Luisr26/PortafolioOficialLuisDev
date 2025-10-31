@@ -1,0 +1,88 @@
+<nav class="fixed top-0 left-0 right-0 z-50 bg-gray-950/80 backdrop-blur-md border-b border-gray-800 shadow-sm">
+  <div class="max-w-7xl mx-14 px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      
+      <!-- Logo/Nombre -->
+      <div class="shrink-0">
+        <a href="/" class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent hover:from-blue-700 hover:to-purple-700 transition-all duration-300">
+          LuisDev
+        </a>
+      </div>
+
+      <!-- Links Desktop -->
+      <div class="hidden md:flex items-center space-x-8">
+        <a href="#inicio" class="text-gray-300 hover:text-white font-medium transition-colors duration-200 relative group">
+          Inicio
+          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-white group-hover:w-full transition-all duration-300"></span>
+        </a>
+        <a href="#proyectos" class="text-gray-300 hover:text-white font-medium transition-colors duration-200 relative group">
+          Proyectos
+          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-white group-hover:w-full transition-all duration-300"></span>
+        </a>
+        <a href="#habilidades" class="text-gray-300 hover:text-white font-medium transition-colors duration-200 relative group">
+          Habilidades
+          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-white group-hover:w-full transition-all duration-300"></span>
+        </a>
+        <a href="#sobre-mi" class="text-gray-300 hover:text-white font-medium transition-colors duration-200 relative group">
+          Sobre Mí
+          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-white group-hover:w-full transition-all duration-300"></span>
+        </a>
+        <a href="#contacto" class="bg-white text-gray-950 px-6 py-2 rounded-full hover:bg-gray-200 transition-all duration-300 hover:shadow-lg hover:scale-105 font-medium">
+          Contacto
+        </a>
+      </div>
+
+      <!-- Botón Menú Mobile -->
+      <button id="menu-btn" class="md:hidden text-gray-300 hover:text-white focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          <path id="close-icon" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Menú Mobile -->
+    <div id="mobile-menu" class="hidden md:hidden pb-4">
+      <div class="flex flex-col space-y-3">
+        <a href="#inicio" class="text-gray-300 hover:text-white hover:bg-gray-800 px-4 py-2 rounded-lg font-medium transition-all duration-200">
+          Inicio
+        </a>
+        <a href="#proyectos" class="text-gray-300 hover:text-white hover:bg-gray-800 px-4 py-2 rounded-lg font-medium transition-all duration-200">
+          Proyectos
+        </a>
+        <a href="#habilidades" class="text-gray-300 hover:text-white hover:bg-gray-800 px-4 py-2 rounded-lg font-medium transition-all duration-200">
+          Habilidades
+        </a>
+        <a href="#sobre-mi" class="text-gray-300 hover:text-white hover:bg-gray-800 px-4 py-2 rounded-lg font-medium transition-all duration-200">
+          Sobre Mí
+        </a>
+        <a href="#contacto" class="bg-white text-gray-950 px-4 py-2 rounded-lg hover:bg-gray-200 transition-all duration-200 text-center font-medium">
+          Contacto
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const menuIcon = document.getElementById('menu-icon');
+  const closeIcon = document.getElementById('close-icon');
+
+  menuBtn?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden');
+    menuIcon?.classList.toggle('hidden');
+    closeIcon?.classList.toggle('hidden');
+  });
+
+  // Cerrar menú al hacer clic en un enlace
+  const mobileLinks = mobileMenu?.querySelectorAll('a');
+  mobileLinks?.forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu?.classList.add('hidden');
+      menuIcon?.classList.remove('hidden');
+      closeIcon?.classList.add('hidden');
+    });
+  });
+</script>
