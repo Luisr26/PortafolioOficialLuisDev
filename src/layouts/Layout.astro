@@ -1,27 +1,51 @@
 ---
-import '../styles/global.css'
+import '../styles/global.css';
+import Navbar from '../components/Navbar.astro';
+import SideElements from '../components/SideElements.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props { title?: string; description?: string; }
+
+const {
+  title = 'Luis Orozco — AI & Automation Developer',
+  description = 'AI & Automation Developer. Full-Stack con Angular + Spring Boot. Hiperautomatización con n8n, Power Automate e IA.'
+} = Astro.props;
 ---
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+  <meta name="author" content="Luis Alfredo Orozco Sanchez" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <title>{title}</title>
+</head>
+<body>
+  <Navbar />
+  <SideElements />
+  <main>
+    <slot />
+  </main>
+  <Footer />
+  <script>
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      { threshold: 0.1 }
+    );
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>LuisDev - Full Stack Developer</title>
-	</head>
-	<body class="bg-gray-950 text-gray-100">
-		<slot />
-	</body>
+    let lastScroll = 0;
+    const nav = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      const curr = window.scrollY;
+      nav?.classList.toggle('-translate-y-full', curr > lastScroll && curr > 100);
+      lastScroll = curr;
+    });
+  </script>
+</body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-		scroll-behavior: smooth;
-	}
-</style>

@@ -1,11 +1,38 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-.medida-section {
-  height: calc(100vh - -130px);
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@layer base {
+  html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+  body { @apply bg-dark text-slate-light font-sans leading-relaxed overflow-x-hidden; }
+  ::selection { @apply bg-accent text-dark; }
 }
 
-@media screen and (max-width: 768px) {
-    .medida-section {
-        height: calc(100vh - -460px);
-    }
+@layer components {
+  .section-heading {
+    @apply flex items-center text-2xl md:text-3xl font-semibold text-slate-bright whitespace-nowrap mb-10;
+  }
+  .section-heading .num {
+    @apply font-mono text-accent text-lg md:text-xl mr-3 font-normal;
+  }
+  .section-heading::after {
+    content: '';
+    @apply block h-px w-full ml-6;
+    background: rgba(255,255,255,0.06);
+  }
+  .btn-outline {
+    @apply font-mono text-sm text-accent border border-accent px-6 py-3 rounded transition-all duration-200 inline-block;
+  }
+  .btn-outline:hover { @apply bg-accent/10; }
+  .reveal {
+    @apply opacity-0 translate-y-8;
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { @apply opacity-100 translate-y-0; }
+  .arrow-marker::before {
+    content: '▹';
+    @apply absolute left-0 text-accent;
+  }
 }

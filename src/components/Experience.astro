@@ -1,0 +1,82 @@
+---
+const jobs = [
+  {
+    id: 0, company: 'Blackbird Labs', role: 'Desarrollador IA',
+    period: 'Diciembre 2025 — Presente',
+    items: [
+      'Diseño e implementación de sistemas inteligentes con modelos de lenguaje y agentes de IA para automatizar procesos de negocio.',
+      'Conexión de plataformas externas mediante APIs REST, protocolos MCP y orquestación de herramientas.',
+      'Diseño de arquitecturas escalables para productos basados en inteligencia artificial.',
+    ],
+  },
+  {
+    id: 1, company: 'Retycol', role: 'Desarrollador IA',
+    period: 'Enero 2026 — Presente',
+    items: [
+      'Ecosistema de automatización híbrido con n8n (84+ nodos) y Power Automate, integrando Microsoft Graph API, ClickUp y SheetJS.',
+      'Verificación documental farmacéutica con Google Gemini para extracción inteligente en SharePoint.',
+      'Dashboards operativos con reportes HTML diarios, KPIs y alertas automáticas.',
+      'Desarrollo de SPDER: predicción de demanda con Angular, Node.js, PostgreSQL y Python.',
+    ],
+  },
+  {
+    id: 2, company: 'ICAS LTDA', role: 'Desarrollador Web & Analista de Datos',
+    period: 'Enero 2023 — Marzo 2024 · Permiso de trabajo menor de edad',
+    items: [
+      'Dashboards interactivos para pipeline de I+D farmacéutico con Node.js, Graph API y Chart.js.',
+      'Procesamiento de datos operativos con Python (Pandas, NumPy, Matplotlib).',
+      'Orquestación de APIs REST conectando SharePoint, OneDrive y ClickUp.',
+    ],
+  },
+];
+---
+<section id="experience" class="max-w-4xl mx-auto px-6 py-24">
+  <h2 class="section-heading reveal"><span class="num">02.</span> Experiencia</h2>
+  <div class="reveal md:flex gap-0">
+    <div class="flex md:flex-col overflow-x-auto md:overflow-visible shrink-0 mb-6 md:mb-0" style="border-bottom:1px solid rgba(255,255,255,.06);" id="tabContainer">
+      {jobs.map((job) => (
+        <button
+          data-tab={job.id}
+          class={`exp-tab font-mono text-sm text-left px-5 py-3 whitespace-nowrap transition-all duration-200 ${
+            job.id === 0
+              ? 'text-accent bg-accent/5'
+              : 'text-slate hover:bg-accent/5 hover:text-slate-light'
+          }`}
+          style={job.id === 0 ? 'border-left:2px solid #64ffda;' : 'border-left:2px solid rgba(255,255,255,.06);'}
+        >
+          {job.company}
+        </button>
+      ))}
+    </div>
+    <div class="md:pl-8 min-h-[320px]">
+      {jobs.map((job) => (
+        <div data-panel={job.id} class={`exp-panel ${job.id !== 0 ? 'hidden' : ''}`}>
+          <h3 class="text-lg font-semibold text-slate-bright mb-1">
+            {job.role} <span class="text-accent">@ {job.company}</span>
+          </h3>
+          <p class="font-mono text-sm text-slate mb-5">{job.period}</p>
+          <ul class="space-y-3">
+            {job.items.map((item) => (
+              <li class="relative pl-6 text-slate text-[.92rem] arrow-marker">{item}</li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+<script>
+  document.querySelectorAll('.exp-tab').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const idx = btn.dataset.tab;
+      document.querySelectorAll('.exp-tab').forEach((t) => {
+        const match = t.dataset.tab === idx;
+        t.className = `exp-tab font-mono text-sm text-left px-5 py-3 whitespace-nowrap transition-all duration-200 ${match ? 'text-accent bg-accent/5' : 'text-slate hover:bg-accent/5 hover:text-slate-light'}`;
+        t.style.borderLeft = match ? '2px solid #64ffda' : '2px solid rgba(255,255,255,.06)';
+      });
+      document.querySelectorAll('.exp-panel').forEach((p) => {
+        p.classList.toggle('hidden', p.dataset.panel !== idx);
+      });
+    });
+  });
+</script>

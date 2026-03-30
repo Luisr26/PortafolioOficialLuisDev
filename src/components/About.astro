@@ -1,0 +1,42 @@
+---
+const skills = [
+  'Java 21 / Spring Boot', 'Angular / TypeScript',
+  'Python / Pandas', 'n8n / Power Automate',
+  'PostgreSQL / MySQL', 'Docker / Git',
+  'MCP Protocol', 'Google Gemini API',
+];
+---
+<section id="about" class="max-w-4xl mx-auto px-6 py-24">
+  <h2 class="section-heading reveal"><span class="num">01.</span> Sobre mí</h2>
+  <div class="grid md:grid-cols-[3fr_2fr] gap-12 items-start reveal">
+    <div>
+      <p class="text-slate mb-4">
+        Comencé a programar a los 15 años y a los 16 conseguí mi primer empleo profesional con un
+        <strong class="text-slate-bright">permiso legal de trabajo como menor de edad</strong> en
+        <span class="text-accent">ICAS LTDA</span>, donde descubrí mi pasión por la automatización y el análisis de datos.
+      </p>
+      <p class="text-slate mb-4">
+        Hoy trabajo simultáneamente en dos empresas —
+        <span class="text-accent">Blackbird Labs</span> como Desarrollador IA y en
+        <span class="text-accent">Retycol</span> diseñando ecosistemas de hiperautomatización con
+        <strong class="text-slate-bright">n8n, Power Automate, servidores MCP</strong> e integración de modelos de IA.
+      </p>
+      <p class="text-slate mb-4">
+        Actualmente curso el 6to semestre de <strong class="text-slate-bright">Ingeniería de Sistemas</strong>
+        y estoy construyendo <strong class="text-accent">SPDER</strong>, un sistema de predicción de demanda basado en eventos reactivos.
+      </p>
+      <p class="text-slate mb-4">Tecnologías con las que trabajo:</p>
+      <ul class="grid grid-cols-2 gap-x-4 gap-y-2 font-mono text-sm text-slate">
+        {skills.map((s) => (
+          <li class="pl-5 relative arrow-marker">{s}</li>
+        ))}
+      </ul>
+    </div>
+    <div class="relative max-w-[280px] mx-auto group">
+      <div class="rounded-lg bg-dark-card border border-white/10 aspect-square flex items-center justify-center text-6xl text-accent relative z-10 transition-all duration-300">
+        👨‍💻
+      </div>
+      <div class="absolute top-4 left-4 w-full h-full border-2 border-accent rounded-lg -z-0 transition-all duration-300 group-hover:top-2 group-hover:left-2"></div>
+    </div>
+  </div>
+</section>

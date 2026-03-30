@@ -1,99 +1,64 @@
-# Portafolio LuisDev - Full Stack Developer
+# Portfolio — Luis Alfredo Orozco Sanchez
 
-Portafolio web profesional de Luis Alfredo Orozco Sánchez, desarrollador Full Stack especializado en Angular y Java con Spring Boot.
+[![Astro](https://img.shields.io/badge/Astro_5-BC52EE?style=flat-square&logo=astro&logoColor=white)]()
+[![Tailwind](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)]()
 
-## 🚀 Características
+Professional developer portfolio. Dark theme, responsive, animated.
 
-- ✨ Diseño moderno y responsivo con tema dark
-- 📱 Totalmente adaptado a dispositivos móviles
-- ⚡ Construido con Astro para máximo rendimiento
-- 🎨 Styling con Tailwind CSS
-- 🌐 Secciones: Hero, Proyectos, Habilidades, Sobre Mí, Contacto
+## Architecture
 
-## 🛠️ Stack Tecnológico
+```
+src/
+├── components/
+│   ├── Navbar.astro        # Auto-hide navbar + mobile menu
+│   ├── SideElements.astro  # Floating social links + email
+│   ├── Hero.astro          # Animated intro with CTA
+│   ├── About.astro         # Bio + skills grid + accent border image
+│   ├── Experience.astro    # Tabbed layout (3 companies)
+│   ├── Projects.astro      # 6 project cards with hover effects
+│   ├── TechStack.astro     # Skill icons + devicon + FontAwesome
+│   ├── Contact.astro       # Email CTA + social links
+│   └── Footer.astro
+├── layouts/
+│   └── Layout.astro        # Global layout + SEO + scroll reveal
+├── pages/
+│   └── index.astro         # Single page composition
+└── styles/
+    └── global.css          # Tailwind + custom utilities
+```
 
-### Frontend
-- HTML5, CSS3, JavaScript
-- Vue.js, Angular, Astro, React
-- Tailwind CSS, Bootstrap, Bulma
+## Design inspiration
 
-### Backend
-- Java, Spring Boot
-- JavaScript, Express
-- Axios, Fetch
-- Kafka, Swagger
+- **Brittany Chiang** — Dark sidebar, tabbed experience, floating elements
+- **Lee Robinson** — Minimal, content-focused
+- **Token Template** — Terminal aesthetic, monospace
+- **Neodev** — Accent color, cyberpunk feel
 
-### Bases de Datos
-- MySQL, MongoDB, MariaDB
+## Stack
 
-### Herramientas
-- Git, GitHub
-- Docker, Vite, N8N
-- Python (Pandas, NumPy, Matplotlib)
+| Tech | Purpose |
+|:---|:---|
+| Astro 5 | Static site framework |
+| Tailwind CSS 3 | Utility-first styling |
+| FontAwesome 6 | Icons |
+| Skill Icons | Tech stack display |
+| Sora + JetBrains Mono | Typography |
 
-## 📦 Instalación
+## Getting started
 
 ```bash
-# Clonar el repositorio
-git clone https://github.com/Luisr26/PortafolioLuisDev.git
-
-# Instalar dependencias
 npm install
-
-# Ejecutar en desarrollo
 npm run dev
-
-# Build para producción
-npm run build
-
-# Preview del build
-npm run preview
 ```
 
-## 🚀 Despliegue en Vercel
-
-Este proyecto está optimizado para desplegarse en Vercel:
-
-1. Push tu código a GitHub
-2. Ve a [vercel.com](https://vercel.com)
-3. Importa tu repositorio
-4. Vercel detectará automáticamente que es un proyecto Astro
-5. ¡Deploy automático!
-
-O usando la CLI de Vercel:
+## Deploy
 
 ```bash
-npm i -g vercel
-vercel
+npm run build
+# Deploy dist/ to Vercel, Netlify, or GitHub Pages
 ```
 
-## 📄 Estructura del Proyecto
+## Author
 
-```
-/
-├── public/          # Archivos estáticos
-├── src/
-│   ├── assets/     # Imágenes y recursos
-│   ├── components/ # Componentes Astro
-│   ├── layouts/    # Layouts de página
-│   ├── pages/      # Páginas (routing)
-│   └── styles/     # Estilos globales
-└── package.json
-```
-
-## 📧 Contacto
-
-- **Email:** luisoro009@gmail.com
-- **Teléfono:** +57 304 523 3125
-- **Ubicación:** Barranquilla, Colombia
-- **GitHub:** [@Luisr26](https://github.com/Luisr26)
-- **LinkedIn:** [Luis Orozco](https://www.linkedin.com/in/luis-orozco-sanchez-07ab5b208/)
-- **Instagram:** [@luigi_r1020](https://www.instagram.com/luigi_r1020/)
-
-## 📝 Licencia
-
-© 2025 LuisDev. Todos los derechos reservados.
-
----
-
-Hecho con ❤️ y mucho código 💻
+**Luis Alfredo Orozco Sanchez** — AI & Automation Developer  
+[GitHub](https://github.com/Luisr26) · [LinkedIn](https://www.linkedin.com/in/luis-orozco-07ab5b208/) · [Email](mailto:luisoro009@gmail.com)
