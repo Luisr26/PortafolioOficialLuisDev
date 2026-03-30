@@ -1,19 +1,247 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Navbar from '../components/Navbar.astro';
-import Hero from '../components/Hero.astro';
-import About from '../components/About.astro';
-import Experience from '../components/Experience.astro';
-import Projects from '../components/Projects.astro';
-import TechStack from '../components/TechStack.astro';
-import Contact from '../components/Contact.astro';
+import '../styles/global.css';
 ---
-<Layout>
-  <Navbar />
-  <Hero />
-  <About />
-  <Experience />
-  <Projects />
-  <TechStack />
-  <Contact />
-</Layout>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <meta name="description" content="Luis Orozco - AI & Automation Developer. Angular, Spring Boot, n8n, Python."/>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <title>Luis Orozco | AI & Automation Developer</title>
+</head>
+<body class="bg-[#0f172a] text-[#94a3b8] antialiased">
+
+  <!-- MOUSE SPOTLIGHT -->
+  <div id="spotlight" class="pointer-events-none fixed inset-0 z-30 opacity-0 transition-opacity duration-500"
+       style="background:radial-gradient(600px circle at var(--mx,50%) var(--my,50%),rgba(29,78,216,.07),transparent 80%)"></div>
+
+  <div class="mx-auto min-h-screen max-w-screen-xl px-6 py-12 md:px-12 md:py-20 lg:px-24 lg:py-0">
+    <div class="lg:flex lg:justify-between lg:gap-4">
+
+      <!-- ========== LEFT COLUMN (STICKY) ========== -->
+      <header class="lg:sticky lg:top-0 lg:flex lg:max-h-screen lg:w-[48%] lg:flex-col lg:justify-between lg:py-24">
+        <div>
+          <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-[#e2e8f0]" style="font-family:'Outfit',sans-serif">
+            <a href="/">Luis Orozco</a>
+          </h1>
+          <h2 class="mt-3 text-lg font-medium tracking-tight text-[#e2e8f0]" style="font-family:'Outfit',sans-serif">
+            AI & Automation Developer
+          </h2>
+          <p class="mt-4 max-w-xs leading-normal text-[#94a3b8]">
+            Construyo soluciones de hiperautomatizacion, full-stack e inteligencia artificial.
+          </p>
+
+          <!-- NAV SPY -->
+          <nav class="nav hidden lg:block mt-16" aria-label="In-page jump links">
+            <ul class="w-max">
+              <li><a class="group flex items-center py-3" href="#about">
+                <span class="nav-indicator mr-4 h-px w-8 bg-[#475569] transition-all group-hover:w-16 group-hover:bg-[#e2e8f0] group-focus-visible:w-16 group-focus-visible:bg-[#e2e8f0]"></span>
+                <span class="nav-text text-xs font-bold uppercase tracking-widest text-[#475569] group-hover:text-[#e2e8f0] group-focus-visible:text-[#e2e8f0]" style="font-family:'Outfit',sans-serif">Sobre mi</span>
+              </a></li>
+              <li><a class="group flex items-center py-3" href="#experience">
+                <span class="nav-indicator mr-4 h-px w-8 bg-[#475569] transition-all group-hover:w-16 group-hover:bg-[#e2e8f0] group-focus-visible:w-16 group-focus-visible:bg-[#e2e8f0]"></span>
+                <span class="nav-text text-xs font-bold uppercase tracking-widest text-[#475569] group-hover:text-[#e2e8f0] group-focus-visible:text-[#e2e8f0]" style="font-family:'Outfit',sans-serif">Experiencia</span>
+              </a></li>
+              <li><a class="group flex items-center py-3" href="#projects">
+                <span class="nav-indicator mr-4 h-px w-8 bg-[#475569] transition-all group-hover:w-16 group-hover:bg-[#e2e8f0] group-focus-visible:w-16 group-focus-visible:bg-[#e2e8f0]"></span>
+                <span class="nav-text text-xs font-bold uppercase tracking-widest text-[#475569] group-hover:text-[#e2e8f0] group-focus-visible:text-[#e2e8f0]" style="font-family:'Outfit',sans-serif">Proyectos</span>
+              </a></li>
+              <li><a class="group flex items-center py-3" href="#stack">
+                <span class="nav-indicator mr-4 h-px w-8 bg-[#475569] transition-all group-hover:w-16 group-hover:bg-[#e2e8f0] group-focus-visible:w-16 group-focus-visible:bg-[#e2e8f0]"></span>
+                <span class="nav-text text-xs font-bold uppercase tracking-widest text-[#475569] group-hover:text-[#e2e8f0] group-focus-visible:text-[#e2e8f0]" style="font-family:'Outfit',sans-serif">Stack</span>
+              </a></li>
+            </ul>
+          </nav>
+        </div>
+
+        <!-- SOCIAL LINKS -->
+        <ul class="ml-1 mt-8 flex items-center gap-5" aria-label="Social media">
+          <li><a class="block text-[#94a3b8] hover:text-[#e2e8f0] transition-colors" href="https://github.com/Luisr26" target="_blank" rel="noopener" title="GitHub"><i class="fa-brands fa-github text-xl"></i></a></li>
+          <li><a class="block text-[#94a3b8] hover:text-[#e2e8f0] transition-colors" href="https://www.linkedin.com/in/luis-orozco-07ab5b208/" target="_blank" rel="noopener" title="LinkedIn"><i class="fa-brands fa-linkedin-in text-xl"></i></a></li>
+          <li><a class="block text-[#94a3b8] hover:text-[#e2e8f0] transition-colors" href="https://wa.me/573045233125" target="_blank" rel="noopener" title="WhatsApp"><i class="fa-brands fa-whatsapp text-xl"></i></a></li>
+          <li><a class="block text-[#94a3b8] hover:text-[#e2e8f0] transition-colors" href="mailto:luisoro009@gmail.com" title="Email"><i class="fa-solid fa-envelope text-xl"></i></a></li>
+        </ul>
+      </header>
+
+      <!-- ========== RIGHT COLUMN (SCROLLABLE) ========== -->
+      <main id="content" class="pt-24 lg:w-[52%] lg:py-24">
+
+        <!-- ABOUT -->
+        <section id="about" class="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24">
+          <div class="sticky top-0 z-20 -mx-6 mb-4 w-screen px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0">
+            <h2 class="text-sm font-bold uppercase tracking-widest text-[#e2e8f0]" style="font-family:'Outfit',sans-serif">Sobre mi</h2>
+          </div>
+          <div>
+            <p class="mb-4">Comence a programar a los 15 anios y a los 16 consegui mi primer empleo profesional con un <span class="text-[#e2e8f0]">permiso legal de trabajo como menor de edad</span> en <a href="#experience" class="font-medium text-[#e2e8f0] hover:text-[#5eead4] focus-visible:text-[#5eead4]">ICAS LTDA</a>, donde descubri mi pasion por la automatizacion y el analisis de datos.</p>
+            <p class="mb-4">Hoy trabajo simultaneamente en <a href="#experience" class="font-medium text-[#e2e8f0] hover:text-[#5eead4]">Blackbird Labs</a> como Desarrollador IA y en <a href="#experience" class="font-medium text-[#e2e8f0] hover:text-[#5eead4]">Retycol</a> diseniando ecosistemas de hiperautomatizacion con <span class="text-[#e2e8f0]">n8n, Power Automate, servidores MCP</span> e integracion de modelos de IA como Google Gemini.</p>
+            <p class="mb-4">Actualmente curso el 6to semestre de <span class="text-[#e2e8f0]">Ingenieria de Sistemas</span> y estoy construyendo <a href="https://github.com/Luisr26" class="font-medium text-[#e2e8f0] hover:text-[#5eead4]">SPDER</a>, un sistema de prediccion de demanda basado en eventos reactivos con Angular, Node.js, PostgreSQL y Python.</p>
+          </div>
+        </section>
+
+        <!-- EXPERIENCE -->
+        <section id="experience" class="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24">
+          <div class="sticky top-0 z-20 -mx-6 mb-4 w-screen px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0">
+            <h2 class="text-sm font-bold uppercase tracking-widest text-[#e2e8f0]" style="font-family:'Outfit',sans-serif">Experiencia</h2>
+          </div>
+          <div>
+            <ol class="group/list">
+
+              <!-- Blackbird Labs -->
+              <li class="mb-12">
+                <div class="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
+                  <div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-[#1e293b]/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"></div>
+                  <header class="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-[#64748b] sm:col-span-2" style="font-family:'JetBrains Mono',monospace" aria-label="2025 to Present">Dic 2025 &mdash; Presente</header>
+                  <div class="z-10 sm:col-span-6">
+                    <h3 class="font-medium leading-snug text-[#e2e8f0]" style="font-family:'Outfit',sans-serif">
+                      <a class="inline-flex items-baseline font-medium leading-tight text-[#e2e8f0] hover:text-[#5eead4] focus-visible:text-[#5eead4] group/link" href="#">
+                        <span>Desarrollador IA &middot; Blackbird Labs</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square inline-block ml-1.5 text-[.6rem] shrink-0 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"></i>
+                      </a>
+                    </h3>
+                    <p class="mt-2 text-sm leading-normal">Disenio e implementacion de sistemas inteligentes con modelos de lenguaje y agentes de IA. Conexion de plataformas mediante APIs REST, protocolos MCP y orquestacion. Arquitecturas escalables para productos de inteligencia artificial.</p>
+                    <ul class="mt-2 flex flex-wrap" aria-label="Technologies used">
+                      <li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">AI Agents</div></li>
+                      <li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">MCP</div></li>
+                      <li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">APIs REST</div></li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+
+              <!-- Retycol -->
+              <li class="mb-12">
+                <div class="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
+                  <div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-[#1e293b]/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"></div>
+                  <header class="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-[#64748b] sm:col-span-2" style="font-family:'JetBrains Mono',monospace">Ene 2026 &mdash; Presente</header>
+                  <div class="z-10 sm:col-span-6">
+                    <h3 class="font-medium leading-snug text-[#e2e8f0]" style="font-family:'Outfit',sans-serif">
+                      <a class="inline-flex items-baseline font-medium leading-tight text-[#e2e8f0] hover:text-[#5eead4] focus-visible:text-[#5eead4] group/link" href="#">
+                        <span>Desarrollador IA &middot; Retycol</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square inline-block ml-1.5 text-[.6rem] shrink-0 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"></i>
+                      </a>
+                    </h3>
+                    <p class="mt-2 text-sm leading-normal">Ecosistema de automatizacion hibrido con n8n (84+ nodos) y Power Automate, integrando Microsoft Graph API, ClickUp y SheetJS. Verificacion documental farmaceutica con Google Gemini. Dashboards operativos con reportes HTML y KPIs. Desarrollo de SPDER: prediccion de demanda con Angular, Node.js, PostgreSQL y Python.</p>
+                    <ul class="mt-2 flex flex-wrap" aria-label="Technologies used">
+                      <li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">n8n</div></li>
+                      <li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">Power Automate</div></li>
+                      <li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">Angular</div></li>
+                      <li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">Gemini</div></li>
+                      <li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">PostgreSQL</div></li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+
+              <!-- ICAS -->
+              <li class="mb-12">
+                <div class="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
+                  <div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-[#1e293b]/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"></div>
+                  <header class="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-[#64748b] sm:col-span-2" style="font-family:'JetBrains Mono',monospace">Ene 2023 &mdash; Mar 2024</header>
+                  <div class="z-10 sm:col-span-6">
+                    <h3 class="font-medium leading-snug text-[#e2e8f0]" style="font-family:'Outfit',sans-serif">
+                      <a class="inline-flex items-baseline font-medium leading-tight text-[#e2e8f0] hover:text-[#5eead4] focus-visible:text-[#5eead4] group/link" href="#">
+                        <span>Web Developer & Data Analyst &middot; ICAS LTDA</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square inline-block ml-1.5 text-[.6rem] shrink-0 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"></i>
+                      </a>
+                    </h3>
+                    <p class="mt-1 text-xs text-[#64748b]" style="font-family:'JetBrains Mono',monospace">Permiso de trabajo menor de edad</p>
+                    <p class="mt-2 text-sm leading-normal">Dashboards interactivos para pipeline I+D farmaceutico con Node.js, Microsoft Graph API y Chart.js. Procesamiento de datos con Python (Pandas, NumPy, Matplotlib). Orquestacion de APIs REST conectando SharePoint, OneDrive y ClickUp.</p>
+                    <ul class="mt-2 flex flex-wrap" aria-label="Technologies used">
+                      <li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">Node.js</div></li>
+                      <li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">Python</div></li>
+                      <li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">Graph API</div></li>
+                      <li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">Chart.js</div></li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+            </ol>
+          </div>
+        </section>
+
+        <!-- PROJECTS -->
+        <section id="projects" class="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24">
+          <div class="sticky top-0 z-20 -mx-6 mb-4 w-screen px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0">
+            <h2 class="text-sm font-bold uppercase tracking-widest text-[#e2e8f0]" style="font-family:'Outfit',sans-serif">Proyectos</h2>
+          </div>
+          <div>
+            <ul class="group/list">
+              <li class="mb-12"><div class="group relative grid gap-4 pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50"><div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-[#1e293b]/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"></div><div class="z-10 sm:order-2 sm:col-span-6"><h3 style="font-family:'Outfit',sans-serif"><a class="inline-flex items-baseline font-medium leading-tight text-[#e2e8f0] hover:text-[#5eead4] group/link" href="https://github.com/Luisr26/CoopCredit" target="_blank" rel="noopener"><span>CoopCredit<i class="fa-solid fa-arrow-up-right-from-square inline-block ml-1.5 text-[.55rem] transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"></i></span></a></h3><p class="mt-2 text-sm leading-normal">Sistema integral de creditos para cooperativas. Arquitectura Hexagonal, seguridad enterprise-grade, evaluacion automatizada de riesgo y 109 tests.</p><ul class="mt-2 flex flex-wrap"><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">Java 21</div></li><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">Spring Boot</div></li><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">PostgreSQL</div></li><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">Docker</div></li></ul></div><div class="z-10 sm:order-1 sm:col-span-2 mt-1 text-xs font-semibold uppercase tracking-wide text-[#64748b]" style="font-family:'JetBrains Mono',monospace"><i class="fa-solid fa-star text-[#5eead4] mr-1"></i>Destacado</div></div></li>
+              <li class="mb-12"><div class="group relative grid gap-4 pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50"><div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-[#1e293b]/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"></div><div class="z-10 sm:order-2 sm:col-span-6"><h3 style="font-family:'Outfit',sans-serif"><a class="inline-flex items-baseline font-medium leading-tight text-[#e2e8f0] hover:text-[#5eead4] group/link" href="https://github.com/Luisr26/NovaBook" target="_blank" rel="noopener"><span>NovaBook<i class="fa-solid fa-arrow-up-right-from-square inline-block ml-1.5 text-[.55rem] transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"></i></span></a></h3><p class="mt-2 text-sm leading-normal">Gestion de bibliotecas con GUI JavaFX, MySQL, RBAC (Admin/Bibliotecario), CRUD completo, import/export CSV. Patron MVC + DAO.</p><ul class="mt-2 flex flex-wrap"><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">Java</div></li><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">JavaFX</div></li><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">MySQL</div></li></ul></div><div class="z-10 sm:order-1 sm:col-span-2 mt-1 text-xs font-semibold uppercase tracking-wide text-[#64748b]" style="font-family:'JetBrains Mono',monospace">Desktop App</div></div></li>
+              <li class="mb-12"><div class="group relative grid gap-4 pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50"><div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-[#1e293b]/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"></div><div class="z-10 sm:order-2 sm:col-span-6"><h3 style="font-family:'Outfit',sans-serif"><a class="inline-flex items-baseline font-medium leading-tight text-[#e2e8f0] hover:text-[#5eead4] group/link" href="https://github.com/Luisr26/LoginAngular" target="_blank" rel="noopener"><span>LoginAngular<i class="fa-solid fa-arrow-up-right-from-square inline-block ml-1.5 text-[.55rem] transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"></i></span></a></h3><p class="mt-2 text-sm leading-normal">Autenticacion full-stack con Angular + Tailwind CSS conectado a Spring Boot. JWT, responsive, rutas protegidas.</p><ul class="mt-2 flex flex-wrap"><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">Angular</div></li><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">TypeScript</div></li><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">Spring Boot</div></li></ul></div><div class="z-10 sm:order-1 sm:col-span-2 mt-1 text-xs font-semibold uppercase tracking-wide text-[#64748b]" style="font-family:'JetBrains Mono',monospace">Full-Stack</div></div></li>
+              <li class="mb-12"><div class="group relative grid gap-4 pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50"><div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-[#1e293b]/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"></div><div class="z-10 sm:order-2 sm:col-span-6"><h3 style="font-family:'Outfit',sans-serif"><a class="inline-flex items-baseline font-medium leading-tight text-[#e2e8f0] hover:text-[#5eead4] group/link" href="https://github.com/Luisr26/JavaSpringM6" target="_blank" rel="noopener"><span>API Hexagonal<i class="fa-solid fa-arrow-up-right-from-square inline-block ml-1.5 text-[.55rem] transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"></i></span></a></h3><p class="mt-2 text-sm leading-normal">REST API con Arquitectura Hexagonal (Ports & Adapters), Spring Data JPA, Swagger UI y frontend Angular/TypeScript.</p><ul class="mt-2 flex flex-wrap"><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">Java 17</div></li><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">Angular</div></li><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">Swagger</div></li></ul></div><div class="z-10 sm:order-1 sm:col-span-2 mt-1 text-xs font-semibold uppercase tracking-wide text-[#64748b]" style="font-family:'JetBrains Mono',monospace">Clean Arch</div></div></li>
+              <li class="mb-12"><div class="group relative grid gap-4 pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50"><div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-[#1e293b]/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"></div><div class="z-10 sm:order-2 sm:col-span-6"><h3 style="font-family:'Outfit',sans-serif"><a class="inline-flex items-baseline font-medium leading-tight text-[#e2e8f0] hover:text-[#5eead4] group/link" href="https://github.com/Luisr26/ArquitecturaMicroservicios" target="_blank" rel="noopener"><span>Microservicios<i class="fa-solid fa-arrow-up-right-from-square inline-block ml-1.5 text-[.55rem] transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"></i></span></a></h3><p class="mt-2 text-sm leading-normal">Arquitectura distribuida con Java 21, Spring Boot 3.3, Spring Security y scripts Shell automatizados.</p><ul class="mt-2 flex flex-wrap"><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">Java 21</div></li><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">Spring Boot</div></li><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">Microservices</div></li></ul></div><div class="z-10 sm:order-1 sm:col-span-2 mt-1 text-xs font-semibold uppercase tracking-wide text-[#64748b]" style="font-family:'JetBrains Mono',monospace">Distributed</div></div></li>
+              <li class="mb-12"><div class="group relative grid gap-4 pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50"><div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-[#1e293b]/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"></div><div class="z-10 sm:order-2 sm:col-span-6"><h3 style="font-family:'Outfit',sans-serif"><a class="inline-flex items-baseline font-medium leading-tight text-[#e2e8f0] hover:text-[#5eead4] group/link" href="https://github.com/Luisr26/NearMe" target="_blank" rel="noopener"><span>NearMe<i class="fa-solid fa-arrow-up-right-from-square inline-block ml-1.5 text-[.55rem] transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"></i></span></a></h3><p class="mt-2 text-sm leading-normal">Plataforma de negocios locales. Landing profesional con diseno responsive y animaciones interactivas.</p><ul class="mt-2 flex flex-wrap"><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">HTML5</div></li><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">Bootstrap</div></li><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">JavaScript</div></li></ul></div><div class="z-10 sm:order-1 sm:col-span-2 mt-1 text-xs font-semibold uppercase tracking-wide text-[#64748b]" style="font-family:'JetBrains Mono',monospace">Landing</div></div></li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- TECH STACK -->
+        <section id="stack" class="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24">
+          <div class="sticky top-0 z-20 -mx-6 mb-4 w-screen px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0">
+            <h2 class="text-sm font-bold uppercase tracking-widest text-[#e2e8f0]" style="font-family:'Outfit',sans-serif">Stack</h2>
+          </div>
+          <div class="space-y-8">
+            <div><p class="text-xs font-bold uppercase tracking-widest text-[#64748b] mb-3" style="font-family:'JetBrains Mono',monospace">Languages</p><img src="https://skillicons.dev/icons?i=java,ts,js,python,html,css&theme=dark" class="h-10" alt="Languages" loading="lazy"/></div>
+            <div><p class="text-xs font-bold uppercase tracking-widest text-[#64748b] mb-3" style="font-family:'JetBrains Mono',monospace">Backend</p><img src="https://skillicons.dev/icons?i=spring,angular,nodejs,express&theme=dark" class="h-10" alt="Backend" loading="lazy"/></div>
+            <div><p class="text-xs font-bold uppercase tracking-widest text-[#64748b] mb-3" style="font-family:'JetBrains Mono',monospace">Frontend</p><img src="https://skillicons.dev/icons?i=angular,tailwind,bootstrap&theme=dark" class="h-10" alt="Frontend" loading="lazy"/></div>
+            <div><p class="text-xs font-bold uppercase tracking-widest text-[#64748b] mb-3" style="font-family:'JetBrains Mono',monospace">Databases</p><img src="https://skillicons.dev/icons?i=postgres,mysql,mongodb&theme=dark" class="h-10" alt="Databases" loading="lazy"/></div>
+            <div><p class="text-xs font-bold uppercase tracking-widest text-[#64748b] mb-3" style="font-family:'JetBrains Mono',monospace">DevOps</p><img src="https://skillicons.dev/icons?i=docker,git,github,vite,astro&theme=dark" class="h-10" alt="DevOps" loading="lazy"/></div>
+            <div><p class="text-xs font-bold uppercase tracking-widest text-[#64748b] mb-3" style="font-family:'JetBrains Mono',monospace">AI & Automation</p><div class="flex flex-wrap gap-1.5"><span class="rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">n8n</span><span class="rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">Power Automate</span><span class="rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">MCP Protocol</span><span class="rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">Google Gemini</span><span class="rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">NLP / OCR</span><span class="rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">AI Agents</span></div></div>
+          </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="max-w-md pb-16 text-sm text-[#64748b]">
+          <p>Coded in <a href="https://code.visualstudio.com/" class="font-medium text-[#94a3b8] hover:text-[#5eead4]">Visual Studio Code</a>. Built with <a href="https://astro.build/" class="font-medium text-[#94a3b8] hover:text-[#5eead4]">Astro</a> and <a href="https://tailwindcss.com/" class="font-medium text-[#94a3b8] hover:text-[#5eead4]">Tailwind CSS</a>. Set in the <a href="https://fonts.google.com/specimen/Outfit" class="font-medium text-[#94a3b8] hover:text-[#5eead4]">Outfit</a> typeface.</p>
+        </footer>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script>
+    // Mouse spotlight
+    var sl = document.getElementById('spotlight');
+    document.addEventListener('mousemove', function(e) {
+      sl.style.setProperty('--mx', e.clientX + 'px');
+      sl.style.setProperty('--my', e.clientY + 'px');
+      sl.style.opacity = '1';
+    });
+
+    // Active nav spy
+    var sections = document.querySelectorAll('section[id]');
+    var navLinks = document.querySelectorAll('.nav a');
+    function updateNav() {
+      var scrollY = window.scrollY + 200;
+      sections.forEach(function(sec) {
+        var top = sec.offsetTop;
+        var height = sec.offsetHeight;
+        var id = sec.getAttribute('id');
+        if (scrollY >= top && scrollY < top + height) {
+          navLinks.forEach(function(link) {
+            var isActive = link.getAttribute('href') === '#' + id;
+            var indicator = link.querySelector('.nav-indicator');
+            var text = link.querySelector('.nav-text');
+            if (isActive) {
+              indicator.style.width = '4rem';
+              indicator.style.backgroundColor = '#e2e8f0';
+              text.style.color = '#e2e8f0';
+            } else {
+              indicator.style.width = '2rem';
+              indicator.style.backgroundColor = '#475569';
+              text.style.color = '#475569';
+            }
+          });
+        }
+      });
+    }
+    window.addEventListener('scroll', updateNav);
+    updateNav();
+  </script>
+</body>
+</html>

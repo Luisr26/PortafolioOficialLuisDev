@@ -1,1 +1,33 @@
-# Portfolio v3 \u2014 Luis Alfredo Orozco Sanchez\n\n[![Astro](https://img.shields.io/badge/Astro_5-BC52EE?style=flat-square&logo=astro&logoColor=white)]()\n[![Tailwind](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)]()\n\nInteractive developer portfolio with 10 design ideas fused from the world's best portfolios.\n\n## Interactions\n\n| Feature | Inspired by |\n|:---|:---|\n| Particle canvas background with mouse repulsion | Diogo Correia |\n| Mouse spotlight glow that follows cursor | Brittany Chiang v5 |\n| Custom cursor dot + magnetic ring on hover | Jack Jeznach |\n| Scroll progress bar at top | Kenneth Jimmy |\n| Typewriter effect in hero | Cassie Evans |\n| Staggered fade-up animations | Devon Stank |\n| Glow cards that track mouse position | Neodev |\n| Floating social sidebar + vertical email | Brittany Chiang v4 |\n| Auto-hide navbar on scroll | Multiple |\n| Scroll-triggered reveal animations | Valeriia Shchebetovska |\n\n## Stack\n\n- Astro 5 + Tailwind CSS\n- Manrope + JetBrains Mono fonts\n- FontAwesome 6 icons\n- Skill Icons (skillicons.dev)\n- Canvas 2D particle system\n- Pure vanilla JS (no dependencies)\n\n## Run\n\n```bash\nnpm install\nnpm run dev\n```\n\n## Author\n\n**Luis Alfredo Orozco Sanchez** \u2014 AI & Automation Developer\n[GitHub](https://github.com/Luisr26) \u00b7 [LinkedIn](https://www.linkedin.com/in/luis-orozco-07ab5b208/)\n
+# Portfolio v4 - Luis Orozco
+
+Brittany Chiang v5 style portfolio adapted with my personal branding.
+
+## Layout
+
+- Two-column layout: sticky left (name, title, nav, socials) + scrollable right (about, experience, projects, stack)
+- Mouse spotlight that follows cursor
+- Active nav indicator with scroll spy
+- Experience items with hover background glow and opacity dimming
+- Project items with same hover pattern
+- Tech pills with teal accent
+- Skill icons from skillicons.dev
+- Outfit + JetBrains Mono typography
+
+## Run
+
+```bash
+npm install
+npm run dev
+```
+
+## Stack
+
+- Astro 5
+- Tailwind CSS 3
+- FontAwesome 6
+- Skill Icons
+
+## Author
+
+Luis Alfredo Orozco Sanchez
+https://github.com/Luisr26
