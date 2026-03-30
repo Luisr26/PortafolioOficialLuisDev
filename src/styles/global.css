@@ -2,37 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
-
 @layer base {
-  html { scroll-behavior: smooth; scroll-padding-top: 80px; }
-  body { @apply bg-dark text-slate-light font-sans leading-relaxed overflow-x-hidden; }
-  ::selection { @apply bg-accent text-dark; }
+  html { scroll-behavior:smooth; scroll-padding-top:80px; }
+  body { @apply bg-[#060611] text-[#94a3b8] leading-relaxed overflow-x-hidden; cursor:none; font-family:'Manrope',sans-serif; }
+  ::selection { background:#64ffda; color:#060611; }
+  @media(max-width:1024px){ body{cursor:auto;} }
 }
 
 @layer components {
-  .section-heading {
-    @apply flex items-center text-2xl md:text-3xl font-semibold text-slate-bright whitespace-nowrap mb-10;
+  .sh { @apply flex items-center text-2xl md:text-3xl font-bold text-[#e2e8f0] whitespace-nowrap mb-12; }
+  .sh .n { @apply font-mono text-[#64ffda] text-lg md:text-xl mr-3 font-normal; font-family:'JetBrains Mono',monospace; }
+  .sh::after { content:''; @apply block h-px w-full ml-6; background:linear-gradient(90deg,rgba(100,255,218,.2),transparent); }
+  .btn { @apply text-sm text-[#64ffda] border border-[#64ffda] px-7 py-3 rounded transition-all duration-200 inline-block relative overflow-hidden; font-family:'JetBrains Mono',monospace; }
+  .btn::before { content:''; @apply absolute inset-0 bg-[#64ffda]/10 -translate-x-full transition-transform duration-300; }
+  .btn:hover::before { @apply translate-x-0; }
+  .rv { @apply opacity-0 translate-y-8; transition:opacity .7s ease,transform .7s ease; }
+  .rv.vis { @apply opacity-100 translate-y-0; }
+  .arr::before { content:'\25b9'; @apply absolute left-0 text-[#64ffda]; }
+  .gc {
+    @apply relative bg-[#0c0c1d] border border-white/5 rounded-xl p-7 transition-all duration-300;
+    background-image:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(100,255,218,.04) 0%,transparent 50%);
   }
-  .section-heading .num {
-    @apply font-mono text-accent text-lg md:text-xl mr-3 font-normal;
-  }
-  .section-heading::after {
-    content: '';
-    @apply block h-px w-full ml-6;
-    background: rgba(255,255,255,0.06);
-  }
-  .btn-outline {
-    @apply font-mono text-sm text-accent border border-accent px-6 py-3 rounded transition-all duration-200 inline-block;
-  }
-  .btn-outline:hover { @apply bg-accent/10; }
-  .reveal {
-    @apply opacity-0 translate-y-8;
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-  .reveal.visible { @apply opacity-100 translate-y-0; }
-  .arrow-marker::before {
-    content: '▹';
-    @apply absolute left-0 text-accent;
-  }
+  .gc:hover { @apply border-[#64ffda]/20 -translate-y-1; box-shadow:0 0 40px rgba(100,255,218,.06); }
 }
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+.au { opacity:0; animation:fadeUp .6s ease forwards; }
+#particles { @apply fixed inset-0 z-0 pointer-events-none; }

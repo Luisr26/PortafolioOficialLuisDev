@@ -1,51 +1,78 @@
 ---
 import '../styles/global.css';
-import Navbar from '../components/Navbar.astro';
-import SideElements from '../components/SideElements.astro';
-import Footer from '../components/Footer.astro';
 
 interface Props { title?: string; description?: string; }
-
 const {
-  title = 'Luis Orozco — AI & Automation Developer',
-  description = 'AI & Automation Developer. Full-Stack con Angular + Spring Boot. Hiperautomatización con n8n, Power Automate e IA.'
+  title = 'Luis Orozco \u2014 AI & Automation Developer',
+  description = 'AI & Automation Developer. Angular + Spring Boot. Hiperautomatizaci\u00f3n con n8n, Power Automate e IA.'
 } = Astro.props;
 ---
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content={description} />
-  <meta name="author" content="Luis Alfredo Orozco Sanchez" />
-  <meta property="og:title" content={title} />
-  <meta property="og:description" content={description} />
-  <meta property="og:type" content="website" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <meta name="description" content={description}/>
+  <meta property="og:title" content={title}/>
+  <meta property="og:description" content={description}/>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
   <title>{title}</title>
 </head>
 <body>
-  <Navbar />
-  <SideElements />
-  <main>
-    <slot />
-  </main>
-  <Footer />
-  <script>
-    const observer = new IntersectionObserver(
-      (entries) => entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add('visible'); }),
-      { threshold: 0.1 }
-    );
-    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+  <!-- Scroll progress bar (Kenneth Jimmy) -->
+  <div id="scrollProgress" class="fixed top-0 left-0 h-[2px] bg-[#64ffda] z-[999]" style="width:0%"></div>
 
-    let lastScroll = 0;
-    const nav = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      const curr = window.scrollY;
-      nav?.classList.toggle('-translate-y-full', curr > lastScroll && curr > 100);
-      lastScroll = curr;
+  <!-- Mouse glow spotlight (Brittany Chiang v5) -->
+  <div id="mouseGlow" class="pointer-events-none fixed w-[600px] h-[600px] rounded-full opacity-0 transition-opacity duration-300 z-0" style="background:radial-gradient(circle,rgba(100,255,218,.07) 0%,transparent 70%)"></div>
+
+  <!-- Custom cursor (Jack Jeznach) -->
+  <div id="cursorDot" class="hidden lg:block pointer-events-none fixed w-2 h-2 bg-[#64ffda] rounded-full z-[9999] mix-blend-difference transition-transform duration-100"></div>
+  <div id="cursorRing" class="hidden lg:block pointer-events-none fixed w-10 h-10 border border-[#64ffda]/40 rounded-full z-[9998] transition-all duration-300"></div>
+
+  <slot/>
+
+  <script>
+    // Scroll progress
+    window.addEventListener('scroll',()=>{
+      const h=document.documentElement;
+      const p=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100;
+      document.getElementById('scrollProgress').style.width=p+'%';
     });
+    // Mouse glow
+    const glow=document.getElementById('mouseGlow');
+    document.addEventListener('mousemove',(e)=>{
+      glow.style.opacity='1';
+      glow.style.left=(e.clientX-300)+'px';
+      glow.style.top=(e.clientY-300)+'px';
+    });
+    document.addEventListener('mouseleave',()=>glow.style.opacity='0');
+    // Custom cursor
+    const dot=document.getElementById('cursorDot');
+    const ring=document.getElementById('cursorRing');
+    let mx=0,my=0,rx=0,ry=0;
+    document.addEventListener('mousemove',(e)=>{
+      mx=e.clientX;my=e.clientY;
+      dot.style.left=(mx-4)+'px';dot.style.top=(my-4)+'px';
+    });
+    (function loop(){rx+=(mx-rx)*.15;ry+=(my-ry)*.15;ring.style.left=(rx-20)+'px';ring.style.top=(ry-20)+'px';requestAnimationFrame(loop)})();
+    // Magnetic hover
+    document.querySelectorAll('a,button,.gc').forEach(el=>{
+      el.addEventListener('mouseenter',()=>{ring.style.transform='scale(1.8)';ring.style.borderColor='rgba(100,255,218,.6)';dot.style.transform='scale(2)';});
+      el.addEventListener('mouseleave',()=>{ring.style.transform='scale(1)';ring.style.borderColor='rgba(100,255,218,.4)';dot.style.transform='scale(1)';});
+    });
+    // Scroll reveal
+    const obs=new IntersectionObserver((en)=>en.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')}),{threshold:.1});
+    document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+    // Nav hide
+    let ly=0;const nav=document.getElementById('nav');
+    window.addEventListener('scroll',()=>{const y=window.scrollY;nav?.classList.toggle('-translate-y-full',y>ly&&y>80);ly=y;});
+    // Mobile menu
+    const mb=document.getElementById('mb'),mm=document.getElementById('mm'),mo=document.getElementById('mo');
+    function tm(){mm?.classList.toggle('translate-x-full');mo?.classList.toggle('hidden');}
+    mb?.addEventListener('click',tm);mo?.addEventListener('click',tm);
+    document.querySelectorAll('.ml').forEach(l=>l.addEventListener('click',tm));
   </script>
 </body>
 </html>
