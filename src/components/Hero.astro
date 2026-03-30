@@ -1,41 +1,85 @@
----
-const sc=[{i:'fa-brands fa-github',h:'https://github.com/Luisr26'},{i:'fa-brands fa-linkedin-in',h:'https://www.linkedin.com/in/luis-orozco-07ab5b208/'},{i:'fa-brands fa-whatsapp',h:'https://wa.me/573045233125'}];
----
 <section class="relative min-h-screen flex items-center">
   <canvas id="particles"></canvas>
   <div class="relative z-10 max-w-5xl mx-auto px-6 pt-20 pb-10">
+    <!-- Floating social sidebar -->
     <div class="hidden lg:flex fixed left-8 bottom-0 flex-col items-center z-40 gap-5">
-      {sc.map(({i,h})=>(<a href={h} target="_blank" rel="noopener" class="text-[#94a3b8] hover:text-[#64ffda] hover:-translate-y-1 transition-all text-lg"><i class={i}></i></a>))}
-      <div class="w-px h-20 bg-[#94a3b8]/30 mt-2"></div>
+      <a href="https://github.com/Luisr26" target="_blank" rel="noopener" class="text-[#94a3b8] hover:text-[#64ffda] hover:-translate-y-1 transition-all text-lg"><i class="fa-brands fa-github"></i></a>
+      <a href="https://www.linkedin.com/in/luis-orozco-07ab5b208/" target="_blank" rel="noopener" class="text-[#94a3b8] hover:text-[#64ffda] hover:-translate-y-1 transition-all text-lg"><i class="fa-brands fa-linkedin-in"></i></a>
+      <a href="https://wa.me/573045233125" target="_blank" rel="noopener" class="text-[#94a3b8] hover:text-[#64ffda] hover:-translate-y-1 transition-all text-lg"><i class="fa-brands fa-whatsapp"></i></a>
+      <div class="w-px h-24 mt-3" style="background:linear-gradient(to bottom,#64ffda33,transparent)"></div>
     </div>
+    <!-- Floating email -->
     <div class="hidden lg:flex fixed right-8 bottom-0 flex-col items-center z-40">
-      <a href="mailto:luisoro009@gmail.com" class="text-[.7rem] text-[#94a3b8] hover:text-[#64ffda] transition-colors tracking-wider mb-2" style="writing-mode:vertical-rl;font-family:'JetBrains Mono',monospace">luisoro009@gmail.com</a>
-      <div class="w-px h-20 bg-[#94a3b8]/30 mt-2"></div>
+      <a href="mailto:luisoro009@gmail.com" class="mono text-[.7rem] text-[#94a3b8] hover:text-[#64ffda] transition-colors tracking-wider mb-3" style="writing-mode:vertical-rl">luisoro009@gmail.com</a>
+      <div class="w-px h-24 mt-1" style="background:linear-gradient(to bottom,#64ffda33,transparent)"></div>
     </div>
-    <p class="text-[#64ffda] mb-5 au" style="animation-delay:.1s;font-family:'JetBrains Mono',monospace;font-size:.9rem">Hola, mi nombre es</p>
-    <h1 class="text-5xl sm:text-6xl md:text-8xl font-extrabold text-[#e2e8f0] leading-[.95] tracking-[-3px] mb-3 au" style="animation-delay:.3s">Luis Orozco<span class="text-[#64ffda]">.</span></h1>
-    <div class="overflow-hidden mb-8 au" style="animation-delay:.5s">
-      <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-[#94a3b8]/70 tracking-tight">Construyo <span id="tt" class="text-[#64ffda] inline-block border-r-2 border-[#64ffda]"></span></h2>
+
+    <p class="mono accent mb-5 au" style="animation-delay:.1s;font-size:.9rem">Hola, mi nombre es</p>
+
+    <h1 class="text-5xl sm:text-6xl md:text-[5.5rem] font-black bright leading-[.92] tracking-[-2px] mb-4 au" style="animation-delay:.3s">
+      Luis Orozco<span class="accent">.</span>
+    </h1>
+
+    <div class="mb-8 au" style="animation-delay:.5s">
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight" style="color:rgba(148,163,184,.6)">
+        Construyo <span id="tt" class="accent inline-block" style="border-right:2.5px solid #64ffda;padding-right:2px;animation:blink 1s step-end infinite"></span>
+      </h2>
     </div>
-    <p class="max-w-lg text-[#94a3b8] text-base md:text-lg leading-relaxed mb-10 au" style="animation-delay:.7s"><strong class="text-[#e2e8f0]">AI & Automation Developer</strong> especializado en hiperautomatizaci\u00f3n, full-stack con <strong class="text-[#e2e8f0]">Angular + Spring Boot</strong>, e integraci\u00f3n de IA. Actualmente en <span class="text-[#64ffda]">Blackbird Labs</span> y <span class="text-[#64ffda]">Retycol</span>.</p>
-    <div class="flex gap-4 au" style="animation-delay:.9s">
-      <a href="#projects" class="btn">Ver proyectos \u2192</a>
-      <a href="#contact" class="text-sm text-[#94a3b8] border border-[#94a3b8]/30 px-7 py-3 rounded hover:border-[#64ffda] hover:text-[#64ffda] transition-all" style="font-family:'JetBrains Mono',monospace">Cont\u00e1ctame</a>
+
+    <p class="max-w-lg text-base md:text-lg leading-relaxed mb-10 au" style="animation-delay:.7s">
+      <strong class="bright">AI & Automation Developer</strong> especializado en
+      hiperautomatizacion, full-stack con <strong class="bright">Angular + Spring Boot</strong>,
+      e integracion de IA. Actualmente en
+      <span class="accent">Blackbird Labs</span> y <span class="accent">Retycol</span>.
+    </p>
+
+    <div class="flex flex-wrap gap-4 au" style="animation-delay:.9s">
+      <a href="#projects" class="btn">Ver proyectos <i class="fa-solid fa-arrow-right ml-2 text-xs"></i></a>
+      <a href="#contact" class="mono text-sm text-[#94a3b8] border border-[#94a3b8]/20 px-7 py-3 rounded-md hover:border-[#64ffda] hover:text-[#64ffda] transition-all duration-300 hover:-translate-y-0.5">Contactame</a>
     </div>
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 au" style="animation-delay:1.2s">
-      <span class="text-[.65rem] text-[#94a3b8]/50 tracking-widest uppercase" style="font-family:'JetBrains Mono',monospace">Scroll</span>
-      <div class="w-px h-8 bg-[#64ffda]/30 animate-pulse"></div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 au" style="animation-delay:1.4s">
+      <span class="mono text-[.6rem] text-[#94a3b8]/40 tracking-[.2em] uppercase">scroll</span>
+      <div class="w-px h-10" style="background:linear-gradient(to bottom,#64ffda55,transparent);animation:glow 2s ease-in-out infinite"></div>
     </div>
   </div>
 </section>
+
 <script>
-  const words=['soluciones con IA.','automatizaciones.','apps full-stack.','el futuro.'];
-  const el=document.getElementById('tt');let wi=0,ci=0,del=false;
-  function type(){const w=words[wi];if(!del){el.textContent=w.slice(0,ci+1);ci++;if(ci===w.length){del=true;setTimeout(type,2000);return;}setTimeout(type,80);}else{el.textContent=w.slice(0,ci-1);ci--;if(ci===0){del=false;wi=(wi+1)%words.length;setTimeout(type,400);return;}setTimeout(type,40);}}
-  setTimeout(type,1200);
-  const cv=document.getElementById('particles');const cx=cv.getContext('2d');let W=0,H=0;
+  // Typewriter
+  var words=['soluciones con IA.','automatizaciones.','apps full-stack.','el futuro.'];
+  var el=document.getElementById('tt'),wi=0,ci=0,del=false;
+  function type(){
+    var w=words[wi];
+    if(!del){el.textContent=w.slice(0,ci+1);ci++;if(ci===w.length){del=true;setTimeout(type,2200);return;}setTimeout(type,75);}
+    else{el.textContent=w.slice(0,ci-1);ci--;if(ci===0){del=false;wi=(wi+1)%words.length;setTimeout(type,500);return;}setTimeout(type,35);}
+  }
+  setTimeout(type,1400);
+
+  // Particles
+  var cv=document.getElementById('particles'),cx=cv.getContext('2d'),W=0,H=0;
   function rs(){W=cv.width=window.innerWidth;H=cv.height=window.innerHeight;}rs();window.addEventListener('resize',rs);
-  const ps=[];for(let i=0;i<60;i++)ps.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,r:Math.random()*1.5+.5,a:Math.random()*.4+.1});
-  let px=W/2,py=H/2;document.addEventListener('mousemove',e=>{px=e.clientX;py=e.clientY;});
-  function draw(){cx.clearRect(0,0,W,H);ps.forEach((p,i)=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;cx.beginPath();cx.arc(p.x,p.y,p.r,0,Math.PI*2);cx.fillStyle=`rgba(100,255,218,${p.a})`;cx.fill();for(let j=i+1;j<ps.length;j++){const dx=p.x-ps[j].x,dy=p.y-ps[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<150){cx.beginPath();cx.moveTo(p.x,p.y);cx.lineTo(ps[j].x,ps[j].y);cx.strokeStyle=`rgba(100,255,218,${.08*(1-d/150)})`;cx.stroke();}}const dmx=p.x-px,dmy=p.y-py,md=Math.sqrt(dmx*dmx+dmy*dmy);if(md<120){p.x+=(dmx/md)*1.5;p.y+=(dmy/md)*1.5;}});requestAnimationFrame(draw);}draw();
+  var ps=[];for(var i=0;i<70;i++)ps.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4,r:Math.random()*2+.3,a:Math.random()*.35+.08});
+  var pmx=W/2,pmy=H/2;
+  document.addEventListener('mousemove',function(e){pmx=e.clientX;pmy=e.clientY;});
+  function draw(){
+    cx.clearRect(0,0,W,H);
+    for(var i=0;i<ps.length;i++){
+      var p=ps[i];
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0||p.x>W)p.vx*=-1;
+      if(p.y<0||p.y>H)p.vy*=-1;
+      cx.beginPath();cx.arc(p.x,p.y,p.r,0,6.28);
+      cx.fillStyle='rgba(100,255,218,'+p.a+')';cx.fill();
+      for(var j=i+1;j<ps.length;j++){
+        var dx=p.x-ps[j].x,dy=p.y-ps[j].y,d=Math.sqrt(dx*dx+dy*dy);
+        if(d<140){cx.beginPath();cx.moveTo(p.x,p.y);cx.lineTo(ps[j].x,ps[j].y);cx.strokeStyle='rgba(100,255,218,'+(0.06*(1-d/140))+')';cx.lineWidth=0.5;cx.stroke();}
+      }
+      var dmx=p.x-pmx,dmy=p.y-pmy,md=Math.sqrt(dmx*dmx+dmy*dmy);
+      if(md<130&&md>0){p.x+=(dmx/md)*2;p.y+=(dmy/md)*2;}
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
 </script>

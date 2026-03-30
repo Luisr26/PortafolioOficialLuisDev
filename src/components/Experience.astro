@@ -1,33 +1,42 @@
 ---
-const jobs=[
-  {id:0,co:'Blackbird Labs',ro:'Desarrollador IA',pe:'Dic 2025 \u2014 Presente',it:['Sistemas inteligentes con modelos de lenguaje y agentes de IA para automatizar procesos.','Conexi\u00f3n de plataformas mediante APIs REST, protocolos MCP y orquestaci\u00f3n.','Arquitecturas escalables para productos de inteligencia artificial.']},
-  {id:1,co:'Retycol',ro:'Desarrollador IA',pe:'Ene 2026 \u2014 Presente',it:['Ecosistema de automatizaci\u00f3n h\u00edbrido con n8n (84+ nodos) y Power Automate, Graph API, ClickUp y SheetJS.','Verificaci\u00f3n documental farmac\u00e9utica con Google Gemini en SharePoint.','Dashboards operativos con reportes HTML, KPIs y alertas autom\u00e1ticas.','SPDER: predicci\u00f3n de demanda con Angular, Node.js, PostgreSQL y Python.']},
-  {id:2,co:'ICAS LTDA',ro:'Web Dev & Data Analyst',pe:'Ene 2023 \u2014 Mar 2024 \u00b7 Menor de edad',it:['Dashboards interactivos para pipeline I+D farmac\u00e9utico con Node.js, Graph API y Chart.js.','Procesamiento de datos con Python (Pandas, NumPy, Matplotlib).','Orquestaci\u00f3n de APIs REST conectando SharePoint, OneDrive y ClickUp.']},
+const jobs = [
+  { id: 0, co: 'Blackbird Labs', ro: 'Desarrollador IA', pe: 'Dic 2025 - Presente', it: ['Sistemas inteligentes con modelos de lenguaje y agentes de IA para automatizar procesos de negocio.', 'Conexion de plataformas mediante APIs REST, protocolos MCP y orquestacion de herramientas.', 'Arquitecturas escalables para productos basados en inteligencia artificial.'] },
+  { id: 1, co: 'Retycol', ro: 'Desarrollador IA', pe: 'Ene 2026 - Presente', it: ['Ecosistema de automatizacion hibrido con n8n (84+ nodos) y Power Automate, Graph API, ClickUp y SheetJS.', 'Verificacion documental farmaceutica con Google Gemini en SharePoint.', 'Dashboards operativos con reportes HTML, KPIs y alertas automaticas.', 'SPDER: prediccion de demanda con Angular, Node.js, PostgreSQL y Python.'] },
+  { id: 2, co: 'ICAS LTDA', ro: 'Web Dev & Data Analyst', pe: 'Ene 2023 - Mar 2024 | Menor de edad', it: ['Dashboards interactivos para pipeline I+D farmaceutico con Node.js, Graph API y Chart.js.', 'Procesamiento de datos con Python (Pandas, NumPy, Matplotlib).', 'Orquestacion de APIs REST conectando SharePoint, OneDrive y ClickUp.'] },
 ];
 ---
 <section id="exp" class="max-w-4xl mx-auto px-6 py-28">
-  <h2 class="sh rv"><span class="n">02.</span>Experiencia</h2>
-  <div class="rv md:flex">
+  <h2 class="sh rv"><span class="n">02.</span> Experiencia</h2>
+  <div class="rv md:flex" data-d=".1s">
     <div class="flex md:flex-col overflow-x-auto md:overflow-visible shrink-0 mb-4 md:mb-0">
-      {jobs.map(j=>(
-        <button data-t={j.id} class={`et text-sm text-left px-5 py-3 whitespace-nowrap transition-all border-b-2 md:border-b-0 md:border-l-2 ${j.id===0?'text-[#64ffda] border-[#64ffda] bg-[#64ffda]/5':'text-[#94a3b8] border-white/5 hover:bg-[#64ffda]/5'}`} style="font-family:'JetBrains Mono',monospace">{j.co}</button>
+      {jobs.map(j => (
+        <button data-t={j.id} class={`et mono text-sm text-left px-5 py-3 whitespace-nowrap border-b-2 md:border-b-0 md:border-l-2 ${j.id === 0 ? 'text-[#64ffda] border-[#64ffda] bg-[#64ffda]/5' : 'text-[#94a3b8] border-white/5 hover:bg-[#64ffda]/[.03]'}`} style="transition:all .3s ease">{j.co}</button>
       ))}
     </div>
     <div class="md:pl-8 min-h-[300px]">
-      {jobs.map(j=>(
-        <div data-p={j.id} class={`ep ${j.id!==0?'hidden':''}`}>
-          <h3 class="text-lg font-semibold text-[#e2e8f0] mb-1">{j.ro} <span class="text-[#64ffda]">@ {j.co}</span></h3>
-          <p class="text-sm text-[#94a3b8] mb-5" style="font-family:'JetBrains Mono',monospace">{j.pe}</p>
-          <ul class="space-y-3">{j.it.map(i=>(<li class="relative pl-6 text-[.92rem] arr">{i}</li>))}</ul>
+      {jobs.map(j => (
+        <div data-p={j.id} class={`ep ${j.id !== 0 ? 'hidden' : ''}`}>
+          <h3 class="text-lg font-semibold bright mb-1">{j.ro} <span class="accent">@ {j.co}</span></h3>
+          <p class="mono text-sm text-[#94a3b8] mb-5">{j.pe}</p>
+          <ul class="space-y-3">
+            {j.it.map(item => (<li class="relative pl-6 text-[.92rem] arr">{item}</li>))}
+          </ul>
         </div>
       ))}
     </div>
   </div>
 </section>
 <script>
-  document.querySelectorAll('.et').forEach(b=>b.addEventListener('click',()=>{
-    const i=b.dataset.t;
-    document.querySelectorAll('.et').forEach(t=>{const m=t.dataset.t===i;t.className=`et text-sm text-left px-5 py-3 whitespace-nowrap transition-all border-b-2 md:border-b-0 md:border-l-2 ${m?'text-[#64ffda] border-[#64ffda] bg-[#64ffda]/5':'text-[#94a3b8] border-white/5 hover:bg-[#64ffda]/5'}`;t.style.fontFamily="'JetBrains Mono',monospace";});
-    document.querySelectorAll('.ep').forEach(p=>p.classList.toggle('hidden',p.dataset.p!==i));
-  }));
+  document.querySelectorAll('.et').forEach(function(b){
+    b.addEventListener('click',function(){
+      var idx=this.dataset.t;
+      document.querySelectorAll('.et').forEach(function(t){
+        var m=t.dataset.t===idx;
+        t.style.color=m?'#64ffda':'#94a3b8';
+        t.style.borderColor=m?'#64ffda':'rgba(255,255,255,.04)';
+        t.style.background=m?'rgba(100,255,218,.05)':'transparent';
+      });
+      document.querySelectorAll('.ep').forEach(function(p){p.classList.toggle('hidden',p.dataset.p!==idx);});
+    });
+  });
 </script>

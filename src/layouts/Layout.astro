@@ -1,11 +1,7 @@
 ---
 import '../styles/global.css';
-
 interface Props { title?: string; description?: string; }
-const {
-  title = 'Luis Orozco \u2014 AI & Automation Developer',
-  description = 'AI & Automation Developer. Angular + Spring Boot. Hiperautomatizaci\u00f3n con n8n, Power Automate e IA.'
-} = Astro.props;
+const { title = 'Luis Orozco | AI & Automation Developer', description = 'AI & Automation Developer. Angular + Spring Boot. n8n, Power Automate e IA.' } = Astro.props;
 ---
 <!DOCTYPE html>
 <html lang="es">
@@ -16,62 +12,33 @@ const {
   <meta property="og:title" content={title}/>
   <meta property="og:description" content={description}/>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
   <title>{title}</title>
 </head>
 <body>
-  <!-- Scroll progress bar (Kenneth Jimmy) -->
-  <div id="scrollProgress" class="fixed top-0 left-0 h-[2px] bg-[#64ffda] z-[999]" style="width:0%"></div>
-
-  <!-- Mouse glow spotlight (Brittany Chiang v5) -->
-  <div id="mouseGlow" class="pointer-events-none fixed w-[600px] h-[600px] rounded-full opacity-0 transition-opacity duration-300 z-0" style="background:radial-gradient(circle,rgba(100,255,218,.07) 0%,transparent 70%)"></div>
-
-  <!-- Custom cursor (Jack Jeznach) -->
-  <div id="cursorDot" class="hidden lg:block pointer-events-none fixed w-2 h-2 bg-[#64ffda] rounded-full z-[9999] mix-blend-difference transition-transform duration-100"></div>
-  <div id="cursorRing" class="hidden lg:block pointer-events-none fixed w-10 h-10 border border-[#64ffda]/40 rounded-full z-[9998] transition-all duration-300"></div>
-
+  <div id="sp" class="fixed top-0 left-0 h-[3px] z-[999]" style="width:0%;background:linear-gradient(90deg,#64ffda,#0ea5e9)"></div>
+  <div id="glow" class="pointer-events-none fixed w-[700px] h-[700px] rounded-full opacity-0 transition-opacity duration-500 z-0" style="background:radial-gradient(circle,rgba(100,255,218,.06) 0%,rgba(14,165,233,.03) 40%,transparent 70%)"></div>
+  <div id="cd" class="hidden lg:block pointer-events-none fixed w-2.5 h-2.5 rounded-full z-[9999] mix-blend-difference" style="background:#64ffda;transition:transform .15s cubic-bezier(.18,.89,.32,1.28)"></div>
+  <div id="cr" class="hidden lg:block pointer-events-none fixed w-12 h-12 rounded-full z-[9998]" style="border:1.5px solid rgba(100,255,218,.3);transition:all .25s cubic-bezier(.18,.89,.32,1.28)"></div>
   <slot/>
-
   <script>
-    // Scroll progress
-    window.addEventListener('scroll',()=>{
-      const h=document.documentElement;
-      const p=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100;
-      document.getElementById('scrollProgress').style.width=p+'%';
-    });
-    // Mouse glow
-    const glow=document.getElementById('mouseGlow');
-    document.addEventListener('mousemove',(e)=>{
-      glow.style.opacity='1';
-      glow.style.left=(e.clientX-300)+'px';
-      glow.style.top=(e.clientY-300)+'px';
-    });
-    document.addEventListener('mouseleave',()=>glow.style.opacity='0');
-    // Custom cursor
-    const dot=document.getElementById('cursorDot');
-    const ring=document.getElementById('cursorRing');
+    window.addEventListener('scroll',()=>{const h=document.documentElement;document.getElementById('sp').style.width=((h.scrollTop/(h.scrollHeight-h.clientHeight))*100)+'%';});
+    const glow=document.getElementById('glow');
+    document.addEventListener('mousemove',e=>{glow.style.opacity='1';glow.style.left=(e.clientX-350)+'px';glow.style.top=(e.clientY-350)+'px';});
+    document.addEventListener('mouseleave',()=>{glow.style.opacity='0';});
+    const cd=document.getElementById('cd'),cr=document.getElementById('cr');
     let mx=0,my=0,rx=0,ry=0;
-    document.addEventListener('mousemove',(e)=>{
-      mx=e.clientX;my=e.clientY;
-      dot.style.left=(mx-4)+'px';dot.style.top=(my-4)+'px';
-    });
-    (function loop(){rx+=(mx-rx)*.15;ry+=(my-ry)*.15;ring.style.left=(rx-20)+'px';ring.style.top=(ry-20)+'px';requestAnimationFrame(loop)})();
-    // Magnetic hover
-    document.querySelectorAll('a,button,.gc').forEach(el=>{
-      el.addEventListener('mouseenter',()=>{ring.style.transform='scale(1.8)';ring.style.borderColor='rgba(100,255,218,.6)';dot.style.transform='scale(2)';});
-      el.addEventListener('mouseleave',()=>{ring.style.transform='scale(1)';ring.style.borderColor='rgba(100,255,218,.4)';dot.style.transform='scale(1)';});
-    });
-    // Scroll reveal
-    const obs=new IntersectionObserver((en)=>en.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')}),{threshold:.1});
+    document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cd.style.left=(mx-5)+'px';cd.style.top=(my-5)+'px';});
+    !function lp(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;cr.style.left=(rx-24)+'px';cr.style.top=(ry-24)+'px';requestAnimationFrame(lp)}();
+    document.querySelectorAll('a,button,.gc').forEach(el=>{el.addEventListener('mouseenter',()=>{cr.style.transform='scale(2)';cr.style.borderColor='rgba(100,255,218,.5)';cd.style.transform='scale(0)';});el.addEventListener('mouseleave',()=>{cr.style.transform='scale(1)';cr.style.borderColor='rgba(100,255,218,.3)';cd.style.transform='scale(1)';});});
+    const obs=new IntersectionObserver(en=>en.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');e.target.style.transitionDelay=e.target.dataset.d||'0s';}}),{threshold:.08,rootMargin:'0px 0px -40px 0px'});
     document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
-    // Nav hide
     let ly=0;const nav=document.getElementById('nav');
-    window.addEventListener('scroll',()=>{const y=window.scrollY;nav?.classList.toggle('-translate-y-full',y>ly&&y>80);ly=y;});
-    // Mobile menu
+    window.addEventListener('scroll',()=>{const y=window.scrollY;if(y>ly&&y>80)nav.style.transform='translateY(-100%)';else nav.style.transform='translateY(0)';ly=y;});
     const mb=document.getElementById('mb'),mm=document.getElementById('mm'),mo=document.getElementById('mo');
-    function tm(){mm?.classList.toggle('translate-x-full');mo?.classList.toggle('hidden');}
-    mb?.addEventListener('click',tm);mo?.addEventListener('click',tm);
+    function tm(){mm.classList.toggle('translate-x-full');mo.classList.toggle('hidden');}
+    mb&&mb.addEventListener('click',tm);mo&&mo.addEventListener('click',tm);
     document.querySelectorAll('.ml').forEach(l=>l.addEventListener('click',tm));
   </script>
 </body>

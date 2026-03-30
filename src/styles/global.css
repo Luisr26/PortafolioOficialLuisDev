@@ -3,29 +3,48 @@
 @tailwind utilities;
 
 @layer base {
-  html { scroll-behavior:smooth; scroll-padding-top:80px; }
-  body { @apply bg-[#060611] text-[#94a3b8] leading-relaxed overflow-x-hidden; cursor:none; font-family:'Manrope',sans-serif; }
-  ::selection { background:#64ffda; color:#060611; }
-  @media(max-width:1024px){ body{cursor:auto;} }
+  html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+  body { background: #060611; color: #94a3b8; font-family: 'Outfit', sans-serif; line-height: 1.75; overflow-x: hidden; cursor: none; }
+  ::selection { background: #64ffda; color: #060611; }
+  @media (max-width: 1024px) { body { cursor: auto; } }
 }
 
 @layer components {
-  .sh { @apply flex items-center text-2xl md:text-3xl font-bold text-[#e2e8f0] whitespace-nowrap mb-12; }
-  .sh .n { @apply font-mono text-[#64ffda] text-lg md:text-xl mr-3 font-normal; font-family:'JetBrains Mono',monospace; }
-  .sh::after { content:''; @apply block h-px w-full ml-6; background:linear-gradient(90deg,rgba(100,255,218,.2),transparent); }
-  .btn { @apply text-sm text-[#64ffda] border border-[#64ffda] px-7 py-3 rounded transition-all duration-200 inline-block relative overflow-hidden; font-family:'JetBrains Mono',monospace; }
-  .btn::before { content:''; @apply absolute inset-0 bg-[#64ffda]/10 -translate-x-full transition-transform duration-300; }
-  .btn:hover::before { @apply translate-x-0; }
-  .rv { @apply opacity-0 translate-y-8; transition:opacity .7s ease,transform .7s ease; }
-  .rv.vis { @apply opacity-100 translate-y-0; }
-  .arr::before { content:'\25b9'; @apply absolute left-0 text-[#64ffda]; }
-  .gc {
-    @apply relative bg-[#0c0c1d] border border-white/5 rounded-xl p-7 transition-all duration-300;
-    background-image:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(100,255,218,.04) 0%,transparent 50%);
+  .sh {
+    display: flex; align-items: center; font-size: 1.75rem; font-weight: 700;
+    color: #e2e8f0; white-space: nowrap; margin-bottom: 3rem;
+    font-family: 'Outfit', sans-serif;
   }
-  .gc:hover { @apply border-[#64ffda]/20 -translate-y-1; box-shadow:0 0 40px rgba(100,255,218,.06); }
+  .sh .n { font-family: 'JetBrains Mono', monospace; color: #64ffda; font-size: 1.1rem; margin-right: 0.75rem; font-weight: 400; }
+  .sh::after { content: ''; display: block; height: 1px; width: 100%; margin-left: 1.5rem; background: linear-gradient(90deg, rgba(100,255,218,.25), transparent); }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  .btn {
+    font-family: 'JetBrains Mono', monospace; font-size: .875rem; color: #64ffda;
+    border: 1.5px solid #64ffda; padding: .75rem 1.75rem; border-radius: 6px;
+    display: inline-block; position: relative; overflow: hidden;
+    transition: all .3s cubic-bezier(.18,.89,.32,1.28);
+  }
+  .btn:hover { background: rgba(100,255,218,.08); transform: translateY(-2px); box-shadow: 0 4px 20px rgba(100,255,218,.15); }
+  .rv { opacity: 0; transform: translateY(32px); transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1); }
+  .rv.vis { opacity: 1; transform: translateY(0); }
+  .arr::before { content: '\25B9'; position: absolute; left: 0; color: #64ffda; }
+  .gc {
+    position: relative; background: #0a0a1a; border: 1px solid rgba(255,255,255,.04);
+    border-radius: 12px; padding: 1.75rem;
+    transition: all .4s cubic-bezier(.16,1,.3,1);
+    background-image: radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(100,255,218,.03) 0%, transparent 50%);
+  }
+  .gc:hover { border-color: rgba(100,255,218,.15); transform: translateY(-6px); box-shadow: 0 20px 60px rgba(0,0,0,.4), 0 0 30px rgba(100,255,218,.04); }
+  .accent { color: #64ffda; }
+  .bright { color: #e2e8f0; }
 }
 
-@keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
-.au { opacity:0; animation:fadeUp .6s ease forwards; }
-#particles { @apply fixed inset-0 z-0 pointer-events-none; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(32px) } to { opacity: 1; transform: translateY(0) } }
+@keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
+@keyframes slideInLeft { from { opacity: 0; transform: translateX(-20px) } to { opacity: 1; transform: translateX(0) } }
+@keyframes blink { 0%,100% { border-color: #64ffda } 50% { border-color: transparent } }
+@keyframes float { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-8px) } }
+@keyframes glow { 0%,100% { opacity: .3 } 50% { opacity: .8 } }
+.au { opacity: 0; animation: fadeUp .7s cubic-bezier(.16,1,.3,1) forwards; }
+.ai { opacity: 0; animation: fadeIn .8s ease forwards; }
+#particles { position: fixed; inset: 0; z-index: 0; pointer-events: none; }

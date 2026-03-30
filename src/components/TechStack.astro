@@ -1,22 +1,52 @@
 ---
-const cs=[{t:'Lenguajes',i:'java,ts,js,python,html,css'},{t:'Backend',i:'spring,angular,nodejs,express'},{t:'Frontend',i:'angular,tailwind,bootstrap'},{t:'Bases de Datos',i:'postgres,mysql,mongodb'},{t:'DevOps',i:'docker,git,github,vite,astro'}];
-const ai=[{n:'n8n',i:'fa-solid fa-robot'},{n:'Power Automate',i:'fa-solid fa-bolt'},{n:'MCP Protocol',i:'fa-solid fa-link'},{n:'Google Gemini',i:'fa-solid fa-brain'},{n:'NLP / OCR',i:'fa-solid fa-comment-dots'},{n:'AI Agents',i:'fa-solid fa-wand-magic-sparkles'}];
-const dt=[{n:'Pandas',s:'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg'},{n:'NumPy',s:'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg'},{n:'Matplotlib',s:'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/matplotlib/matplotlib-original.svg'}];
+const categories = [
+  { t: 'Lenguajes', i: 'java,ts,js,python,html,css' },
+  { t: 'Backend & Frameworks', i: 'spring,angular,nodejs,express' },
+  { t: 'Frontend & Styling', i: 'angular,tailwind,bootstrap' },
+  { t: 'Bases de Datos', i: 'postgres,mysql,mongodb' },
+  { t: 'DevOps & Herramientas', i: 'docker,git,github,vite,astro' },
+];
+const aiTools = [
+  { n: 'n8n', i: 'fa-solid fa-robot' },
+  { n: 'Power Automate', i: 'fa-solid fa-bolt' },
+  { n: 'MCP Protocol', i: 'fa-solid fa-link' },
+  { n: 'Google Gemini', i: 'fa-solid fa-brain' },
+  { n: 'NLP / OCR', i: 'fa-solid fa-comment-dots' },
+  { n: 'AI Agents', i: 'fa-solid fa-wand-magic-sparkles' },
+];
+const dataTools = [
+  { n: 'Pandas', s: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg' },
+  { n: 'NumPy', s: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg' },
+  { n: 'Matplotlib', s: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/matplotlib/matplotlib-original.svg' },
+];
 ---
 <section id="stack" class="max-w-5xl mx-auto px-6 py-28">
-  <h2 class="sh rv"><span class="n">04.</span>Tech Stack</h2>
-  <div class="space-y-10 rv">
-    {cs.map(c=>(<div><h4 class="text-xs text-[#64ffda] uppercase tracking-[3px] mb-4" style="font-family:'JetBrains Mono',monospace">{c.t}</h4><img src={`https://skillicons.dev/icons?i=${c.i}&theme=dark`} alt={c.t} class="h-11" loading="lazy"/></div>))}
-    <div>
-      <h4 class="text-xs text-[#64ffda] uppercase tracking-[3px] mb-4" style="font-family:'JetBrains Mono',monospace">AI & Automatizaci\u00f3n</h4>
+  <h2 class="sh rv"><span class="n">04.</span> Tech Stack</h2>
+  <div class="space-y-10">
+    {categories.map((c, i) => (
+      <div class="rv" data-d={`${i * 0.1}s`}>
+        <h4 class="mono text-xs accent uppercase tracking-[3px] mb-4">{c.t}</h4>
+        <img src={`https://skillicons.dev/icons?i=${c.i}&theme=dark`} alt={c.t} class="h-12" loading="lazy"/>
+      </div>
+    ))}
+    <div class="rv" data-d=".5s">
+      <h4 class="mono text-xs accent uppercase tracking-[3px] mb-4">AI & Automatizacion</h4>
       <div class="flex flex-wrap gap-3">
-        {ai.map(t=>(<div class="flex items-center gap-2 bg-[#0c0c1d] border border-white/5 px-4 py-2.5 rounded-lg text-sm hover:border-[#64ffda]/40 hover:text-[#64ffda] hover:-translate-y-0.5 transition-all duration-200"><i class={`${t.i} w-5 text-center`}></i>{t.n}</div>))}
+        {aiTools.map(tool => (
+          <div class="flex items-center gap-2.5 bg-[#0a0a1a] border border-white/[.04] px-4 py-2.5 rounded-lg text-sm hover:border-[#64ffda]/30 hover:text-[#64ffda] hover:-translate-y-1 transition-all duration-300" style="cursor:none">
+            <i class={`${tool.i} w-5 text-center`}></i>{tool.n}
+          </div>
+        ))}
       </div>
     </div>
-    <div>
-      <h4 class="text-xs text-[#64ffda] uppercase tracking-[3px] mb-4" style="font-family:'JetBrains Mono',monospace">Data Analysis</h4>
+    <div class="rv" data-d=".6s">
+      <h4 class="mono text-xs accent uppercase tracking-[3px] mb-4">Data Analysis</h4>
       <div class="flex flex-wrap gap-3">
-        {dt.map(t=>(<div class="flex items-center gap-2 bg-[#0c0c1d] border border-white/5 px-4 py-2.5 rounded-lg text-sm hover:border-[#64ffda]/40 hover:text-[#64ffda] hover:-translate-y-0.5 transition-all duration-200"><img src={t.s} alt={t.n} class="w-5 h-5" loading="lazy"/>{t.n}</div>))}
+        {dataTools.map(tool => (
+          <div class="flex items-center gap-2.5 bg-[#0a0a1a] border border-white/[.04] px-4 py-2.5 rounded-lg text-sm hover:border-[#64ffda]/30 hover:text-[#64ffda] hover:-translate-y-1 transition-all duration-300" style="cursor:none">
+            <img src={tool.s} alt={tool.n} class="w-5 h-5" loading="lazy"/>{tool.n}
+          </div>
+        ))}
       </div>
     </div>
   </div>

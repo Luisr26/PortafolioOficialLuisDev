@@ -1,26 +1,27 @@
 ---
-const pj=[
-  {t:'CoopCredit',d:'Sistema de cr\u00e9ditos para cooperativas. Arquitectura Hexagonal, seguridad enterprise-grade, 109 tests automatizados.',tg:['Java 21','Spring Boot 3.4','PostgreSQL','Docker','JUnit 5'],g:'https://github.com/Luisr26/CoopCredit'},
-  {t:'NovaBook',d:'Gesti\u00f3n de bibliotecas con GUI JavaFX, MySQL, RBAC, CRUD completo, import/export CSV. Patr\u00f3n MVC + DAO.',tg:['Java','JavaFX','MySQL','MVC','DAO'],g:'https://github.com/Luisr26/NovaBook'},
-  {t:'LoginAngular',d:'Autenticaci\u00f3n full-stack con Angular + Tailwind CSS conectado a Spring Boot. JWT, responsive, rutas protegidas.',tg:['Angular','TypeScript','Tailwind','Spring Boot'],g:'https://github.com/Luisr26/LoginAngular'},
-  {t:'API Hexagonal',d:'REST API con Arquitectura Hexagonal, Spring Data JPA, Swagger UI y frontend Angular/TypeScript.',tg:['Java 17','Spring Boot','Angular','Swagger'],g:'https://github.com/Luisr26/JavaSpringM6'},
-  {t:'Microservicios',d:'Arquitectura distribuida con Java 21, Spring Boot 3.3, Spring Security y scripts Shell automatizados.',tg:['Java 21','Spring Boot','Microservices','Shell'],g:'https://github.com/Luisr26/ArquitecturaMicroservicios'},
-  {t:'NearMe',d:'Plataforma de negocios locales. Landing profesional con dise\u00f1o responsive y animaciones interactivas.',tg:['HTML5','CSS3','JavaScript','Bootstrap 5.3'],g:'https://github.com/Luisr26/NearMe'},
+const projects = [
+  { t: 'CoopCredit', d: 'Sistema de creditos para cooperativas. Arquitectura Hexagonal, seguridad enterprise-grade, 109 tests automatizados.', tg: ['Java 21', 'Spring Boot 3.4', 'PostgreSQL', 'Docker', 'JUnit 5'], g: 'https://github.com/Luisr26/CoopCredit' },
+  { t: 'NovaBook', d: 'Gestion de bibliotecas con GUI JavaFX, MySQL, RBAC, CRUD completo, import/export CSV. Patron MVC + DAO.', tg: ['Java', 'JavaFX', 'MySQL', 'MVC', 'DAO'], g: 'https://github.com/Luisr26/NovaBook' },
+  { t: 'LoginAngular', d: 'Autenticacion full-stack con Angular + Tailwind CSS conectado a Spring Boot. JWT, responsive, rutas protegidas.', tg: ['Angular', 'TypeScript', 'Tailwind', 'Spring Boot'], g: 'https://github.com/Luisr26/LoginAngular' },
+  { t: 'API Hexagonal', d: 'REST API con Arquitectura Hexagonal, Spring Data JPA, Swagger UI y frontend Angular/TypeScript.', tg: ['Java 17', 'Spring Boot', 'Angular', 'Swagger'], g: 'https://github.com/Luisr26/JavaSpringM6' },
+  { t: 'Microservicios', d: 'Arquitectura distribuida con Java 21, Spring Boot 3.3, Spring Security y scripts Shell automatizados.', tg: ['Java 21', 'Spring Boot', 'Microservices', 'Shell'], g: 'https://github.com/Luisr26/ArquitecturaMicroservicios' },
+  { t: 'NearMe', d: 'Plataforma de negocios locales. Landing profesional con diseno responsive y animaciones interactivas.', tg: ['HTML5', 'CSS3', 'JavaScript', 'Bootstrap 5.3'], g: 'https://github.com/Luisr26/NearMe' },
 ];
 ---
 <section id="projects" class="max-w-5xl mx-auto px-6 py-28">
-  <h2 class="sh rv"><span class="n">03.</span>Proyectos destacados</h2>
+  <h2 class="sh rv"><span class="n">03.</span> Proyectos destacados</h2>
   <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-    {pj.map(p=>(
-      <a href={p.g} target="_blank" rel="noopener" class="gc rv group flex flex-col no-underline" onmousemove="const r=this.getBoundingClientRect();this.style.setProperty('--mx',((event.clientX-r.left)/r.width*100)+'%');this.style.setProperty('--my',((event.clientY-r.top)/r.height*100)+'%')">
+    {projects.map((p, i) => (
+      <a href={p.g} target="_blank" rel="noopener" class="gc rv group flex flex-col no-underline" data-d={`${i * 0.08}s`}
+         onmousemove="var r=this.getBoundingClientRect();this.style.setProperty('--mx',((event.clientX-r.left)/r.width*100)+'%');this.style.setProperty('--my',((event.clientY-r.top)/r.height*100)+'%')">
         <div class="flex justify-between items-center mb-5">
-          <i class="fa-regular fa-folder-open text-[#64ffda] text-2xl"></i>
-          <i class="fa-brands fa-github text-[#94a3b8] text-lg group-hover:text-[#64ffda] transition-colors"></i>
+          <i class="fa-regular fa-folder-open accent text-2xl"></i>
+          <i class="fa-brands fa-github text-[#94a3b8] text-lg group-hover:text-[#64ffda] transition-colors duration-300"></i>
         </div>
-        <h3 class="text-lg font-semibold text-[#e2e8f0] mb-3 group-hover:text-[#64ffda] transition-colors">{p.t}</h3>
+        <h3 class="text-lg font-semibold bright mb-3 group-hover:text-[#64ffda] transition-colors duration-300">{p.t}</h3>
         <p class="text-sm leading-relaxed flex-1 mb-5">{p.d}</p>
-        <div class="flex flex-wrap gap-2 text-[.68rem] text-[#94a3b8]" style="font-family:'JetBrains Mono',monospace">
-          {p.tg.map(t=>(<span class="bg-[#64ffda]/5 px-2.5 py-1 rounded">{t}</span>))}
+        <div class="flex flex-wrap gap-2 mono text-[.68rem] text-[#94a3b8]">
+          {p.tg.map(tag => (<span class="bg-[#64ffda]/[.04] px-2.5 py-1 rounded">{tag}</span>))}
         </div>
       </a>
     ))}

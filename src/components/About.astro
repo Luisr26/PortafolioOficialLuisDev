@@ -1,23 +1,26 @@
 ---
-const sk=['Java 21 / Spring Boot','Angular / TypeScript','Python / Pandas','n8n / Power Automate','PostgreSQL / MySQL','Docker / Git','MCP Protocol','Google Gemini API'];
+const skills = ['Java 21 / Spring Boot', 'Angular / TypeScript', 'Python / Pandas', 'n8n / Power Automate', 'PostgreSQL / MySQL', 'Docker / Git', 'MCP Protocol', 'Google Gemini API'];
 ---
 <section id="about" class="max-w-4xl mx-auto px-6 py-28">
-  <h2 class="sh rv"><span class="n">01.</span>Sobre m\u00ed</h2>
-  <div class="grid md:grid-cols-[3fr_2fr] gap-12 items-start rv">
+  <h2 class="sh rv"><span class="n">01.</span> Sobre mi</h2>
+  <div class="grid md:grid-cols-[3fr_2fr] gap-12 items-start rv" data-d=".1s">
     <div class="space-y-4">
-      <p>Comenc\u00e9 a programar a los 15 a\u00f1os y a los 16 consegu\u00ed mi primer empleo profesional con un <strong class="text-[#e2e8f0]">permiso legal de trabajo como menor de edad</strong> en <span class="text-[#64ffda]">ICAS LTDA</span>, donde descubr\u00ed mi pasi\u00f3n por la automatizaci\u00f3n.</p>
-      <p>Hoy trabajo en <span class="text-[#64ffda]">Blackbird Labs</span> y <span class="text-[#64ffda]">Retycol</span>, dise\u00f1ando ecosistemas de hiperautomatizaci\u00f3n con <strong class="text-[#e2e8f0]">n8n, Power Automate, servidores MCP</strong> e integraci\u00f3n de modelos de IA.</p>
-      <p>Curso el 6to semestre de <strong class="text-[#e2e8f0]">Ingenier\u00eda de Sistemas</strong> y construyo <strong class="text-[#64ffda]">SPDER</strong>, un sistema de predicci\u00f3n de demanda basado en eventos reactivos.</p>
-      <p class="text-[#e2e8f0] text-sm mt-6">Tecnolog\u00edas:</p>
-      <ul class="grid grid-cols-2 gap-x-4 gap-y-2 text-sm" style="font-family:'JetBrains Mono',monospace">
-        {sk.map(s=>(<li class="pl-5 relative arr">{s}</li>))}
+      <p>Comence a programar a los 15 anios y a los 16 consegui mi primer empleo profesional con un <strong class="bright">permiso legal de trabajo como menor de edad</strong> en <span class="accent">ICAS LTDA</span>, donde descubri mi pasion por la automatizacion.</p>
+      <p>Hoy trabajo en <span class="accent">Blackbird Labs</span> y <span class="accent">Retycol</span>, diseniando ecosistemas de hiperautomatizacion con <strong class="bright">n8n, Power Automate, servidores MCP</strong> e integracion de modelos de IA como Google Gemini.</p>
+      <p>Curso el 6to semestre de <strong class="bright">Ingenieria de Sistemas</strong> y estoy construyendo <strong class="accent">SPDER</strong>, un sistema de prediccion de demanda basado en eventos reactivos.</p>
+      <p class="bright text-sm mt-6">Tecnologias:</p>
+      <ul class="grid grid-cols-2 gap-x-4 gap-y-2 mono text-sm">
+        {skills.map(s => (<li class="pl-5 relative arr">{s}</li>))}
       </ul>
     </div>
     <div class="relative max-w-[260px] mx-auto group">
-      <div class="rounded-lg bg-[#0c0c1d] border border-white/10 aspect-square flex items-center justify-center text-7xl relative z-10 overflow-hidden">
-        <span class="group-hover:scale-110 transition-transform duration-500">\ud83d\udc68\u200d\ud83d\udcbb</span>
+      <div class="rounded-xl bg-[#0a0a1a] border border-white/10 aspect-square flex items-center justify-center text-7xl relative z-10 overflow-hidden" style="transition:all .5s cubic-bezier(.16,1,.3,1)">
+        <span class="group-hover:scale-110 transition-transform duration-700" style="filter:drop-shadow(0 0 20px rgba(100,255,218,.2))">&#128104;&#8205;&#128187;</span>
       </div>
-      <div class="absolute top-4 left-4 w-full h-full border-2 border-[#64ffda] rounded-lg -z-0 transition-all duration-500 group-hover:top-2 group-hover:left-2"></div>
+      <div class="absolute top-4 left-4 w-full h-full border-2 border-[#64ffda] rounded-xl -z-0" style="transition:all .5s cubic-bezier(.16,1,.3,1)"></div>
+      <style>
+        .group:hover div:last-child { top: 8px !important; left: 8px !important; }
+      </style>
     </div>
   </div>
 </section>
