@@ -13,6 +13,8 @@ import '../styles/global.css';
   <title>Luis Orozco | AI & Automation Developer</title>
   <style>
     .i18n-fade{transition:opacity .15s ease}
+
+    /* === BOT === */
     @keyframes botFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
     @keyframes antPulse{0%,100%{opacity:1}50%{opacity:.2}}
     @keyframes eyePulse{0%,80%,100%{transform:scaleY(1)}88%{transform:scaleY(.1)}95%{transform:scaleY(1)}}
@@ -20,38 +22,285 @@ import '../styles/global.css';
     @keyframes chestRipple{0%{transform:scale(1);opacity:.25}100%{transform:scale(2.8);opacity:0}}
     @keyframes bubbleIn{from{opacity:0;transform:translateY(8px) translateX(-50%)}to{opacity:1;transform:translateY(0) translateX(-50%)}}
     @keyframes bubbleOut{from{opacity:1;transform:translateY(0) translateX(-50%)}to{opacity:0;transform:translateY(-8px) translateX(-50%)}}
-    @keyframes mIn{from{opacity:0;transform:scale(.93) translateY(18px)}to{opacity:1;transform:scale(1) translateY(0)}}
-    #bot-wrap{position:fixed;left:20px;bottom:120px;z-index:9990;display:flex;flex-direction:column;align-items:center;transition:transform .08s linear}
-    #bot-widget{cursor:pointer;width:72px;height:72px;animation:botFloat 2.8s ease-in-out infinite;filter:drop-shadow(0 4px 16px rgba(94,234,212,.35));transition:filter .3s}
-    #bot-widget:hover{filter:drop-shadow(0 4px 28px rgba(94,234,212,.65))}
+
+    #bot-wrap{
+      position:fixed;
+      bottom:28px;
+      right:28px;
+      z-index:9990;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+    }
+    #bot-widget{
+      cursor:pointer;
+      width:68px;
+      height:68px;
+      animation:botFloat 2.8s ease-in-out infinite;
+      filter:drop-shadow(0 4px 18px rgba(94,234,212,.4));
+      transition:filter .3s, transform .2s;
+    }
+    #bot-widget:hover{
+      filter:drop-shadow(0 4px 32px rgba(94,234,212,.75));
+      transform:scale(1.07);
+    }
     .ant-p{animation:antPulse 1.5s ease-in-out infinite}
     .eye-l{transform-origin:center;transform-box:fill-box;animation:eyePulse 5s ease-in-out infinite}
     .eye-r{transform-origin:center;transform-box:fill-box;animation:eyePulse 5s ease-in-out infinite .2s}
     .ch-c{animation:chestPulse 2s ease-in-out infinite}
     .ch-r{transform-origin:center;transform-box:fill-box;animation:chestRipple 2s ease-out infinite}
-    #bot-bubble{position:absolute;bottom:calc(100% + 12px);left:50%;transform:translateX(-50%);background:#1e293b;border:1.5px solid #5eead4;border-radius:12px;padding:10px 14px;width:200px;text-align:center;font-size:12px;color:#e2e8f0;font-family:'Outfit',sans-serif;line-height:1.45;pointer-events:none;box-shadow:0 0 20px rgba(94,234,212,.15);opacity:0;white-space:normal}
+
+    #bot-bubble{
+      position:absolute;
+      bottom:calc(100% + 14px);
+      left:50%;
+      transform:translateX(-50%);
+      background:#1e293b;
+      border:1.5px solid #5eead4;
+      border-radius:14px;
+      padding:10px 14px;
+      width:210px;
+      text-align:center;
+      font-size:12px;
+      color:#e2e8f0;
+      font-family:'Outfit',sans-serif;
+      line-height:1.5;
+      pointer-events:none;
+      box-shadow:0 0 24px rgba(94,234,212,.18);
+      opacity:0;
+      white-space:normal;
+    }
     #bot-bubble.show{animation:bubbleIn .4s ease forwards;opacity:1}
     #bot-bubble.hide{animation:bubbleOut .4s ease forwards}
-    .bba{position:absolute;bottom:-7px;left:50%;width:12px;height:12px;background:#1e293b;border-right:1.5px solid #5eead4;border-bottom:1.5px solid #5eead4;transform:translateX(-50%) rotate(45deg)}
-    #bot-modal{display:none;position:fixed;inset:0;z-index:10000;background:rgba(15,23,42,.88);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px}
+    .bba{
+      position:absolute;
+      bottom:-7px;
+      left:50%;
+      width:12px;
+      height:12px;
+      background:#1e293b;
+      border-right:1.5px solid #5eead4;
+      border-bottom:1.5px solid #5eead4;
+      transform:translateX(-50%) rotate(45deg);
+    }
+
+    /* === MODAL === */
+    @keyframes mIn{from{opacity:0;transform:scale(.95) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    #bot-modal{
+      display:none;
+      position:fixed;
+      inset:0;
+      z-index:10000;
+      background:rgba(2,6,23,.85);
+      backdrop-filter:blur(10px);
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+    }
     #bot-modal.open{display:flex}
-    #bot-mi{background:#0f172a;border:1.5px solid #334155;border-radius:16px;padding:32px;width:100%;max-width:480px;max-height:90vh;overflow-y:auto;position:relative;box-shadow:0 25px 50px rgba(0,0,0,.6);animation:mIn .3s ease}
-    .bi{width:100%;box-sizing:border-box;background:#1e293b;border:1.5px solid #334155;border-radius:8px;padding:10px 14px;font-family:'Outfit',sans-serif;font-size:14px;color:#e2e8f0;outline:none;transition:border-color .2s}
-    .bi:focus{border-color:#5eead4}
-    .bi::placeholder{color:#475569}
-    .bl{display:block;font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#64748b;margin-bottom:6px}
-    .bf{margin-bottom:16px}
-    .be{display:none;font-size:11px;color:#f87171;margin-top:4px;font-family:'Outfit',sans-serif}
-    #bsub{width:100%;padding:13px;background:#5eead4;color:#0f172a;font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;border:none;border-radius:8px;cursor:pointer;transition:background .2s,transform .1s;text-transform:uppercase;letter-spacing:.08em;margin-top:8px}
-    #bsub:hover{background:#99f6e4}
-    #bsub:active{transform:scale(.98)}
-    #bsub:disabled{background:#334155;color:#64748b;cursor:not-allowed}
-    #bcl{position:absolute;top:14px;right:16px;background:none;border:none;color:#475569;font-size:26px;cursor:pointer;line-height:1;padding:0 4px;transition:color .2s}
-    #bcl:hover{color:#e2e8f0}
-    #bres{margin-top:14px;padding:12px 16px;border-radius:8px;font-family:'Outfit',sans-serif;font-size:13px;display:none;text-align:center}
-    #bres.ok{background:rgba(94,234,212,.08);border:1px solid #5eead4;color:#5eead4}
-    #bres.err{background:rgba(248,113,113,.08);border:1px solid #f87171;color:#f87171}
-    @media(max-width:640px){#bot-widget{width:58px;height:58px}#bot-bubble{width:160px;font-size:11px}}
+
+    #bot-mi{
+      background:#0f172a;
+      border:1px solid #1e293b;
+      border-radius:20px;
+      width:100%;
+      max-width:500px;
+      max-height:92vh;
+      overflow-y:auto;
+      position:relative;
+      box-shadow:0 30px 60px rgba(0,0,0,.7), 0 0 0 1px rgba(94,234,212,.08);
+      animation:mIn .3s cubic-bezier(.34,1.56,.64,1);
+    }
+
+    /* Modal header band */
+    #bot-mh{
+      background:linear-gradient(135deg,#0f2744 0%,#0f172a 60%);
+      border-bottom:1px solid #1e293b;
+      border-radius:20px 20px 0 0;
+      padding:28px 28px 22px;
+      position:relative;
+      overflow:hidden;
+    }
+    #bot-mh::before{
+      content:'';
+      position:absolute;
+      top:-40px;right:-40px;
+      width:160px;height:160px;
+      background:radial-gradient(circle,rgba(94,234,212,.12) 0%,transparent 70%);
+      pointer-events:none;
+    }
+    #bot-mh-icon{
+      width:48px;height:48px;
+      background:rgba(94,234,212,.08);
+      border:1.5px solid rgba(94,234,212,.25);
+      border-radius:14px;
+      display:flex;align-items:center;justify-content:center;
+      margin-bottom:14px;
+    }
+    #bmt{
+      font-family:'Outfit',sans-serif;
+      font-size:22px;
+      font-weight:700;
+      color:#e2e8f0;
+      margin:0 0 5px;
+    }
+    #bms{
+      font-family:'Outfit',sans-serif;
+      font-size:13px;
+      color:#64748b;
+      margin:0;
+    }
+    #bcl{
+      position:absolute;
+      top:16px;right:18px;
+      background:rgba(255,255,255,.04);
+      border:1px solid #1e293b;
+      color:#475569;
+      width:32px;height:32px;
+      border-radius:8px;
+      cursor:pointer;
+      font-size:18px;
+      line-height:1;
+      display:flex;align-items:center;justify-content:center;
+      transition:background .2s, color .2s, border-color .2s;
+    }
+    #bcl:hover{background:rgba(248,113,113,.1);border-color:#f87171;color:#f87171}
+
+    /* Modal body */
+    #bot-mb{
+      padding:24px 28px 28px;
+    }
+
+    /* Two-col row */
+    .brow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    @media(max-width:480px){.brow{grid-template-columns:1fr}}
+
+    .bf{margin-bottom:14px}
+    .bl{
+      display:block;
+      font-family:'JetBrains Mono',monospace;
+      font-size:10px;
+      text-transform:uppercase;
+      letter-spacing:.1em;
+      color:#475569;
+      margin-bottom:6px;
+      transition:color .2s;
+    }
+    .bf:focus-within .bl{color:#5eead4}
+
+    .bi-wrap{position:relative}
+    .bi-icon{
+      position:absolute;
+      left:12px;top:50%;
+      transform:translateY(-50%);
+      color:#334155;
+      font-size:13px;
+      pointer-events:none;
+      transition:color .2s;
+    }
+    .bf:focus-within .bi-icon{color:#5eead4}
+
+    .bi{
+      width:100%;
+      box-sizing:border-box;
+      background:#0d1b2e;
+      border:1.5px solid #1e293b;
+      border-radius:10px;
+      padding:11px 14px 11px 36px;
+      font-family:'Outfit',sans-serif;
+      font-size:14px;
+      color:#e2e8f0;
+      outline:none;
+      transition:border-color .2s, background .2s, box-shadow .2s;
+    }
+    .bi:focus{
+      border-color:#5eead4;
+      background:#0f2233;
+      box-shadow:0 0 0 3px rgba(94,234,212,.08);
+    }
+    .bi.err{border-color:#f87171!important;box-shadow:0 0 0 3px rgba(248,113,113,.08)}
+    .bi::placeholder{color:#334155}
+    textarea.bi{padding-top:12px;padding-bottom:12px;resize:vertical;min-height:96px}
+
+    .be{
+      display:none;
+      font-size:11px;
+      color:#f87171;
+      margin-top:5px;
+      font-family:'Outfit',sans-serif;
+      padding-left:2px;
+    }
+    .be.show{display:block}
+
+    /* divider */
+    .bdiv{
+      height:1px;
+      background:linear-gradient(90deg,transparent,#1e293b 20%,#1e293b 80%,transparent);
+      margin:6px 0 18px;
+    }
+
+    #bsub{
+      width:100%;
+      padding:13px;
+      background:linear-gradient(135deg,#5eead4,#38bdf8);
+      color:#0f172a;
+      font-family:'Outfit',sans-serif;
+      font-size:14px;
+      font-weight:700;
+      border:none;
+      border-radius:10px;
+      cursor:pointer;
+      transition:opacity .2s, transform .15s, box-shadow .2s;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      position:relative;
+      overflow:hidden;
+    }
+    #bsub::after{
+      content:'';
+      position:absolute;
+      inset:0;
+      background:linear-gradient(135deg,rgba(255,255,255,.15),transparent);
+      opacity:0;
+      transition:opacity .2s;
+    }
+    #bsub:hover:not(:disabled)::after{opacity:1}
+    #bsub:hover:not(:disabled){box-shadow:0 6px 24px rgba(94,234,212,.35);transform:translateY(-1px)}
+    #bsub:active:not(:disabled){transform:scale(.98)}
+    #bsub:disabled{background:#1e293b;color:#475569;cursor:not-allowed;box-shadow:none}
+
+    /* Spinner inside submit */
+    .bspin{
+      display:inline-block;
+      width:14px;height:14px;
+      border:2px solid rgba(15,23,42,.3);
+      border-top-color:#0f172a;
+      border-radius:50%;
+      animation:spin .7s linear infinite;
+      vertical-align:middle;
+      margin-right:7px;
+    }
+
+    #bres{
+      margin-top:14px;
+      padding:13px 16px;
+      border-radius:10px;
+      font-family:'Outfit',sans-serif;
+      font-size:13px;
+      display:none;
+      text-align:center;
+      line-height:1.5;
+    }
+    #bres.ok{background:rgba(94,234,212,.06);border:1px solid rgba(94,234,212,.2);color:#5eead4}
+    #bres.err{background:rgba(248,113,113,.06);border:1px solid rgba(248,113,113,.2);color:#f87171}
+
+    @media(max-width:480px){
+      #bot-mi{border-radius:16px}
+      #bot-mh{padding:22px 20px 18px}
+      #bot-mb{padding:20px 20px 24px}
+    }
   </style>
 </head>
 <body class="bg-[#0f172a] text-[#94a3b8] antialiased">
@@ -59,11 +308,11 @@ import '../styles/global.css';
   <div id="spotlight" class="pointer-events-none fixed inset-0 z-30 opacity-0 transition-opacity duration-500"
        style="background:radial-gradient(600px circle at var(--mx,50%) var(--my,50%),rgba(29,78,216,.07),transparent 80%)"></div>
 
-  <!-- ====== FLOATING BOT ====== -->
+  <!-- ====== FLOATING BOT (fixed bottom-right) ====== -->
   <div id="bot-wrap">
     <div id="bot-bubble"><span id="bot-msg"></span><div class="bba"></div></div>
     <div id="bot-widget">
-      <svg viewBox="0 0 64 84" xmlns="http://www.w3.org/2000/svg" width="72" height="72">
+      <svg viewBox="0 0 64 84" xmlns="http://www.w3.org/2000/svg" width="68" height="68">
         <defs>
           <radialGradient id="hg" cx="40%" cy="30%"><stop offset="0%" stop-color="#1e3a5f"/><stop offset="100%" stop-color="#0f172a"/></radialGradient>
           <filter id="gl" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur in="SourceGraphic" stdDeviation="1.8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
@@ -95,20 +344,86 @@ import '../styles/global.css';
   <!-- ====== CONTACT MODAL ====== -->
   <div id="bot-modal">
     <div id="bot-mi">
-      <button id="bcl">&times;</button>
-      <div style="margin-bottom:24px">
-        <h3 id="bmt" style="font-family:'Outfit',sans-serif;font-size:22px;font-weight:700;color:#e2e8f0;margin:0 0 6px">&#x00A1;Hablemos!</h3>
-        <p id="bms" style="font-family:'Outfit',sans-serif;font-size:13px;color:#64748b;margin:0">Cu&#xe9;ntame sobre tu proyecto.</p>
+
+      <!-- Header -->
+      <div id="bot-mh">
+        <button id="bcl" aria-label="Close">&times;</button>
+        <div id="bot-mh-icon">
+          <svg width="26" height="26" viewBox="0 0 64 84" xmlns="http://www.w3.org/2000/svg">
+            <defs><radialGradient id="hg2" cx="40%" cy="30%"><stop offset="0%" stop-color="#1e3a5f"/><stop offset="100%" stop-color="#0f172a"/></radialGradient></defs>
+            <line x1="32" y1="1" x2="32" y2="14" stroke="#5eead4" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="32" cy="1" r="5" fill="#5eead4"/>
+            <rect x="8" y="13" width="48" height="34" rx="12" fill="url(#hg2)" stroke="#5eead4" stroke-width="2"/>
+            <circle cx="22" cy="29" r="5.5" fill="#0f172a" stroke="#5eead4" stroke-width="1.5"/>
+            <circle cx="42" cy="29" r="5.5" fill="#0f172a" stroke="#5eead4" stroke-width="1.5"/>
+            <circle cx="22" cy="29" r="3" fill="#5eead4"/>
+            <circle cx="42" cy="29" r="3" fill="#5eead4"/>
+            <path d="M18 40 Q32 50 46 40" fill="none" stroke="#5eead4" stroke-width="2.5" stroke-linecap="round"/>
+            <rect x="12" y="49" width="40" height="24" rx="8" fill="url(#hg2)" stroke="#5eead4" stroke-width="2"/>
+            <circle cx="32" cy="61" r="4" fill="#5eead4" opacity=".8"/>
+          </svg>
+        </div>
+        <h3 id="bmt">&#x00A1;Hablemos!</h3>
+        <p id="bms">Cu&#xe9;ntame sobre tu proyecto y te respondo pronto.</p>
       </div>
-      <form id="bot-form" novalidate>
-        <div class="bf"><label class="bl" for="bn" id="lbn">Nombre *</label><input id="bn" type="text" autocomplete="name" class="bi" placeholder="Tu nombre"/><span class="be" id="ebn"></span></div>
-        <div class="bf"><label class="bl" for="be2" id="lbe">Email *</label><input id="be2" type="email" autocomplete="email" class="bi" placeholder="tu@email.com"/><span class="be" id="ebe"></span></div>
-        <div class="bf"><label class="bl" for="bph" id="lbph">Tel&#xe9;fono</label><input id="bph" type="tel" autocomplete="tel" class="bi" placeholder="+57 300 000 0000"/><span class="be" id="ebph"></span></div>
-        <div class="bf"><label class="bl" for="bsj" id="lbsj">Asunto *</label><input id="bsj" type="text" class="bi" placeholder="&#xBF;De qu&#xe9; se trata?"/><span class="be" id="ebsj"></span></div>
-        <div class="bf" style="margin-bottom:20px"><label class="bl" for="bmsg" id="lbmsg">Mensaje *</label><textarea id="bmsg" rows="4" class="bi" style="resize:vertical;min-height:90px" placeholder="Cu&#xe9;ntame m&#xe1;s..."></textarea><span class="be" id="ebmsg"></span></div>
-        <button type="submit" id="bsub">Enviar mensaje</button>
-        <div id="bres"></div>
-      </form>
+
+      <!-- Body / Form -->
+      <div id="bot-mb">
+        <form id="bot-form" novalidate>
+
+          <div class="brow">
+            <div class="bf">
+              <label class="bl" for="bn" id="lbn">Nombre *</label>
+              <div class="bi-wrap">
+                <i class="fa-solid fa-user bi-icon"></i>
+                <input id="bn" type="text" autocomplete="name" class="bi" placeholder="Tu nombre"/>
+              </div>
+              <span class="be" id="ebn"></span>
+            </div>
+            <div class="bf">
+              <label class="bl" for="bph" id="lbph">Tel&#xe9;fono</label>
+              <div class="bi-wrap">
+                <i class="fa-solid fa-phone bi-icon"></i>
+                <input id="bph" type="tel" autocomplete="tel" class="bi" placeholder="+57 300 000 0000"/>
+              </div>
+              <span class="be" id="ebph"></span>
+            </div>
+          </div>
+
+          <div class="bf">
+            <label class="bl" for="be2" id="lbe">Email *</label>
+            <div class="bi-wrap">
+              <i class="fa-solid fa-envelope bi-icon"></i>
+              <input id="be2" type="email" autocomplete="email" class="bi" placeholder="tu@email.com"/>
+            </div>
+            <span class="be" id="ebe"></span>
+          </div>
+
+          <div class="bf">
+            <label class="bl" for="bsj" id="lbsj">Asunto *</label>
+            <div class="bi-wrap">
+              <i class="fa-solid fa-tag bi-icon"></i>
+              <input id="bsj" type="text" class="bi" placeholder="&#xBF;De qu&#xe9; se trata?"/>
+            </div>
+            <span class="be" id="ebsj"></span>
+          </div>
+
+          <div class="bf">
+            <label class="bl" for="bmsg" id="lbmsg">Mensaje *</label>
+            <div class="bi-wrap">
+              <i class="fa-solid fa-comment-dots bi-icon" style="top:16px;transform:none"></i>
+              <textarea id="bmsg" rows="4" class="bi" placeholder="Cu&#xe9;ntame m&#xe1;s sobre tu proyecto..."></textarea>
+            </div>
+            <span class="be" id="ebmsg"></span>
+          </div>
+
+          <div class="bdiv"></div>
+
+          <button type="submit" id="bsub">Enviar mensaje</button>
+          <div id="bres"></div>
+
+        </form>
+      </div>
     </div>
   </div>
 
@@ -207,7 +522,6 @@ import '../styles/global.css';
   <!-- BOT SCRIPT -->
   <script is:inline>
   (function(){
-    // To receive emails directly: visit https://web3forms.com, enter luisoro009@gmail.com, get your key, replace below.
     var W3F='YOUR_ACCESS_KEY_HERE';
     var MAIL='luisoro009@gmail.com';
 
@@ -216,7 +530,6 @@ import '../styles/global.css';
       en:["Have an idea that needs building? I'll make it real 🚀","I automate what's eating your time ⚡","Your competition is already using AI. Are you? 🤖","From requirement to production. No detours 💪","n8n, APIs, AI? That's my language 🔧","Every manual task is an automation waiting to happen 🎯","I build faster than you'd expect 🔥","Untapped data? I turn it into insights 📊","Real full-stack: frontend, backend, and everything in between","Frustrated with your current process? Tell me 💬","No empty promises. Just results ✅","How many hours do you lose on repetitive tasks? Message me","I integrate your tools so they work on their own 🔗","Complex project? Even better. That's what I like 🧩","Clean code, solid architecture, zero technical debt","From 0 to MVP in record time 🏃","Want an AI agent for your business? We need to talk","2+ years automating real processes in real companies","Spring Boot + Angular + AI = a stack that scales 📈","Got a 500-row manual spreadsheet? That's solvable 😅","Every integration I build saves hours every week","Looking for someone who gets both business and code? That's me","Don't wait for the perfect moment. Let's talk today 📱","Your workflow has bottlenecks. I find them and remove them","You bring the problem, I bring the solution","Need dashboards that update themselves? I can build that","Automation + AI = real competitive advantage","Got an MVP that needs to scale? Tell me about it","Started coding at 15. Building production systems today 📈","Invoices, reports, notifications? I automate them all","I build things that work on the first try 💯","Third-party API giving you trouble? I've handled that","My work makes your work easier","Want to implement AI but don't know where to start? I'll guide you","Available for short and long-term projects","Your technical problem has a solution. Just tap here 👇","Every project is a chance to build something brilliant ✨","Tight budget? Let's talk. There's always a way","84+ automated workflows in production. Yours could be next","Full dedication. I don't outsource anything","Need someone who understands your data? I'm your person 📊","AI applied to real businesses, not demos that don't work","Tired of tools that don't integrate? I'll connect them","Your next developer is already waiting 👋","Chaotic WhatsApp Business? I'll automate it with AI","Code I can explain, maintain, and improve","One conversation can change your project. Shall we talk? 💬","Want to connect your apps into one flow? That's my specialty","PostgreSQL, MongoDB, MySQL... data where it belongs","Click me and tell me what you need 🚀"]
     };
 
-    var wrap=document.getElementById('bot-wrap');
     var widget=document.getElementById('bot-widget');
     var bubble=document.getElementById('bot-bubble');
     var msgEl=document.getElementById('bot-msg');
@@ -226,106 +539,28 @@ import '../styles/global.css';
     var submitBtn=document.getElementById('bsub');
     var resEl=document.getElementById('bres');
 
-    // ── AUTONOMOUS WANDERING MOVEMENT ──
-    var BOT_W = 80, BOT_H = 100; // bot footprint approx
-    var bx = 40;
-    var by = window.innerHeight - 200;
-    var vx = 1.4, vy = -0.9;
-    var locked = false;
-    var pausing = false;
-    var pauseTimer = null;
-
-    function bounds(){
-      return {
-        minX: 10,
-        maxX: window.innerWidth  - BOT_W  - 10,
-        minY: 10,
-        maxY: window.innerHeight - BOT_H  - 10
-      };
-    }
-
-    // Randomize velocity with consistent speed
-    function randVel(){
-      var speed = 1.2 + Math.random() * 1.6;
-      var angle = Math.random() * Math.PI * 2;
-      vx = Math.cos(angle) * speed;
-      vy = Math.sin(angle) * speed;
-    }
-
-    // Random direction tweak (doesn't fully reverse, feels natural)
-    function nudge(){
-      vx += (Math.random() - 0.5) * 0.8;
-      vy += (Math.random() - 0.5) * 0.8;
-      // Clamp speed
-      var spd = Math.sqrt(vx*vx + vy*vy);
-      var target = 1.2 + Math.random() * 1.6;
-      vx = (vx/spd)*target;
-      vy = (vy/spd)*target;
-    }
-
-    // Occasional pause (robot "thinking")
-    function maybePause(){
-      if(!pausing && Math.random() < 0.18){
-        pausing = true;
-        clearTimeout(pauseTimer);
-        pauseTimer = setTimeout(function(){ pausing = false; }, 800 + Math.random() * 1600);
-      }
-    }
-
-    var dirChangeTimer = setInterval(function(){
-      if(!locked){ nudge(); maybePause(); }
-    }, 2200 + Math.random() * 1800);
-
-    (function tick(){
-      if(!locked && !pausing){
-        var b = bounds();
-        bx += vx;
-        by += vy;
-        // Bounce
-        if(bx <= b.minX){ bx = b.minX; vx = Math.abs(vx); nudge(); }
-        if(bx >= b.maxX){ bx = b.maxX; vx = -Math.abs(vx); nudge(); }
-        if(by <= b.minY){ by = b.minY; vy = Math.abs(vy); nudge(); }
-        if(by >= b.maxY){ by = b.maxY; vy = -Math.abs(vy); nudge(); }
-        // Slight tilt toward movement direction
-        var tilt = Math.max(-12, Math.min(12, vx * 3));
-        wrap.style.left = bx + 'px';
-        wrap.style.bottom = 'auto';
-        wrap.style.top = by + 'px';
-        wrap.style.transform = 'rotate(' + tilt + 'deg)';
-      }
-      requestAnimationFrame(tick);
-    })();
-
-    // Freeze on hover / touch
-    widget.addEventListener('mouseenter', function(){ locked = true; wrap.style.transform = 'rotate(0deg)'; });
-    widget.addEventListener('mouseleave', function(){ if(!modal.classList.contains('open')){ locked = false; } });
-    widget.addEventListener('touchstart', function(){ locked = true; wrap.style.transform = 'rotate(0deg)'; }, { passive: true });
-
-    // ── MESSAGES ──
+    // === MESSAGES ===
     var used=[];
     function pickMsg(){
       var lang=localStorage.getItem('portfolio-lang')||'es';
       var list=MSGS[lang]||MSGS.es;
       if(used.length>=list.length) used=[];
-      var avail=[];
-      for(var i=0;i<list.length;i++) if(used.indexOf(i)===-1) avail.push(i);
+      var avail=[]; for(var i=0;i<list.length;i++) if(used.indexOf(i)===-1) avail.push(i);
       var idx=avail[Math.floor(Math.random()*avail.length)];
-      used.push(idx);
-      return list[idx];
+      used.push(idx); return list[idx];
     }
     function showBubble(){
       msgEl.textContent=pickMsg();
-      bubble.classList.remove('hide');
-      bubble.classList.add('show');
+      bubble.classList.remove('hide'); bubble.classList.add('show');
       setTimeout(function(){ bubble.classList.remove('show'); bubble.classList.add('hide'); }, 4500);
     }
-    setTimeout(showBubble, 1800);
-    setInterval(showBubble, 8000);
+    setTimeout(showBubble,1800);
+    setInterval(showBubble,8000);
 
-    // ── MODAL ──
+    // === MODAL STRINGS ===
     var MS={
-      es:{t:'¡Hablemos!',s:'Cuéntame sobre tu proyecto.',n:'Nombre *',e:'Email *',p:'Teléfono',sj:'Asunto *',m:'Mensaje *',btn:'Enviar mensaje',sending:'Enviando...',ok:'¡Mensaje enviado! Te respondo pronto 🚀',fail:'Error al enviar. Intenta de nuevo.',en:'Nombre requerido (mín. 2 caracteres)',ee:'Email inválido',ep:'Teléfono inválido',es2:'Asunto requerido (mín. 3 caracteres)',em:'Mensaje requerido (mín. 10 caracteres)'},
-      en:{t:"Let's talk!",s:'Tell me about your project.',n:'Name *',e:'Email *',p:'Phone',sj:'Subject *',m:'Message *',btn:'Send message',sending:'Sending...',ok:"Message sent! I'll reply soon 🚀",fail:'Error sending. Please try again.',en:'Name required (min. 2 chars)',ee:'Invalid email',ep:'Invalid phone',es2:'Subject required (min. 3 chars)',em:'Message required (min. 10 chars)'}
+      es:{t:'¡Hablemos!',s:'Cuéntame sobre tu proyecto y te respondo pronto.',n:'Nombre *',e:'Email *',p:'Teléfono',sj:'Asunto *',m:'Mensaje *',btn:'Enviar mensaje',sending:'Enviando...',ok:'¡Mensaje enviado! Te respondo lo antes posible 🚀',fail:'Error al enviar. Inténtalo de nuevo.',en:'Mínimo 2 caracteres',ee:'Email inválido',ep:'Teléfono inválido',es2:'Mínimo 3 caracteres',em:'Mínimo 10 caracteres'},
+      en:{t:"Let's talk!",s:"Tell me about your project and I'll reply soon.",n:'Name *',e:'Email *',p:'Phone',sj:'Subject *',m:'Message *',btn:'Send message',sending:'Sending...',ok:"Message sent! I'll get back to you asap 🚀",fail:'Error sending. Please try again.',en:'Minimum 2 characters',ee:'Invalid email',ep:'Invalid phone',es2:'Minimum 3 characters',em:'Minimum 10 characters'}
     };
     function glang(){ return localStorage.getItem('portfolio-lang')||'es'; }
     function gs(){ return MS[glang()]||MS.es; }
@@ -340,25 +575,23 @@ import '../styles/global.css';
       document.getElementById('lbmsg').textContent=x.m;
       submitBtn.textContent=x.btn;
     }
-    widget.addEventListener('click', function(){ openM(); });
+
+    widget.addEventListener('click', openM);
     closeBtn.addEventListener('click', closeM);
     modal.addEventListener('click', function(e){ if(e.target===modal) closeM(); });
     document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeM(); });
-    function openM(){ locked=true; modal.classList.add('open'); resEl.style.display='none'; resEl.className=''; updateML(); }
-    function closeM(){ modal.classList.remove('open'); setTimeout(function(){ locked=false; }, 200); }
+    function openM(){ modal.classList.add('open'); resEl.style.display='none'; resEl.className=''; updateML(); }
+    function closeM(){ modal.classList.remove('open'); }
 
-    // Input focus styles
-    ['bn','be2','bph','bsj','bmsg'].forEach(function(id){
-      var el=document.getElementById(id);
-      el.addEventListener('focus',function(){ if(this.style.borderColor!=='#f87171') this.style.borderColor='#5eead4'; });
-      el.addEventListener('blur',function(){ if(this.style.borderColor!=='#f87171') this.style.borderColor='#334155'; });
-    });
+    // Validation helpers
     function setE(fid,eid,msg){
-      document.getElementById(fid).style.borderColor=msg?'#f87171':'#5eead4';
-      var e=document.getElementById(eid); e.textContent=msg||''; e.style.display=msg?'block':'none';
+      var inp=document.getElementById(fid);
+      var err=document.getElementById(eid);
+      if(msg){ inp.classList.add('err'); err.textContent=msg; err.classList.add('show'); }
+      else   { inp.classList.remove('err'); err.textContent=''; err.classList.remove('show'); }
     }
 
-    // ── FORM SUBMIT ──
+    // === FORM SUBMIT ===
     form.addEventListener('submit', function(ev){
       ev.preventDefault();
       var x=gs();
@@ -374,14 +607,19 @@ import '../styles/global.css';
       if(sj.length<3){ setE('bsj','ebsj',x.es2); ok=false; } else setE('bsj','ebsj','');
       if(mg.length<10){ setE('bmsg','ebmsg',x.em); ok=false; } else setE('bmsg','ebmsg','');
       if(!ok) return;
-      submitBtn.textContent=x.sending; submitBtn.disabled=true; resEl.style.display='none';
+      submitBtn.innerHTML='<span class="bspin"></span>'+x.sending;
+      submitBtn.disabled=true; resEl.style.display='none';
       function done(success){
         if(success){
-          resEl.textContent=x.ok; resEl.className='ok'; resEl.style.display='block';
+          resEl.innerHTML='<i class="fa-solid fa-circle-check" style="margin-right:7px"></i>'+x.ok;
+          resEl.className='ok'; resEl.style.display='block';
           form.reset();
-          ['bn','be2','bph','bsj','bmsg'].forEach(function(id){ document.getElementById(id).style.borderColor='#334155'; });
-          setTimeout(closeM, 3000);
-        } else { resEl.textContent=x.fail; resEl.className='err'; resEl.style.display='block'; }
+          ['bn','be2','bph','bsj','bmsg'].forEach(function(id){ document.getElementById(id).classList.remove('err'); });
+          setTimeout(closeM, 3500);
+        } else {
+          resEl.innerHTML='<i class="fa-solid fa-circle-exclamation" style="margin-right:7px"></i>'+x.fail;
+          resEl.className='err'; resEl.style.display='block';
+        }
         submitBtn.textContent=x.btn; submitBtn.disabled=false;
       }
       if(W3F==='YOUR_ACCESS_KEY_HERE'){
