@@ -14,14 +14,14 @@ import '../styles/global.css';
   <style>
     .i18n-fade{transition:opacity .15s ease}
 
-    /* === BOT === */
+    /* ===================== BOT ===================== */
     @keyframes botFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
     @keyframes antPulse{0%,100%{opacity:1}50%{opacity:.2}}
-    @keyframes eyePulse{0%,80%,100%{transform:scaleY(1)}88%{transform:scaleY(.1)}95%{transform:scaleY(1)}}
+    @keyframes eyePulse{0%,80%,100%{transform:scaleY(1)}88%{transform:scaleY(.08)}95%{transform:scaleY(1)}}
     @keyframes chestPulse{0%,100%{opacity:.9}50%{opacity:.3}}
     @keyframes chestRipple{0%{transform:scale(1);opacity:.25}100%{transform:scale(2.8);opacity:0}}
-    @keyframes bubbleIn{from{opacity:0;transform:translateY(8px) translateX(-50%)}to{opacity:1;transform:translateY(0) translateX(-50%)}}
-    @keyframes bubbleOut{from{opacity:1;transform:translateY(0) translateX(-50%)}to{opacity:0;transform:translateY(-8px) translateX(-50%)}}
+    @keyframes bubbleIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes bubbleOut{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(-6px)}}
 
     #bot-wrap{
       position:fixed;
@@ -30,277 +30,278 @@ import '../styles/global.css';
       z-index:9990;
       display:flex;
       flex-direction:column;
-      align-items:center;
+      align-items:flex-end;
     }
     #bot-widget{
       cursor:pointer;
-      width:68px;
-      height:68px;
+      width:68px;height:68px;
       animation:botFloat 2.8s ease-in-out infinite;
-      filter:drop-shadow(0 4px 18px rgba(94,234,212,.4));
-      transition:filter .3s, transform .2s;
+      filter:drop-shadow(0 6px 20px rgba(94,234,212,.45));
+      transition:filter .25s,transform .2s;
     }
     #bot-widget:hover{
-      filter:drop-shadow(0 4px 32px rgba(94,234,212,.75));
-      transform:scale(1.07);
+      filter:drop-shadow(0 6px 34px rgba(94,234,212,.8));
+      transform:scale(1.08);
     }
     .ant-p{animation:antPulse 1.5s ease-in-out infinite}
     .eye-l{transform-origin:center;transform-box:fill-box;animation:eyePulse 5s ease-in-out infinite}
-    .eye-r{transform-origin:center;transform-box:fill-box;animation:eyePulse 5s ease-in-out infinite .2s}
+    .eye-r{transform-origin:center;transform-box:fill-box;animation:eyePulse 5s ease-in-out infinite .25s}
     .ch-c{animation:chestPulse 2s ease-in-out infinite}
     .ch-r{transform-origin:center;transform-box:fill-box;animation:chestRipple 2s ease-out infinite}
 
+    /* Bubble — anchored to the RIGHT so it never overflows */
     #bot-bubble{
       position:absolute;
-      bottom:calc(100% + 14px);
-      left:50%;
-      transform:translateX(-50%);
-      background:#1e293b;
-      border:1.5px solid #5eead4;
-      border-radius:14px;
+      bottom:calc(100% + 16px);
+      right:0;
+      background:rgba(14,26,50,.85);
+      backdrop-filter:blur(16px) saturate(180%);
+      -webkit-backdrop-filter:blur(16px) saturate(180%);
+      border:1px solid rgba(94,234,212,.35);
+      border-radius:14px 14px 2px 14px;
       padding:10px 14px;
-      width:210px;
-      text-align:center;
-      font-size:12px;
+      width:220px;
+      text-align:left;
+      font-size:12.5px;
       color:#e2e8f0;
       font-family:'Outfit',sans-serif;
       line-height:1.5;
       pointer-events:none;
-      box-shadow:0 0 24px rgba(94,234,212,.18);
+      box-shadow:0 8px 32px rgba(0,0,0,.4),0 0 0 1px rgba(255,255,255,.04) inset,0 0 20px rgba(94,234,212,.1);
       opacity:0;
-      white-space:normal;
     }
-    #bot-bubble.show{animation:bubbleIn .4s ease forwards;opacity:1}
-    #bot-bubble.hide{animation:bubbleOut .4s ease forwards}
-    .bba{
+    #bot-bubble.show{animation:bubbleIn .35s ease forwards;opacity:1}
+    #bot-bubble.hide{animation:bubbleOut .35s ease forwards}
+    /* tiny tail bottom-right */
+    #bot-bubble::after{
+      content:'';
       position:absolute;
-      bottom:-7px;
-      left:50%;
-      width:12px;
-      height:12px;
-      background:#1e293b;
-      border-right:1.5px solid #5eead4;
-      border-bottom:1.5px solid #5eead4;
-      transform:translateX(-50%) rotate(45deg);
+      bottom:-7px;right:22px;
+      width:12px;height:12px;
+      background:rgba(14,26,50,.85);
+      border-right:1px solid rgba(94,234,212,.35);
+      border-bottom:1px solid rgba(94,234,212,.35);
+      transform:rotate(45deg);
     }
 
-    /* === MODAL === */
-    @keyframes mIn{from{opacity:0;transform:scale(.95) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+    /* ===================== MODAL — LIQUID GLASS ===================== */
+    @keyframes mIn{from{opacity:0;transform:scale(.96) translateY(24px)}to{opacity:1;transform:scale(1) translateY(0)}}
     @keyframes spin{to{transform:rotate(360deg)}}
+    @keyframes shimmer{0%{background-position:200% center}100%{background-position:-200% center}}
 
     #bot-modal{
       display:none;
-      position:fixed;
-      inset:0;
+      position:fixed;inset:0;
       z-index:10000;
-      background:rgba(2,6,23,.85);
-      backdrop-filter:blur(10px);
-      align-items:center;
-      justify-content:center;
+      background:rgba(2,6,23,.7);
+      backdrop-filter:blur(16px) saturate(140%);
+      -webkit-backdrop-filter:blur(16px) saturate(140%);
+      align-items:center;justify-content:center;
       padding:20px;
     }
     #bot-modal.open{display:flex}
 
+    /* Glass card */
     #bot-mi{
-      background:#0f172a;
-      border:1px solid #1e293b;
-      border-radius:20px;
-      width:100%;
-      max-width:500px;
-      max-height:92vh;
-      overflow-y:auto;
       position:relative;
-      box-shadow:0 30px 60px rgba(0,0,0,.7), 0 0 0 1px rgba(94,234,212,.08);
-      animation:mIn .3s cubic-bezier(.34,1.56,.64,1);
+      width:100%;max-width:480px;
+      max-height:92vh;overflow-y:auto;
+      border-radius:28px;
+      background:linear-gradient(145deg,rgba(12,28,58,.72) 0%,rgba(8,15,32,.82) 100%);
+      backdrop-filter:blur(40px) saturate(200%);
+      -webkit-backdrop-filter:blur(40px) saturate(200%);
+      border:1px solid rgba(255,255,255,.1);
+      box-shadow:
+        inset 0 1.5px 0 rgba(255,255,255,.12),
+        inset 0 -1px 0 rgba(0,0,0,.25),
+        inset 1px 0 0 rgba(255,255,255,.05),
+        0 40px 80px rgba(0,0,0,.65),
+        0 0 0 1px rgba(94,234,212,.06),
+        0 0 80px rgba(94,234,212,.06);
+      animation:mIn .35s cubic-bezier(.34,1.56,.64,1);
+      scrollbar-width:thin;
+      scrollbar-color:rgba(94,234,212,.2) transparent;
+    }
+    /* top light-refraction shine */
+    #bot-mi::before{
+      content:'';
+      position:absolute;top:0;left:10%;right:10%;height:1px;
+      background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);
+      border-radius:50%;
+      pointer-events:none;z-index:1;
     }
 
-    /* Modal header band */
+    /* --- Header --- */
     #bot-mh{
-      background:linear-gradient(135deg,#0f2744 0%,#0f172a 60%);
-      border-bottom:1px solid #1e293b;
-      border-radius:20px 20px 0 0;
       padding:28px 28px 22px;
-      position:relative;
-      overflow:hidden;
+      border-bottom:1px solid rgba(255,255,255,.06);
+      border-radius:28px 28px 0 0;
+      position:relative;overflow:hidden;
     }
     #bot-mh::before{
       content:'';
-      position:absolute;
-      top:-40px;right:-40px;
-      width:160px;height:160px;
-      background:radial-gradient(circle,rgba(94,234,212,.12) 0%,transparent 70%);
+      position:absolute;top:-60px;right:-60px;
+      width:200px;height:200px;
+      background:radial-gradient(circle,rgba(94,234,212,.1) 0%,transparent 65%);
       pointer-events:none;
     }
-    #bot-mh-icon{
-      width:48px;height:48px;
-      background:rgba(94,234,212,.08);
-      border:1.5px solid rgba(94,234,212,.25);
-      border-radius:14px;
-      display:flex;align-items:center;justify-content:center;
+    #bot-mh::after{
+      content:'';
+      position:absolute;bottom:-60px;left:-60px;
+      width:180px;height:180px;
+      background:radial-gradient(circle,rgba(56,189,248,.07) 0%,transparent 65%);
+      pointer-events:none;
+    }
+    .mh-badge{
+      display:inline-flex;align-items:center;gap:7px;
+      background:rgba(94,234,212,.07);
+      border:1px solid rgba(94,234,212,.18);
+      border-radius:100px;
+      padding:5px 12px 5px 8px;
       margin-bottom:14px;
+    }
+    .mh-badge-dot{
+      width:6px;height:6px;border-radius:50%;
+      background:#5eead4;
+      box-shadow:0 0 6px #5eead4;
+      animation:chestPulse 2s ease-in-out infinite;
+    }
+    .mh-badge span{
+      font-family:'JetBrains Mono',monospace;
+      font-size:10px;text-transform:uppercase;
+      letter-spacing:.1em;color:#5eead4;
     }
     #bmt{
       font-family:'Outfit',sans-serif;
-      font-size:22px;
-      font-weight:700;
-      color:#e2e8f0;
-      margin:0 0 5px;
+      font-size:24px;font-weight:800;
+      color:#f1f5f9;margin:0 0 6px;
+      line-height:1.2;
     }
-    #bms{
-      font-family:'Outfit',sans-serif;
-      font-size:13px;
-      color:#64748b;
-      margin:0;
-    }
+    #bms{font-family:'Outfit',sans-serif;font-size:13px;color:#64748b;margin:0}
     #bcl{
-      position:absolute;
-      top:16px;right:18px;
-      background:rgba(255,255,255,.04);
-      border:1px solid #1e293b;
-      color:#475569;
-      width:32px;height:32px;
-      border-radius:8px;
-      cursor:pointer;
-      font-size:18px;
+      position:absolute;top:18px;right:20px;
+      width:34px;height:34px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
+      color:#475569;font-size:18px;
+      border-radius:10px;
+      cursor:pointer;display:flex;align-items:center;justify-content:center;
+      transition:background .2s,color .2s,border-color .2s;
       line-height:1;
-      display:flex;align-items:center;justify-content:center;
-      transition:background .2s, color .2s, border-color .2s;
     }
-    #bcl:hover{background:rgba(248,113,113,.1);border-color:#f87171;color:#f87171}
+    #bcl:hover{background:rgba(248,113,113,.12);border-color:rgba(248,113,113,.3);color:#f87171}
 
-    /* Modal body */
-    #bot-mb{
-      padding:24px 28px 28px;
-    }
-
-    /* Two-col row */
+    /* --- Form body --- */
+    #bot-mb{padding:22px 28px 28px}
     .brow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-    @media(max-width:480px){.brow{grid-template-columns:1fr}}
+    @media(max-width:480px){.brow{grid-template-columns:1fr}#bot-mb{padding:18px 20px 24px}#bot-mh{padding:22px 20px 18px}}
 
     .bf{margin-bottom:14px}
     .bl{
       display:block;
       font-family:'JetBrains Mono',monospace;
-      font-size:10px;
-      text-transform:uppercase;
-      letter-spacing:.1em;
-      color:#475569;
-      margin-bottom:6px;
+      font-size:10px;text-transform:uppercase;letter-spacing:.1em;
+      color:rgba(100,116,139,.8);margin-bottom:7px;
       transition:color .2s;
     }
-    .bf:focus-within .bl{color:#5eead4}
+    .bf:focus-within .bl{color:rgba(94,234,212,.9)}
 
     .bi-wrap{position:relative}
     .bi-icon{
-      position:absolute;
-      left:12px;top:50%;
-      transform:translateY(-50%);
-      color:#334155;
-      font-size:13px;
-      pointer-events:none;
-      transition:color .2s;
+      position:absolute;left:13px;top:50%;transform:translateY(-50%);
+      color:rgba(71,85,105,.8);font-size:12px;
+      pointer-events:none;transition:color .2s;
     }
-    .bf:focus-within .bi-icon{color:#5eead4}
+    .bf:focus-within .bi-icon{color:rgba(94,234,212,.7)}
+    textarea.bi~.bi-icon,.bi-wrap:has(textarea) .bi-icon{top:15px;transform:none}
 
+    /* Glass inputs */
     .bi{
-      width:100%;
-      box-sizing:border-box;
-      background:#0d1b2e;
-      border:1.5px solid #1e293b;
-      border-radius:10px;
+      width:100%;box-sizing:border-box;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.07);
+      border-radius:12px;
       padding:11px 14px 11px 36px;
-      font-family:'Outfit',sans-serif;
-      font-size:14px;
-      color:#e2e8f0;
-      outline:none;
-      transition:border-color .2s, background .2s, box-shadow .2s;
+      font-family:'Outfit',sans-serif;font-size:14px;
+      color:#e2e8f0;outline:none;
+      transition:background .2s,border-color .2s,box-shadow .2s;
+      -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
     }
+    .bi::placeholder{color:rgba(71,85,105,.6)}
     .bi:focus{
-      border-color:#5eead4;
-      background:#0f2233;
-      box-shadow:0 0 0 3px rgba(94,234,212,.08);
+      background:rgba(94,234,212,.04);
+      border-color:rgba(94,234,212,.4);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.05),
+        0 0 0 3px rgba(94,234,212,.08),
+        0 0 20px rgba(94,234,212,.05);
     }
-    .bi.err{border-color:#f87171!important;box-shadow:0 0 0 3px rgba(248,113,113,.08)}
-    .bi::placeholder{color:#334155}
-    textarea.bi{padding-top:12px;padding-bottom:12px;resize:vertical;min-height:96px}
+    .bi.err{border-color:rgba(248,113,113,.5)!important;box-shadow:0 0 0 3px rgba(248,113,113,.07)!important}
+    textarea.bi{resize:vertical;min-height:100px;padding-top:12px;padding-bottom:12px}
 
-    .be{
-      display:none;
-      font-size:11px;
-      color:#f87171;
-      margin-top:5px;
-      font-family:'Outfit',sans-serif;
-      padding-left:2px;
-    }
+    .be{display:none;font-size:11px;color:#f87171;margin-top:5px;font-family:'Outfit',sans-serif;padding-left:2px}
     .be.show{display:block}
 
-    /* divider */
-    .bdiv{
-      height:1px;
-      background:linear-gradient(90deg,transparent,#1e293b 20%,#1e293b 80%,transparent);
-      margin:6px 0 18px;
-    }
+    /* Divider */
+    .bdiv{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.06) 20%,rgba(255,255,255,.06) 80%,transparent);margin:6px 0 18px}
 
+    /* Glass submit button */
     #bsub{
-      width:100%;
-      padding:13px;
-      background:linear-gradient(135deg,#5eead4,#38bdf8);
-      color:#0f172a;
-      font-family:'Outfit',sans-serif;
-      font-size:14px;
-      font-weight:700;
-      border:none;
-      border-radius:10px;
+      width:100%;padding:13px;
+      background:linear-gradient(135deg,rgba(94,234,212,.92) 0%,rgba(56,189,248,.9) 100%);
+      -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+      border:1px solid rgba(255,255,255,.3);
+      border-radius:12px;
+      color:#0a1628;
+      font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;
+      text-transform:uppercase;letter-spacing:.08em;
       cursor:pointer;
-      transition:opacity .2s, transform .15s, box-shadow .2s;
-      text-transform:uppercase;
-      letter-spacing:.08em;
-      position:relative;
-      overflow:hidden;
+      box-shadow:
+        inset 0 1.5px 0 rgba(255,255,255,.45),
+        inset 0 -1px 0 rgba(0,0,0,.1),
+        0 8px 32px rgba(94,234,212,.28),
+        0 2px 8px rgba(0,0,0,.2);
+      transition:opacity .2s,transform .15s,box-shadow .2s;
+      position:relative;overflow:hidden;
     }
     #bsub::after{
       content:'';
-      position:absolute;
-      inset:0;
-      background:linear-gradient(135deg,rgba(255,255,255,.15),transparent);
-      opacity:0;
-      transition:opacity .2s;
+      position:absolute;inset:0;
+      background:linear-gradient(135deg,rgba(255,255,255,.2) 0%,transparent 60%);
+      pointer-events:none;
     }
-    #bsub:hover:not(:disabled)::after{opacity:1}
-    #bsub:hover:not(:disabled){box-shadow:0 6px 24px rgba(94,234,212,.35);transform:translateY(-1px)}
+    #bsub:hover:not(:disabled){
+      box-shadow:
+        inset 0 1.5px 0 rgba(255,255,255,.5),
+        0 12px 40px rgba(94,234,212,.4),
+        0 2px 8px rgba(0,0,0,.2);
+      transform:translateY(-1px);
+    }
     #bsub:active:not(:disabled){transform:scale(.98)}
-    #bsub:disabled{background:#1e293b;color:#475569;cursor:not-allowed;box-shadow:none}
-
-    /* Spinner inside submit */
+    #bsub:disabled{
+      background:rgba(30,41,59,.6);
+      border-color:rgba(255,255,255,.05);
+      color:#475569;cursor:not-allowed;
+      box-shadow:none;
+    }
     .bspin{
-      display:inline-block;
-      width:14px;height:14px;
-      border:2px solid rgba(15,23,42,.3);
-      border-top-color:#0f172a;
+      display:inline-block;width:13px;height:13px;
+      border:2px solid rgba(10,22,40,.2);
+      border-top-color:#0a1628;
       border-radius:50%;
-      animation:spin .7s linear infinite;
-      vertical-align:middle;
-      margin-right:7px;
+      animation:spin .65s linear infinite;
+      vertical-align:middle;margin-right:7px;
     }
 
     #bres{
-      margin-top:14px;
-      padding:13px 16px;
-      border-radius:10px;
-      font-family:'Outfit',sans-serif;
-      font-size:13px;
-      display:none;
-      text-align:center;
-      line-height:1.5;
+      margin-top:13px;padding:12px 16px;
+      border-radius:12px;
+      font-family:'Outfit',sans-serif;font-size:13px;
+      display:none;text-align:center;line-height:1.5;
+      -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
     }
-    #bres.ok{background:rgba(94,234,212,.06);border:1px solid rgba(94,234,212,.2);color:#5eead4}
-    #bres.err{background:rgba(248,113,113,.06);border:1px solid rgba(248,113,113,.2);color:#f87171}
-
-    @media(max-width:480px){
-      #bot-mi{border-radius:16px}
-      #bot-mh{padding:22px 20px 18px}
-      #bot-mb{padding:20px 20px 24px}
-    }
+    #bres.ok{background:rgba(94,234,212,.06);border:1px solid rgba(94,234,212,.18);color:#5eead4}
+    #bres.err{background:rgba(248,113,113,.06);border:1px solid rgba(248,113,113,.18);color:#f87171}
   </style>
 </head>
 <body class="bg-[#0f172a] text-[#94a3b8] antialiased">
@@ -308,9 +309,9 @@ import '../styles/global.css';
   <div id="spotlight" class="pointer-events-none fixed inset-0 z-30 opacity-0 transition-opacity duration-500"
        style="background:radial-gradient(600px circle at var(--mx,50%) var(--my,50%),rgba(29,78,216,.07),transparent 80%)"></div>
 
-  <!-- ====== FLOATING BOT (fixed bottom-right) ====== -->
+  <!-- ====== BOT (fixed bottom-right) ====== -->
   <div id="bot-wrap">
-    <div id="bot-bubble"><span id="bot-msg"></span><div class="bba"></div></div>
+    <div id="bot-bubble"><span id="bot-msg"></span></div>
     <div id="bot-widget">
       <svg viewBox="0 0 64 84" xmlns="http://www.w3.org/2000/svg" width="68" height="68">
         <defs>
@@ -321,14 +322,12 @@ import '../styles/global.css';
         <circle cx="32" cy="1" r="4.5" fill="#5eead4" filter="url(#gl)" class="ant-p"/>
         <circle cx="32" cy="1" r="2" fill="white" opacity=".8"/>
         <rect x="8" y="13" width="48" height="34" rx="12" fill="url(#hg)" stroke="#5eead4" stroke-width="1.5"/>
-        <circle cx="22" cy="29" r="7.5" fill="#020617"/>
-        <circle cx="42" cy="29" r="7.5" fill="#020617"/>
+        <circle cx="22" cy="29" r="7.5" fill="#020617"/><circle cx="42" cy="29" r="7.5" fill="#020617"/>
         <circle cx="22" cy="29" r="5.5" fill="#0f172a" stroke="#5eead4" stroke-width="1"/>
         <circle cx="42" cy="29" r="5.5" fill="#0f172a" stroke="#5eead4" stroke-width="1"/>
         <circle cx="22" cy="29" r="3.5" fill="#5eead4" filter="url(#gl)" class="eye-l"/>
         <circle cx="42" cy="29" r="3.5" fill="#5eead4" filter="url(#gl)" class="eye-r"/>
-        <circle cx="24" cy="27" r="1.3" fill="white" opacity=".65"/>
-        <circle cx="44" cy="27" r="1.3" fill="white" opacity=".65"/>
+        <circle cx="24" cy="27" r="1.3" fill="white" opacity=".65"/><circle cx="44" cy="27" r="1.3" fill="white" opacity=".65"/>
         <path d="M18 40 Q32 50 46 40" fill="none" stroke="#5eead4" stroke-width="2" stroke-linecap="round" filter="url(#gl)"/>
         <rect x="12" y="49" width="40" height="24" rx="8" fill="url(#hg)" stroke="#5eead4" stroke-width="1.5"/>
         <circle cx="32" cy="61" r="6" fill="#5eead4" opacity=".15" class="ch-r"/>
@@ -341,33 +340,20 @@ import '../styles/global.css';
     </div>
   </div>
 
-  <!-- ====== CONTACT MODAL ====== -->
+  <!-- ====== CONTACT MODAL — LIQUID GLASS ====== -->
   <div id="bot-modal">
     <div id="bot-mi">
 
-      <!-- Header -->
       <div id="bot-mh">
         <button id="bcl" aria-label="Close">&times;</button>
-        <div id="bot-mh-icon">
-          <svg width="26" height="26" viewBox="0 0 64 84" xmlns="http://www.w3.org/2000/svg">
-            <defs><radialGradient id="hg2" cx="40%" cy="30%"><stop offset="0%" stop-color="#1e3a5f"/><stop offset="100%" stop-color="#0f172a"/></radialGradient></defs>
-            <line x1="32" y1="1" x2="32" y2="14" stroke="#5eead4" stroke-width="3" stroke-linecap="round"/>
-            <circle cx="32" cy="1" r="5" fill="#5eead4"/>
-            <rect x="8" y="13" width="48" height="34" rx="12" fill="url(#hg2)" stroke="#5eead4" stroke-width="2"/>
-            <circle cx="22" cy="29" r="5.5" fill="#0f172a" stroke="#5eead4" stroke-width="1.5"/>
-            <circle cx="42" cy="29" r="5.5" fill="#0f172a" stroke="#5eead4" stroke-width="1.5"/>
-            <circle cx="22" cy="29" r="3" fill="#5eead4"/>
-            <circle cx="42" cy="29" r="3" fill="#5eead4"/>
-            <path d="M18 40 Q32 50 46 40" fill="none" stroke="#5eead4" stroke-width="2.5" stroke-linecap="round"/>
-            <rect x="12" y="49" width="40" height="24" rx="8" fill="url(#hg2)" stroke="#5eead4" stroke-width="2"/>
-            <circle cx="32" cy="61" r="4" fill="#5eead4" opacity=".8"/>
-          </svg>
+        <div class="mh-badge">
+          <span class="mh-badge-dot"></span>
+          <span data-i18n="badge.available">Disponible ahora</span>
         </div>
         <h3 id="bmt">&#x00A1;Hablemos!</h3>
         <p id="bms">Cu&#xe9;ntame sobre tu proyecto y te respondo pronto.</p>
       </div>
 
-      <!-- Body / Form -->
       <div id="bot-mb">
         <form id="bot-form" novalidate>
 
@@ -403,7 +389,7 @@ import '../styles/global.css';
             <label class="bl" for="bsj" id="lbsj">Asunto *</label>
             <div class="bi-wrap">
               <i class="fa-solid fa-tag bi-icon"></i>
-              <input id="bsj" type="text" class="bi" placeholder="&#xBF;De qu&#xe9; se trata?"/>
+              <input id="bsj" type="text" class="bi" placeholder="&#xBF;De qu&#xe9; trata tu proyecto?"/>
             </div>
             <span class="be" id="ebsj"></span>
           </div>
@@ -411,14 +397,13 @@ import '../styles/global.css';
           <div class="bf">
             <label class="bl" for="bmsg" id="lbmsg">Mensaje *</label>
             <div class="bi-wrap">
-              <i class="fa-solid fa-comment-dots bi-icon" style="top:16px;transform:none"></i>
-              <textarea id="bmsg" rows="4" class="bi" placeholder="Cu&#xe9;ntame m&#xe1;s sobre tu proyecto..."></textarea>
+              <i class="fa-solid fa-comment-dots bi-icon" style="top:14px;transform:none"></i>
+              <textarea id="bmsg" rows="4" class="bi" placeholder="Cu&#xe9;ntame los detalles..."></textarea>
             </div>
             <span class="be" id="ebmsg"></span>
           </div>
 
           <div class="bdiv"></div>
-
           <button type="submit" id="bsub">Enviar mensaje</button>
           <div id="bres"></div>
 
@@ -462,8 +447,8 @@ import '../styles/global.css';
         <section id="about" class="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24">
           <div class="sticky top-0 z-20 -mx-6 mb-4 w-screen px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0"><h2 class="text-sm font-bold uppercase tracking-widest text-[#e2e8f0]" style="font-family:'Outfit',sans-serif" data-i18n="nav.about">Sobre mi</h2></div>
           <div>
-            <p class="mb-4" data-i18n-html="about.p1">Aprendi a programar a los 15 anios por curiosidad, sin que nadie me lo pidiera. Ese mismo instinto de entender como funcionan las cosas es lo que hoy me lleva a construir sistemas de <span class="text-[#e2e8f0]">automatizacion, agentes de IA e integraciones</span> que resuelven problemas reales.</p>
-            <p class="mb-4" data-i18n-html="about.p2">Me muevo comodo entre frontend y backend, pero donde realmente disfruto es en el espacio entre sistemas: conectar APIs, orquestar flujos, hacer que herramientas distintas hablen entre si. Si hay una tarea manual repetitiva, mi primer instinto es <span class="text-[#e2e8f0]">automatizarla</span>.</p>
+            <p class="mb-4" data-i18n-html="about.p1">Aprendi a programar a los 15 anios por curiosidad, sin que nadie me lo pidiera. Ese mismo instinto es lo que hoy me lleva a construir sistemas de <span class="text-[#e2e8f0]">automatizacion, agentes de IA e integraciones</span> que resuelven problemas reales.</p>
+            <p class="mb-4" data-i18n-html="about.p2">Me muevo comodo entre frontend y backend, pero donde realmente disfruto es en el espacio entre sistemas. Si hay una tarea manual repetitiva, mi primer instinto es <span class="text-[#e2e8f0]">automatizarla</span>.</p>
             <p class="mb-4" data-i18n-html="about.p3">Estoy disponible para proyectos de <span class="text-[#e2e8f0]">automatizacion, desarrollo full-stack, integraciones de APIs y sistemas con IA</span>. Me interesa trabajar en productos que importen, con personas que quieran construir algo bien hecho desde el principio.</p>
           </div>
         </section>
@@ -509,8 +494,8 @@ import '../styles/global.css';
   <!-- I18N -->
   <script is:inline>
   var i18n={
-    es:{"hero.title":"AI & Automation Developer","hero.subtitle":"Construyo soluciones de hiperautomatizacion, full-stack e inteligencia artificial.","nav.about":"Sobre mi","nav.experience":"Experiencia","nav.projects":"Proyectos","nav.stack":"Stack","about.p1":'Aprendi a programar a los 15 anios por curiosidad, sin que nadie me lo pidiera. Ese mismo instinto es lo que hoy me lleva a construir sistemas de <span class="text-[#e2e8f0]">automatizacion, agentes de IA e integraciones</span> que resuelven problemas reales.',"about.p2":'Me muevo comodo entre frontend y backend, pero donde realmente disfruto es en el espacio entre sistemas. Si hay una tarea manual repetitiva, mi primer instinto es <span class="text-[#e2e8f0]">automatizarla</span>.',"about.p3":'Estoy disponible para proyectos de <span class="text-[#e2e8f0]">automatizacion, desarrollo full-stack, integraciones de APIs y sistemas con IA</span>. Me interesa trabajar en productos que importen, con personas que quieran construir algo bien hecho.',"exp.bb.date":"Dic 2025 — Presente","exp.bb.title":"Desarrollador IA · Blackbird Labs","exp.bb.desc":"Disenio e implementacion de sistemas inteligentes con modelos de lenguaje y agentes de IA. Conexion de plataformas mediante APIs REST, protocolos MCP y orquestacion.","exp.ret.date":"Ene 2026 — Presente","exp.ret.title":"Desarrollador IA · Retycol","exp.ret.desc":"Ecosistema de automatizacion hibrido con n8n (84+ nodos) y Power Automate, integrando Microsoft Graph API, ClickUp y SheetJS. Verificacion documental farmaceutica con Google Gemini.","exp.icas.date":"Ene 2023 — Mar 2024","exp.icas.title":"Web Developer & Data Analyst · ICAS LTDA","exp.icas.badge":"Permiso de trabajo menor de edad","exp.icas.desc":"Dashboards interactivos para pipeline I+D farmaceutico con Node.js, Microsoft Graph API y Chart.js. Procesamiento de datos con Python.","proj.featured":"Destacado","proj.coopcredit.desc":"Sistema integral de creditos para cooperativas. Arquitectura Hexagonal, seguridad enterprise-grade, evaluacion automatizada de riesgo y 109 tests.","proj.novabook.desc":"Gestion de bibliotecas con GUI JavaFX, MySQL, RBAC, CRUD completo e import/export CSV.","proj.loginangular.desc":"Autenticacion full-stack con Angular + Tailwind CSS conectado a Spring Boot. JWT, responsive, rutas protegidas.","proj.nearme.desc":"Plataforma de negocios locales. Landing con diseno responsive y animaciones interactivas.","footer.credit":'Coded in <a href="https://code.visualstudio.com/" class="font-medium text-[#94a3b8] hover:text-[#5eead4]">Visual Studio Code</a>. Built with <a href="https://astro.build/" class="font-medium text-[#94a3b8] hover:text-[#5eead4]">Astro</a> and <a href="https://tailwindcss.com/" class="font-medium text-[#94a3b8] hover:text-[#5eead4]">Tailwind CSS</a>. Set in the <a href="https://fonts.google.com/specimen/Outfit" class="font-medium text-[#94a3b8] hover:text-[#5eead4]">Outfit</a> typeface.'},
-    en:{"hero.title":"AI & Automation Developer","hero.subtitle":"I build hyperautomation, full-stack and artificial intelligence solutions.","nav.about":"About","nav.experience":"Experience","nav.projects":"Projects","nav.stack":"Stack","about.p1":'I taught myself to code at 15 out of pure curiosity. That same instinct drives me today to build <span class="text-[#e2e8f0]">automation systems, AI agents, and integrations</span> that solve real problems.',"about.p2":'I’m comfortable across frontend and backend, but where I truly enjoy working is in the space between systems. If there’s a repetitive manual task, my first instinct is to <span class="text-[#e2e8f0]">automate it</span>.',"about.p3":'I’m open to <span class="text-[#e2e8f0]">automation projects, full-stack development, API integrations, and AI-powered systems</span>. I want to work on products that matter, with people who care about building things the right way.',"exp.bb.date":"Dec 2025 — Present","exp.bb.title":"AI Developer · Blackbird Labs","exp.bb.desc":"Design and implementation of intelligent systems with language models and AI agents. Platform integration via REST APIs, MCP protocols and orchestration.","exp.ret.date":"Jan 2026 — Present","exp.ret.title":"AI Developer · Retycol","exp.ret.desc":"Hybrid automation ecosystem with n8n (84+ nodes) and Power Automate, integrating Microsoft Graph API, ClickUp and SheetJS. Pharmaceutical document verification with Google Gemini.","exp.icas.date":"Jan 2023 — Mar 2024","exp.icas.title":"Web Developer & Data Analyst · ICAS LTDA","exp.icas.badge":"Legal work permit as a minor","exp.icas.desc":"Interactive dashboards for pharmaceutical R&D pipeline with Node.js, Microsoft Graph API and Chart.js. Data processing with Python.","proj.featured":"Featured","proj.coopcredit.desc":"Comprehensive credit system for cooperatives. Hexagonal Architecture, enterprise-grade security, automated risk evaluation and 109 tests.","proj.novabook.desc":"Library management with JavaFX GUI, MySQL, RBAC, full CRUD, CSV import/export.","proj.loginangular.desc":"Full-stack authentication with Angular + Tailwind CSS connected to Spring Boot. JWT, responsive, protected routes.","proj.nearme.desc":"Local business platform. Landing with responsive design and interactive animations.","footer.credit":'Coded in <a href="https://code.visualstudio.com/" class="font-medium text-[#94a3b8] hover:text-[#5eead4]">Visual Studio Code</a>. Built with <a href="https://astro.build/" class="font-medium text-[#94a3b8] hover:text-[#5eead4]">Astro</a> and <a href="https://tailwindcss.com/" class="font-medium text-[#94a3b8] hover:text-[#5eead4]">Tailwind CSS</a>. Set in the <a href="https://fonts.google.com/specimen/Outfit" class="font-medium text-[#94a3b8] hover:text-[#5eead4]">Outfit</a> typeface.'}
+    es:{"hero.title":"AI & Automation Developer","hero.subtitle":"Construyo soluciones de hiperautomatizacion, full-stack e inteligencia artificial.","nav.about":"Sobre mi","nav.experience":"Experiencia","nav.projects":"Proyectos","nav.stack":"Stack","badge.available":"Disponible ahora","about.p1":'Aprendi a programar a los 15 anios por curiosidad, sin que nadie me lo pidiera. Ese mismo instinto es lo que hoy me lleva a construir sistemas de <span class="text-[#e2e8f0]">automatizacion, agentes de IA e integraciones</span> que resuelven problemas reales.',"about.p2":'Me muevo comodo entre frontend y backend, pero donde realmente disfruto es en el espacio entre sistemas. Si hay una tarea manual repetitiva, mi primer instinto es <span class="text-[#e2e8f0]">automatizarla</span>.',"about.p3":'Estoy disponible para proyectos de <span class="text-[#e2e8f0]">automatizacion, desarrollo full-stack, integraciones de APIs y sistemas con IA</span>. Me interesa trabajar en productos que importen, con personas que quieran construir algo bien hecho.',"exp.bb.date":"Dic 2025 — Presente","exp.bb.title":"Desarrollador IA · Blackbird Labs","exp.bb.desc":"Disenio e implementacion de sistemas inteligentes con modelos de lenguaje y agentes de IA. Conexion de plataformas mediante APIs REST, protocolos MCP y orquestacion.","exp.ret.date":"Ene 2026 — Presente","exp.ret.title":"Desarrollador IA · Retycol","exp.ret.desc":"Ecosistema de automatizacion hibrido con n8n (84+ nodos) y Power Automate, integrando Microsoft Graph API, ClickUp y SheetJS. Verificacion documental farmaceutica con Google Gemini.","exp.icas.date":"Ene 2023 — Mar 2024","exp.icas.title":"Web Developer & Data Analyst · ICAS LTDA","exp.icas.badge":"Permiso de trabajo menor de edad","exp.icas.desc":"Dashboards interactivos para pipeline I+D farmaceutico con Node.js, Microsoft Graph API y Chart.js. Procesamiento de datos con Python.","proj.featured":"Destacado","proj.coopcredit.desc":"Sistema integral de creditos para cooperativas. Arquitectura Hexagonal, seguridad enterprise-grade, evaluacion automatizada de riesgo y 109 tests.","proj.novabook.desc":"Gestion de bibliotecas con GUI JavaFX, MySQL, RBAC, CRUD completo e import/export CSV.","proj.loginangular.desc":"Autenticacion full-stack con Angular + Tailwind CSS conectado a Spring Boot. JWT, responsive, rutas protegidas.","proj.nearme.desc":"Plataforma de negocios locales. Landing con diseno responsive y animaciones interactivas.","footer.credit":'Coded in <a href="https://code.visualstudio.com/" class="font-medium text-[#94a3b8] hover:text-[#5eead4]">Visual Studio Code</a>. Built with <a href="https://astro.build/" class="font-medium text-[#94a3b8] hover:text-[#5eead4]">Astro</a> and <a href="https://tailwindcss.com/" class="font-medium text-[#94a3b8] hover:text-[#5eead4]">Tailwind CSS</a>. Set in the <a href="https://fonts.google.com/specimen/Outfit" class="font-medium text-[#94a3b8] hover:text-[#5eead4]">Outfit</a> typeface.'},
+    en:{"hero.title":"AI & Automation Developer","hero.subtitle":"I build hyperautomation, full-stack and artificial intelligence solutions.","nav.about":"About","nav.experience":"Experience","nav.projects":"Projects","nav.stack":"Stack","badge.available":"Available now","about.p1":'I taught myself to code at 15 out of pure curiosity. That same instinct drives me today to build <span class="text-[#e2e8f0]">automation systems, AI agents, and integrations</span> that solve real problems.',"about.p2":'I’m comfortable across frontend and backend, but where I truly enjoy working is in the space between systems. If there’s a repetitive manual task, my first instinct is to <span class="text-[#e2e8f0]">automate it</span>.',"about.p3":'I’m open to <span class="text-[#e2e8f0]">automation projects, full-stack development, API integrations, and AI-powered systems</span>. I want to work on products that matter, with people who care about building things the right way.',"exp.bb.date":"Dec 2025 — Present","exp.bb.title":"AI Developer · Blackbird Labs","exp.bb.desc":"Design and implementation of intelligent systems with language models and AI agents. Platform integration via REST APIs, MCP protocols and orchestration.","exp.ret.date":"Jan 2026 — Present","exp.ret.title":"AI Developer · Retycol","exp.ret.desc":"Hybrid automation ecosystem with n8n (84+ nodes) and Power Automate, integrating Microsoft Graph API, ClickUp and SheetJS. Pharmaceutical document verification with Google Gemini.","exp.icas.date":"Jan 2023 — Mar 2024","exp.icas.title":"Web Developer & Data Analyst · ICAS LTDA","exp.icas.badge":"Legal work permit as a minor","exp.icas.desc":"Interactive dashboards for pharmaceutical R&D pipeline with Node.js, Microsoft Graph API and Chart.js. Data processing with Python.","proj.featured":"Featured","proj.coopcredit.desc":"Comprehensive credit system for cooperatives. Hexagonal Architecture, enterprise-grade security, automated risk evaluation and 109 tests.","proj.novabook.desc":"Library management with JavaFX GUI, MySQL, RBAC, full CRUD, CSV import/export.","proj.loginangular.desc":"Full-stack authentication with Angular + Tailwind CSS connected to Spring Boot. JWT, responsive, protected routes.","proj.nearme.desc":"Local business platform. Landing with responsive design and interactive animations.","footer.credit":'Coded in <a href="https://code.visualstudio.com/" class="font-medium text-[#94a3b8] hover:text-[#5eead4]">Visual Studio Code</a>. Built with <a href="https://astro.build/" class="font-medium text-[#94a3b8] hover:text-[#5eead4]">Astro</a> and <a href="https://tailwindcss.com/" class="font-medium text-[#94a3b8] hover:text-[#5eead4]">Tailwind CSS</a>. Set in the <a href="https://fonts.google.com/specimen/Outfit" class="font-medium text-[#94a3b8] hover:text-[#5eead4]">Outfit</a> typeface.'}
   };
   function _apply(lang){document.documentElement.lang=lang;localStorage.setItem('portfolio-lang',lang);document.querySelectorAll('[data-i18n]').forEach(function(el){var k=el.getAttribute('data-i18n');if(i18n[lang]&&i18n[lang][k]!==undefined)el.textContent=i18n[lang][k];});document.querySelectorAll('[data-i18n-html]').forEach(function(el){var k=el.getAttribute('data-i18n-html');if(i18n[lang]&&i18n[lang][k]!==undefined)el.innerHTML=i18n[lang][k];});document.querySelectorAll('.lang-label').forEach(function(el){el.textContent=lang==='es'?'EN':'ES';});}
   function applyTranslations(lang){var c=document.getElementById('content'),h=document.querySelector('header');if(c)c.style.opacity='0';if(h)h.style.opacity='0';setTimeout(function(){_apply(lang);if(c)c.style.opacity='1';if(h)h.style.opacity='1';},120);}
@@ -526,8 +511,8 @@ import '../styles/global.css';
     var MAIL='luisoro009@gmail.com';
 
     var MSGS={
-      es:["¿Tienes una idea sin resolver? Yo la hago realidad 🚀","Automatizo lo que más tiempo te consume ⚡","Tu competencia ya usa IA. ¿Y tú? 🤖","De requisito a producción, sin rodeos 💪","¿n8n, APIs, IA? Ese es mi idioma 🔧","Cada tarea manual es una automatización esperando 🎯","Construyo más rápido de lo que imaginas 🔥","¿Datos sin explotar? Los convierto en insights 📊","Full-stack real: frontend, backend y lo que hay en el medio","¿Frustrado con tu proceso? Cuéntame 💬","No vendo humo. Entrego resultados ✅","¿Cuántas horas pierdes en tareas repetitivas? Escríbeme","Integro tus herramientas para que trabajen solas 🔗","¿Proyecto complejo? Mejor. Eso me gusta 🧩","Código limpio, arquitectura sólida, sin deuda técnica","De 0 a MVP en tiempo récord 🏃","¿Quieres un agente de IA en tu empresa? Tenemos que hablar","+2 años automatizando procesos reales en empresas reales","Spring Boot + Angular + IA = stack que escala 📈","¿Tienes 500 filas manuales en Excel? Eso tiene solución 😅","Cada integración que construyo ahorra horas cada semana","¿Buscas a alguien que entienda negocio y código? Ese soy yo","No esperes el momento perfecto. Hablemos hoy 📱","¿Cuellos de botella en tu flujo? Los identifico y elimino","Tú traes el problema, yo traigo la solución","¿Necesitas dashboards que se actualicen solos? Puedo construirlos","Automatización + IA = ventaja competitiva real","¿Tienes un MVP que necesita escalar? Cuéntame","Empecé a los 15. Hoy construyo sistemas en producción 📈","¿Facturas, reportes, notificaciones? Los automatizo todos","Construyo cosas que funcionan la primera vez 💯","¿API de terceros problemática? Tengo experiencia con eso","Mi trabajo hace que el tuyo sea más fácil","¿Quieres implementar IA pero no sabes por dónde empezar? Yo te guío","Disponible para proyectos cortos y de largo plazo","Tu problema técnico tiene solución. Solo toca aquí 👇","Cada proyecto es una oportunidad de hacer algo brillante ✨","¿Presupuesto ajustado? Hablemos, siempre hay opciones","84+ workflows automatizados en producción. El siguiente puede ser el tuyo","Dedicación total. Sin tercerizar nada","¿Necesitas alguien que entienda tus datos? Soy tu persona 📊","IA aplicada a negocios reales, no demos que no funcionan","¿Cansado de herramientas que no se integran? Las uno yo","Tu próximo desarrollador ya te está esperando 👋","¿Tienes WhatsApp Business caótico? Lo automatizo con IA","Código que puedo explicar, mantener y mejorar","Una conversación puede cambiar tu proyecto. ¿Hablamos? 💬","¿Quieres conectar tus apps en un solo flujo? Es mi especialidad","PostgreSQL, MongoDB, MySQL... los datos donde deben estar","Haz clic y cuéntame qué necesitas 🚀"],
-      en:["Have an idea that needs building? I'll make it real 🚀","I automate what's eating your time ⚡","Your competition is already using AI. Are you? 🤖","From requirement to production. No detours 💪","n8n, APIs, AI? That's my language 🔧","Every manual task is an automation waiting to happen 🎯","I build faster than you'd expect 🔥","Untapped data? I turn it into insights 📊","Real full-stack: frontend, backend, and everything in between","Frustrated with your current process? Tell me 💬","No empty promises. Just results ✅","How many hours do you lose on repetitive tasks? Message me","I integrate your tools so they work on their own 🔗","Complex project? Even better. That's what I like 🧩","Clean code, solid architecture, zero technical debt","From 0 to MVP in record time 🏃","Want an AI agent for your business? We need to talk","2+ years automating real processes in real companies","Spring Boot + Angular + AI = a stack that scales 📈","Got a 500-row manual spreadsheet? That's solvable 😅","Every integration I build saves hours every week","Looking for someone who gets both business and code? That's me","Don't wait for the perfect moment. Let's talk today 📱","Your workflow has bottlenecks. I find them and remove them","You bring the problem, I bring the solution","Need dashboards that update themselves? I can build that","Automation + AI = real competitive advantage","Got an MVP that needs to scale? Tell me about it","Started coding at 15. Building production systems today 📈","Invoices, reports, notifications? I automate them all","I build things that work on the first try 💯","Third-party API giving you trouble? I've handled that","My work makes your work easier","Want to implement AI but don't know where to start? I'll guide you","Available for short and long-term projects","Your technical problem has a solution. Just tap here 👇","Every project is a chance to build something brilliant ✨","Tight budget? Let's talk. There's always a way","84+ automated workflows in production. Yours could be next","Full dedication. I don't outsource anything","Need someone who understands your data? I'm your person 📊","AI applied to real businesses, not demos that don't work","Tired of tools that don't integrate? I'll connect them","Your next developer is already waiting 👋","Chaotic WhatsApp Business? I'll automate it with AI","Code I can explain, maintain, and improve","One conversation can change your project. Shall we talk? 💬","Want to connect your apps into one flow? That's my specialty","PostgreSQL, MongoDB, MySQL... data where it belongs","Click me and tell me what you need 🚀"]
+      es:["¿Tienes una idea sin resolver? Yo la hago realidad 🚀","Automatizo lo que más tiempo te consume ⚡","Tu competencia ya usa IA. ¿Y tú? 🤖","De requisito a producción, sin rodeos 💪","¿n8n, APIs, IA? Ese es mi idioma 🔧","Cada tarea manual es una automatización esperando 🎯","Construyo más rápido de lo que imaginas 🔥","¿Datos sin explotar? Los convierto en insights 📊","Full-stack real: frontend, backend y lo que hay en el medio","¿Frustrado con tu proceso? Cuéntame 💬","No vendo humo. Entrego resultados ✅","¿Cuántas horas pierdes en tareas repetitivas?","Integro tus herramientas para que trabajen solas 🔗","¿Proyecto complejo? Mejor. Eso me gusta 🧩","Código limpio, arquitectura sólida, sin deuda técnica","De 0 a MVP en tiempo récord 🏃","¿Quieres un agente de IA en tu empresa? Hablemos","+2 años automatizando procesos reales en empresas reales","Spring Boot + Angular + IA = stack que escala 📈","¿Tienes filas manuales en Excel? Eso tiene solución 😅","Cada integración que construyo ahorra horas cada semana","¿Buscas alguien que entienda negocio y código? Ese soy yo","No esperes el momento perfecto. Hablemos hoy 📱","¿Cuellos de botella? Los identifico y elimino","Tú traes el problema, yo traigo la solución","¿Necesitas dashboards que se actualicen solos?","Automatización + IA = ventaja competitiva real","¿Tienes un MVP que necesita escalar? Cuéntame","Empecé a los 15. Hoy construyo sistemas en producción 📈","¿Facturas, reportes, notificaciones? Los automatizo todos","Construyo cosas que funcionan la primera vez 💯","¿API problemática? Tengo experiencia con eso","Mi trabajo hace que el tuyo sea más fácil","¿Quieres implementar IA? Yo te guío desde el principio","Disponible para proyectos cortos y de largo plazo","Tu problema técnico tiene solución. Toca aquí 👇","Cada proyecto es una oportunidad de construir algo brillante ✨","¿Presupuesto ajustado? Hablemos, siempre hay opciones","84+ workflows automatizados en producción","Dedicación total. Sin tercerizar nada","¿Necesitas alguien que entienda tus datos?","IA aplicada a negocios reales, no demos que no funcionan","¿Cansado de herramientas que no se integran?","Tu próximo desarrollador ya te está esperando 👋","¿WhatsApp Business caótico? Lo automatizo con IA","Código que puedo explicar, mantener y mejorar","Una conversación puede cambiar tu proyecto 💬","¿Quieres conectar tus apps en un solo flujo?","PostgreSQL, MongoDB, MySQL... los datos donde deben estar","Haz clic y cuéntame qué necesitas 🚀"],
+      en:["Have an idea that needs building? I'll make it real 🚀","I automate what's eating your time ⚡","Your competition is already using AI. Are you? 🤖","From requirement to production. No detours 💪","n8n, APIs, AI? That's my language 🔧","Every manual task is an automation waiting to happen 🎯","I build faster than you'd expect 🔥","Untapped data? I turn it into insights 📊","Real full-stack: frontend, backend, and everything in between","Frustrated with your current process? Tell me 💬","No empty promises. Just results ✅","How many hours do you lose on repetitive tasks?","I integrate your tools so they work on their own 🔗","Complex project? Even better. That's what I like 🧩","Clean code, solid architecture, zero technical debt","From 0 to MVP in record time 🏃","Want an AI agent for your business? Let's talk","2+ years automating real processes in real companies","Spring Boot + Angular + AI = a stack that scales 📈","Got a 500-row spreadsheet? That's solvable 😅","Every integration I build saves hours every week","Looking for someone who gets both business and code? That's me","Don't wait for the perfect moment. Let's talk today 📱","Your workflow has bottlenecks. I find and remove them","You bring the problem, I bring the solution","Need dashboards that update themselves? I can build that","Automation + AI = real competitive advantage","Got an MVP that needs to scale? Tell me","Started coding at 15. Building production systems today 📈","Invoices, reports, notifications? I automate them all","I build things that work on the first try 💯","Third-party API trouble? I've handled that before","My work makes your work easier","Want to implement AI? I'll guide you from day one","Available for short and long-term projects","Your technical problem has a solution. Tap here 👇","Every project is a chance to build something brilliant ✨","Tight budget? Let's talk. There's always a way","84+ automated workflows in production","Full dedication. I don't outsource anything","Need someone who understands your data?","AI applied to real businesses, not demos that don't work","Tired of tools that don't integrate?","Your next developer is already waiting 👋","Chaotic WhatsApp Business? I'll automate it with AI","Code I can explain, maintain, and improve","One conversation can change your project 💬","Want to connect your apps into one flow?","PostgreSQL, MongoDB, MySQL... data where it belongs","Click me and tell me what you need 🚀"]
     };
 
     var widget=document.getElementById('bot-widget');
@@ -554,13 +539,13 @@ import '../styles/global.css';
       bubble.classList.remove('hide'); bubble.classList.add('show');
       setTimeout(function(){ bubble.classList.remove('show'); bubble.classList.add('hide'); }, 4500);
     }
-    setTimeout(showBubble,1800);
+    setTimeout(showBubble,2000);
     setInterval(showBubble,8000);
 
-    // === MODAL STRINGS ===
+    // === MODAL ===
     var MS={
-      es:{t:'¡Hablemos!',s:'Cuéntame sobre tu proyecto y te respondo pronto.',n:'Nombre *',e:'Email *',p:'Teléfono',sj:'Asunto *',m:'Mensaje *',btn:'Enviar mensaje',sending:'Enviando...',ok:'¡Mensaje enviado! Te respondo lo antes posible 🚀',fail:'Error al enviar. Inténtalo de nuevo.',en:'Mínimo 2 caracteres',ee:'Email inválido',ep:'Teléfono inválido',es2:'Mínimo 3 caracteres',em:'Mínimo 10 caracteres'},
-      en:{t:"Let's talk!",s:"Tell me about your project and I'll reply soon.",n:'Name *',e:'Email *',p:'Phone',sj:'Subject *',m:'Message *',btn:'Send message',sending:'Sending...',ok:"Message sent! I'll get back to you asap 🚀",fail:'Error sending. Please try again.',en:'Minimum 2 characters',ee:'Invalid email',ep:'Invalid phone',es2:'Minimum 3 characters',em:'Minimum 10 characters'}
+      es:{t:'¡Hablemos!',s:'Cuéntame sobre tu proyecto y te respondo pronto.',n:'Nombre *',e:'Email *',p:'Teléfono',sj:'Asunto *',m:'Mensaje *',btn:'Enviar mensaje',sending:'Enviando...',ok:'¡Enviado! Te respondo lo antes posible 🚀',fail:'Error al enviar. Inténtalo de nuevo.',en:'Mín. 2 caracteres',ee:'Email inválido',ep:'Teléfono inválido',es2:'Mín. 3 caracteres',em:'Mín. 10 caracteres'},
+      en:{t:"Let's talk!",s:"Tell me about your project and I'll reply soon.",n:'Name *',e:'Email *',p:'Phone',sj:'Subject *',m:'Message *',btn:'Send message',sending:'Sending...',ok:"Sent! I'll get back to you asap 🚀",fail:'Error sending. Please try again.',en:'Min. 2 characters',ee:'Invalid email',ep:'Invalid phone',es2:'Min. 3 characters',em:'Min. 10 characters'}
     };
     function glang(){ return localStorage.getItem('portfolio-lang')||'es'; }
     function gs(){ return MS[glang()]||MS.es; }
@@ -575,7 +560,6 @@ import '../styles/global.css';
       document.getElementById('lbmsg').textContent=x.m;
       submitBtn.textContent=x.btn;
     }
-
     widget.addEventListener('click', openM);
     closeBtn.addEventListener('click', closeM);
     modal.addEventListener('click', function(e){ if(e.target===modal) closeM(); });
@@ -583,15 +567,12 @@ import '../styles/global.css';
     function openM(){ modal.classList.add('open'); resEl.style.display='none'; resEl.className=''; updateML(); }
     function closeM(){ modal.classList.remove('open'); }
 
-    // Validation helpers
     function setE(fid,eid,msg){
-      var inp=document.getElementById(fid);
-      var err=document.getElementById(eid);
+      var inp=document.getElementById(fid), err=document.getElementById(eid);
       if(msg){ inp.classList.add('err'); err.textContent=msg; err.classList.add('show'); }
       else   { inp.classList.remove('err'); err.textContent=''; err.classList.remove('show'); }
     }
 
-    // === FORM SUBMIT ===
     form.addEventListener('submit', function(ev){
       ev.preventDefault();
       var x=gs();
@@ -611,13 +592,13 @@ import '../styles/global.css';
       submitBtn.disabled=true; resEl.style.display='none';
       function done(success){
         if(success){
-          resEl.innerHTML='<i class="fa-solid fa-circle-check" style="margin-right:7px"></i>'+x.ok;
+          resEl.innerHTML='<i class="fa-solid fa-circle-check" style="margin-right:6px"></i>'+x.ok;
           resEl.className='ok'; resEl.style.display='block';
           form.reset();
           ['bn','be2','bph','bsj','bmsg'].forEach(function(id){ document.getElementById(id).classList.remove('err'); });
           setTimeout(closeM, 3500);
         } else {
-          resEl.innerHTML='<i class="fa-solid fa-circle-exclamation" style="margin-right:7px"></i>'+x.fail;
+          resEl.innerHTML='<i class="fa-solid fa-circle-exclamation" style="margin-right:6px"></i>'+x.fail;
           resEl.className='err'; resEl.style.display='block';
         }
         submitBtn.textContent=x.btn; submitBtn.disabled=false;
@@ -631,7 +612,7 @@ import '../styles/global.css';
           method:'POST',
           headers:{'Content-Type':'application/json','Accept':'application/json'},
           body:JSON.stringify({access_key:W3F,name:nm,email:em,phone:ph,subject:sj,message:mg})
-        }).then(function(r){ return r.json(); }).then(function(d){ done(!!d.success); }).catch(function(){ done(false); });
+        }).then(function(r){return r.json();}).then(function(d){done(!!d.success);}).catch(function(){done(false);});
       }
     });
   })();
