@@ -11,6 +11,9 @@ import '../styles/global.css';
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
   <title>Luis Orozco | AI & Automation Developer</title>
+  <style>
+    .i18n-fade { transition: opacity 0.15s ease; }
+  </style>
 </head>
 <body class="bg-[#0f172a] text-[#94a3b8] antialiased">
 
@@ -51,20 +54,20 @@ import '../styles/global.css';
           <nav class="nav hidden lg:block mt-10" aria-label="In-page jump links">
             <ul class="w-max">
               <li><a class="group flex items-center py-3" href="#about">
-                <span class="nav-indicator mr-4 h-px w-8 bg-[#475569] transition-all group-hover:w-16 group-hover:bg-[#e2e8f0] group-focus-visible:w-16 group-focus-visible:bg-[#e2e8f0]"></span>
-                <span class="nav-text text-xs font-bold uppercase tracking-widest text-[#475569] group-hover:text-[#e2e8f0] group-focus-visible:text-[#e2e8f0]" style="font-family:'Outfit',sans-serif" data-i18n="nav.about">Sobre mi</span>
+                <span class="nav-indicator mr-4 h-px w-8 bg-[#475569] transition-all group-hover:w-16 group-hover:bg-[#e2e8f0]"></span>
+                <span class="nav-text text-xs font-bold uppercase tracking-widest text-[#475569] group-hover:text-[#e2e8f0]" style="font-family:'Outfit',sans-serif" data-i18n="nav.about">Sobre mi</span>
               </a></li>
               <li><a class="group flex items-center py-3" href="#experience">
-                <span class="nav-indicator mr-4 h-px w-8 bg-[#475569] transition-all group-hover:w-16 group-hover:bg-[#e2e8f0] group-focus-visible:w-16 group-focus-visible:bg-[#e2e8f0]"></span>
-                <span class="nav-text text-xs font-bold uppercase tracking-widest text-[#475569] group-hover:text-[#e2e8f0] group-focus-visible:text-[#e2e8f0]" style="font-family:'Outfit',sans-serif" data-i18n="nav.experience">Experiencia</span>
+                <span class="nav-indicator mr-4 h-px w-8 bg-[#475569] transition-all group-hover:w-16 group-hover:bg-[#e2e8f0]"></span>
+                <span class="nav-text text-xs font-bold uppercase tracking-widest text-[#475569] group-hover:text-[#e2e8f0]" style="font-family:'Outfit',sans-serif" data-i18n="nav.experience">Experiencia</span>
               </a></li>
               <li><a class="group flex items-center py-3" href="#projects">
-                <span class="nav-indicator mr-4 h-px w-8 bg-[#475569] transition-all group-hover:w-16 group-hover:bg-[#e2e8f0] group-focus-visible:w-16 group-focus-visible:bg-[#e2e8f0]"></span>
-                <span class="nav-text text-xs font-bold uppercase tracking-widest text-[#475569] group-hover:text-[#e2e8f0] group-focus-visible:text-[#e2e8f0]" style="font-family:'Outfit',sans-serif" data-i18n="nav.projects">Proyectos</span>
+                <span class="nav-indicator mr-4 h-px w-8 bg-[#475569] transition-all group-hover:w-16 group-hover:bg-[#e2e8f0]"></span>
+                <span class="nav-text text-xs font-bold uppercase tracking-widest text-[#475569] group-hover:text-[#e2e8f0]" style="font-family:'Outfit',sans-serif" data-i18n="nav.projects">Proyectos</span>
               </a></li>
               <li><a class="group flex items-center py-3" href="#stack">
-                <span class="nav-indicator mr-4 h-px w-8 bg-[#475569] transition-all group-hover:w-16 group-hover:bg-[#e2e8f0] group-focus-visible:w-16 group-focus-visible:bg-[#e2e8f0]"></span>
-                <span class="nav-text text-xs font-bold uppercase tracking-widest text-[#475569] group-hover:text-[#e2e8f0] group-focus-visible:text-[#e2e8f0]" style="font-family:'Outfit',sans-serif" data-i18n="nav.stack">Stack</span>
+                <span class="nav-indicator mr-4 h-px w-8 bg-[#475569] transition-all group-hover:w-16 group-hover:bg-[#e2e8f0]"></span>
+                <span class="nav-text text-xs font-bold uppercase tracking-widest text-[#475569] group-hover:text-[#e2e8f0]" style="font-family:'Outfit',sans-serif" data-i18n="nav.stack">Stack</span>
               </a></li>
             </ul>
           </nav>
@@ -88,9 +91,9 @@ import '../styles/global.css';
             <h2 class="text-sm font-bold uppercase tracking-widest text-[#e2e8f0]" style="font-family:'Outfit',sans-serif" data-i18n="nav.about">Sobre mi</h2>
           </div>
           <div>
-            <p class="mb-4" data-i18n-html="about.p1">Comence a programar a los 15 anios y a los 16 consegui mi primer empleo profesional con un <span class="text-[#e2e8f0]">permiso legal de trabajo como menor de edad</span> en <a href="#experience" class="font-medium text-[#e2e8f0] hover:text-[#5eead4] focus-visible:text-[#5eead4]">ICAS LTDA</a>, donde descubri mi pasion por la automatizacion y el analisis de datos.</p>
-            <p class="mb-4" data-i18n-html="about.p2">Hoy trabajo simultaneamente en <a href="#experience" class="font-medium text-[#e2e8f0] hover:text-[#5eead4]">Blackbird Labs</a> como Desarrollador IA y en <a href="#experience" class="font-medium text-[#e2e8f0] hover:text-[#5eead4]">Retycol</a> disenando ecosistemas de hiperautomatizacion con <span class="text-[#e2e8f0]">n8n, Power Automate, servidores MCP</span> e integracion de modelos de IA como Google Gemini.</p>
-            <p class="mb-4" data-i18n-html="about.p3">Actualmente curso el 6to semestre de <span class="text-[#e2e8f0]">Ingenieria de Sistemas</span> y estoy construyendo <a href="https://github.com/Luisr26" class="font-medium text-[#e2e8f0] hover:text-[#5eead4]">SPDER</a>, un sistema de prediccion de demanda basado en eventos reactivos con Angular, Node.js, PostgreSQL y Python.</p>
+            <p class="mb-4" data-i18n-html="about.p1">Aprendi a programar a los 15 anios por curiosidad, sin que nadie me lo pidiera. Ese mismo instinto de entender como funcionan las cosas es lo que hoy me lleva a construir sistemas de <span class="text-[#e2e8f0]">automatizacion, agentes de IA e integraciones</span> que resuelven problemas reales en lugar de solo cumplir con un requisito.</p>
+            <p class="mb-4" data-i18n-html="about.p2">Me muevo comodo entre frontend y backend, pero donde realmente disfruto es en el espacio entre sistemas: conectar APIs, orquestar flujos, hacer que herramientas distintas hablen entre si. Si hay una tarea manual y repetitiva en un proceso, mi primer instinto es <span class="text-[#e2e8f0]">automatizarla</span>.</p>
+            <p class="mb-4" data-i18n-html="about.p3">Estoy disponible para proyectos de <span class="text-[#e2e8f0]">automatizacion, desarrollo full-stack, integraciones de APIs y sistemas con IA</span>. Me interesa trabajar en productos que importen, con personas que quieran construir algo bien hecho desde el principio.</p>
           </div>
         </section>
 
@@ -106,11 +109,11 @@ import '../styles/global.css';
               <li class="mb-12">
                 <div class="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
                   <div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-[#1e293b]/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"></div>
-                  <header class="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-[#64748b] sm:col-span-2" style="font-family:'JetBrains Mono',monospace" aria-label="2025 to Present" data-i18n="exp.bb.date">Dic 2025 &mdash; Presente</header>
+                  <header class="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-[#64748b] sm:col-span-2" style="font-family:'JetBrains Mono',monospace" data-i18n="exp.bb.date">Dic 2025 — Presente</header>
                   <div class="z-10 sm:col-span-6">
                     <h3 class="font-medium leading-snug text-[#e2e8f0]" style="font-family:'Outfit',sans-serif">
                       <a class="inline-flex items-baseline font-medium leading-tight text-[#e2e8f0] hover:text-[#5eead4] focus-visible:text-[#5eead4] group/link" href="#">
-                        <span data-i18n="exp.bb.title">Desarrollador IA &middot; Blackbird Labs</span>
+                        <span data-i18n="exp.bb.title">Desarrollador IA · Blackbird Labs</span>
                         <i class="fa-solid fa-arrow-up-right-from-square inline-block ml-1.5 text-[.6rem] shrink-0 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"></i>
                       </a>
                     </h3>
@@ -128,11 +131,11 @@ import '../styles/global.css';
               <li class="mb-12">
                 <div class="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
                   <div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-[#1e293b]/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"></div>
-                  <header class="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-[#64748b] sm:col-span-2" style="font-family:'JetBrains Mono',monospace" data-i18n="exp.ret.date">Ene 2026 &mdash; Presente</header>
+                  <header class="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-[#64748b] sm:col-span-2" style="font-family:'JetBrains Mono',monospace" data-i18n="exp.ret.date">Ene 2026 — Presente</header>
                   <div class="z-10 sm:col-span-6">
                     <h3 class="font-medium leading-snug text-[#e2e8f0]" style="font-family:'Outfit',sans-serif">
                       <a class="inline-flex items-baseline font-medium leading-tight text-[#e2e8f0] hover:text-[#5eead4] focus-visible:text-[#5eead4] group/link" href="#">
-                        <span data-i18n="exp.ret.title">Desarrollador IA &middot; Retycol</span>
+                        <span data-i18n="exp.ret.title">Desarrollador IA · Retycol</span>
                         <i class="fa-solid fa-arrow-up-right-from-square inline-block ml-1.5 text-[.6rem] shrink-0 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"></i>
                       </a>
                     </h3>
@@ -152,11 +155,11 @@ import '../styles/global.css';
               <li class="mb-12">
                 <div class="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
                   <div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-[#1e293b]/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"></div>
-                  <header class="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-[#64748b] sm:col-span-2" style="font-family:'JetBrains Mono',monospace" data-i18n="exp.icas.date">Ene 2023 &mdash; Mar 2024</header>
+                  <header class="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-[#64748b] sm:col-span-2" style="font-family:'JetBrains Mono',monospace" data-i18n="exp.icas.date">Ene 2023 — Mar 2024</header>
                   <div class="z-10 sm:col-span-6">
                     <h3 class="font-medium leading-snug text-[#e2e8f0]" style="font-family:'Outfit',sans-serif">
                       <a class="inline-flex items-baseline font-medium leading-tight text-[#e2e8f0] hover:text-[#5eead4] focus-visible:text-[#5eead4] group/link" href="#">
-                        <span data-i18n="exp.icas.title">Web Developer & Data Analyst &middot; ICAS LTDA</span>
+                        <span data-i18n="exp.icas.title">Web Developer & Data Analyst · ICAS LTDA</span>
                         <i class="fa-solid fa-arrow-up-right-from-square inline-block ml-1.5 text-[.6rem] shrink-0 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"></i>
                       </a>
                     </h3>
@@ -226,17 +229,17 @@ import '../styles/global.css';
         "nav.experience": "Experiencia",
         "nav.projects": "Proyectos",
         "nav.stack": "Stack",
-        "about.p1": 'Comence a programar a los 15 anios y a los 16 consegui mi primer empleo profesional con un <span class="text-[#e2e8f0]">permiso legal de trabajo como menor de edad</span> en <a href="#experience" class="font-medium text-[#e2e8f0] hover:text-[#5eead4] focus-visible:text-[#5eead4]">ICAS LTDA</a>, donde descubri mi pasion por la automatizacion y el analisis de datos.',
-        "about.p2": 'Hoy trabajo simultaneamente en <a href="#experience" class="font-medium text-[#e2e8f0] hover:text-[#5eead4]">Blackbird Labs</a> como Desarrollador IA y en <a href="#experience" class="font-medium text-[#e2e8f0] hover:text-[#5eead4]">Retycol</a> disenando ecosistemas de hiperautomatizacion con <span class="text-[#e2e8f0]">n8n, Power Automate, servidores MCP</span> e integracion de modelos de IA como Google Gemini.',
-        "about.p3": 'Actualmente curso el 6to semestre de <span class="text-[#e2e8f0]">Ingenieria de Sistemas</span> y estoy construyendo <a href="https://github.com/Luisr26" class="font-medium text-[#e2e8f0] hover:text-[#5eead4]">SPDER</a>, un sistema de prediccion de demanda basado en eventos reactivos con Angular, Node.js, PostgreSQL y Python.',
-        "exp.bb.date": "Dic 2025 &mdash; Presente",
-        "exp.bb.title": "Desarrollador IA &middot; Blackbird Labs",
+        "about.p1": 'Aprendi a programar a los 15 anios por curiosidad, sin que nadie me lo pidiera. Ese mismo instinto de entender como funcionan las cosas es lo que hoy me lleva a construir sistemas de <span class="text-[#e2e8f0]">automatizacion, agentes de IA e integraciones</span> que resuelven problemas reales en lugar de solo cumplir con un requisito.',
+        "about.p2": 'Me muevo comodo entre frontend y backend, pero donde realmente disfruto es en el espacio entre sistemas: conectar APIs, orquestar flujos, hacer que herramientas distintas hablen entre si. Si hay una tarea manual y repetitiva en un proceso, mi primer instinto es <span class="text-[#e2e8f0]">automatizarla</span>.',
+        "about.p3": 'Estoy disponible para proyectos de <span class="text-[#e2e8f0]">automatizacion, desarrollo full-stack, integraciones de APIs y sistemas con IA</span>. Me interesa trabajar en productos que importen, con personas que quieran construir algo bien hecho desde el principio.',
+        "exp.bb.date": "Dic 2025 — Presente",
+        "exp.bb.title": "Desarrollador IA · Blackbird Labs",
         "exp.bb.desc": "Disenio e implementacion de sistemas inteligentes con modelos de lenguaje y agentes de IA. Conexion de plataformas mediante APIs REST, protocolos MCP y orquestacion. Arquitecturas escalables para productos de inteligencia artificial.",
-        "exp.ret.date": "Ene 2026 &mdash; Presente",
-        "exp.ret.title": "Desarrollador IA &middot; Retycol",
+        "exp.ret.date": "Ene 2026 — Presente",
+        "exp.ret.title": "Desarrollador IA · Retycol",
         "exp.ret.desc": "Ecosistema de automatizacion hibrido con n8n (84+ nodos) y Power Automate, integrando Microsoft Graph API, ClickUp y SheetJS. Verificacion documental farmaceutica con Google Gemini. Dashboards operativos con reportes HTML y KPIs. Desarrollo de SPDER: prediccion de demanda con Angular, Node.js, PostgreSQL y Python.",
-        "exp.icas.date": "Ene 2023 &mdash; Mar 2024",
-        "exp.icas.title": "Web Developer & Data Analyst &middot; ICAS LTDA",
+        "exp.icas.date": "Ene 2023 — Mar 2024",
+        "exp.icas.title": "Web Developer & Data Analyst · ICAS LTDA",
         "exp.icas.badge": "Permiso de trabajo menor de edad",
         "exp.icas.desc": "Dashboards interactivos para pipeline I+D farmaceutico con Node.js, Microsoft Graph API y Chart.js. Procesamiento de datos con Python (Pandas, NumPy, Matplotlib). Orquestacion de APIs REST conectando SharePoint, OneDrive y ClickUp.",
         "proj.featured": "Destacado",
@@ -255,17 +258,17 @@ import '../styles/global.css';
         "nav.experience": "Experience",
         "nav.projects": "Projects",
         "nav.stack": "Stack",
-        "about.p1": 'I started coding at 15 and at 16 got my first professional job with a <span class="text-[#e2e8f0]">legal work permit as a minor</span> at <a href="#experience" class="font-medium text-[#e2e8f0] hover:text-[#5eead4] focus-visible:text-[#5eead4]">ICAS LTDA</a>, where I discovered my passion for automation and data analysis.',
-        "about.p2": 'Today I work simultaneously at <a href="#experience" class="font-medium text-[#e2e8f0] hover:text-[#5eead4]">Blackbird Labs</a> as an AI Developer and at <a href="#experience" class="font-medium text-[#e2e8f0] hover:text-[#5eead4]">Retycol</a> designing hyperautomation ecosystems with <span class="text-[#e2e8f0]">n8n, Power Automate, MCP servers</span> and AI model integration like Google Gemini.',
-        "about.p3": 'I am currently in my 6th semester of <span class="text-[#e2e8f0]">Systems Engineering</span> and building <a href="https://github.com/Luisr26" class="font-medium text-[#e2e8f0] hover:text-[#5eead4]">SPDER</a>, a demand prediction system based on reactive events with Angular, Node.js, PostgreSQL and Python.',
-        "exp.bb.date": "Dec 2025 &mdash; Present",
-        "exp.bb.title": "AI Developer &middot; Blackbird Labs",
+        "about.p1": 'I taught myself to code at 15 out of pure curiosity, with no one pushing me to do it. That same instinct to understand how things work is what drives me today to build <span class="text-[#e2e8f0]">automation systems, AI agents, and integrations</span> that solve real problems instead of just checking a box.',
+        "about.p2": 'I’m comfortable across frontend and backend, but where I truly enjoy working is in the space between systems: connecting APIs, orchestrating flows, making different tools talk to each other. If there’s a repetitive manual task in a process, my first instinct is to <span class="text-[#e2e8f0]">automate it</span>.',
+        "about.p3": 'I’m open to <span class="text-[#e2e8f0]">automation projects, full-stack development, API integrations, and AI-powered systems</span>. I want to work on products that matter, with people who care about building things the right way from the start.',
+        "exp.bb.date": "Dec 2025 — Present",
+        "exp.bb.title": "AI Developer · Blackbird Labs",
         "exp.bb.desc": "Design and implementation of intelligent systems with language models and AI agents. Platform integration via REST APIs, MCP protocols and orchestration. Scalable architectures for artificial intelligence products.",
-        "exp.ret.date": "Jan 2026 &mdash; Present",
-        "exp.ret.title": "AI Developer &middot; Retycol",
+        "exp.ret.date": "Jan 2026 — Present",
+        "exp.ret.title": "AI Developer · Retycol",
         "exp.ret.desc": "Hybrid automation ecosystem with n8n (84+ nodes) and Power Automate, integrating Microsoft Graph API, ClickUp and SheetJS. Pharmaceutical document verification with Google Gemini. Operational dashboards with HTML reports and KPIs. Development of SPDER: demand prediction with Angular, Node.js, PostgreSQL and Python.",
-        "exp.icas.date": "Jan 2023 &mdash; Mar 2024",
-        "exp.icas.title": "Web Developer & Data Analyst &middot; ICAS LTDA",
+        "exp.icas.date": "Jan 2023 — Mar 2024",
+        "exp.icas.title": "Web Developer & Data Analyst · ICAS LTDA",
         "exp.icas.badge": "Legal work permit as a minor",
         "exp.icas.desc": "Interactive dashboards for pharmaceutical R&D pipeline with Node.js, Microsoft Graph API and Chart.js. Data processing with Python (Pandas, NumPy, Matplotlib). REST API orchestration connecting SharePoint, OneDrive and ClickUp.",
         "proj.featured": "Featured",
@@ -279,7 +282,7 @@ import '../styles/global.css';
       }
     };
 
-    function applyTranslations(lang) {
+    function _doApply(lang) {
       document.documentElement.lang = lang;
       localStorage.setItem('portfolio-lang', lang);
       document.querySelectorAll('[data-i18n]').forEach(function(el) {
@@ -299,6 +302,18 @@ import '../styles/global.css';
       });
     }
 
+    function applyTranslations(lang) {
+      var el = document.getElementById('content');
+      var hdr = document.querySelector('header');
+      if (el) el.style.opacity = '0';
+      if (hdr) hdr.style.opacity = '0';
+      setTimeout(function() {
+        _doApply(lang);
+        if (el) el.style.opacity = '1';
+        if (hdr) hdr.style.opacity = '1';
+      }, 120);
+    }
+
     function toggleLang() {
       var current = localStorage.getItem('portfolio-lang') || 'es';
       applyTranslations(current === 'es' ? 'en' : 'es');
@@ -308,7 +323,13 @@ import '../styles/global.css';
 
     document.addEventListener('DOMContentLoaded', function() {
       var saved = localStorage.getItem('portfolio-lang') || 'es';
-      applyTranslations(saved);
+      // Apply immediately without fade on initial load
+      _doApply(saved);
+      // Enable CSS transitions after initial render
+      var el = document.getElementById('content');
+      var hdr = document.querySelector('header');
+      if (el) el.style.transition = 'opacity 0.12s ease';
+      if (hdr) hdr.style.transition = 'opacity 0.12s ease';
     });
   </script>
 
