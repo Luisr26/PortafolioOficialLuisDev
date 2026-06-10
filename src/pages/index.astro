@@ -13,15 +13,15 @@ import '../styles/global.css';
   <title>Luis Orozco | AI & Automation Developer</title>
   <style>
     .i18n-fade{transition:opacity .15s ease}
-    @keyframes botFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
-    @keyframes antPulse{0%,100%{opacity:1}50%{opacity:.25}}
+    @keyframes botFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+    @keyframes antPulse{0%,100%{opacity:1}50%{opacity:.2}}
     @keyframes eyePulse{0%,80%,100%{transform:scaleY(1)}88%{transform:scaleY(.1)}95%{transform:scaleY(1)}}
-    @keyframes chestPulse{0%,100%{opacity:.9}50%{opacity:.35}}
+    @keyframes chestPulse{0%,100%{opacity:.9}50%{opacity:.3}}
     @keyframes chestRipple{0%{transform:scale(1);opacity:.25}100%{transform:scale(2.8);opacity:0}}
     @keyframes bubbleIn{from{opacity:0;transform:translateY(8px) translateX(-50%)}to{opacity:1;transform:translateY(0) translateX(-50%)}}
     @keyframes bubbleOut{from{opacity:1;transform:translateY(0) translateX(-50%)}to{opacity:0;transform:translateY(-8px) translateX(-50%)}}
     @keyframes mIn{from{opacity:0;transform:scale(.93) translateY(18px)}to{opacity:1;transform:scale(1) translateY(0)}}
-    #bot-wrap{position:fixed;bottom:100px;left:20px;z-index:9990;display:flex;flex-direction:column;align-items:center}
+    #bot-wrap{position:fixed;left:20px;bottom:120px;z-index:9990;display:flex;flex-direction:column;align-items:center;transition:transform .08s linear}
     #bot-widget{cursor:pointer;width:72px;height:72px;animation:botFloat 2.8s ease-in-out infinite;filter:drop-shadow(0 4px 16px rgba(94,234,212,.35));transition:filter .3s}
     #bot-widget:hover{filter:drop-shadow(0 4px 28px rgba(94,234,212,.65))}
     .ant-p{animation:antPulse 1.5s ease-in-out infinite}
@@ -29,7 +29,7 @@ import '../styles/global.css';
     .eye-r{transform-origin:center;transform-box:fill-box;animation:eyePulse 5s ease-in-out infinite .2s}
     .ch-c{animation:chestPulse 2s ease-in-out infinite}
     .ch-r{transform-origin:center;transform-box:fill-box;animation:chestRipple 2s ease-out infinite}
-    #bot-bubble{position:absolute;bottom:calc(100% + 12px);left:50%;transform:translateX(-50%);background:#1e293b;border:1.5px solid #5eead4;border-radius:12px;padding:10px 14px;width:200px;text-align:center;font-size:12px;color:#e2e8f0;font-family:'Outfit',sans-serif;line-height:1.45;pointer-events:none;box-shadow:0 0 20px rgba(94,234,212,.15);opacity:0}
+    #bot-bubble{position:absolute;bottom:calc(100% + 12px);left:50%;transform:translateX(-50%);background:#1e293b;border:1.5px solid #5eead4;border-radius:12px;padding:10px 14px;width:200px;text-align:center;font-size:12px;color:#e2e8f0;font-family:'Outfit',sans-serif;line-height:1.45;pointer-events:none;box-shadow:0 0 20px rgba(94,234,212,.15);opacity:0;white-space:normal}
     #bot-bubble.show{animation:bubbleIn .4s ease forwards;opacity:1}
     #bot-bubble.hide{animation:bubbleOut .4s ease forwards}
     .bba{position:absolute;bottom:-7px;left:50%;width:12px;height:12px;background:#1e293b;border-right:1.5px solid #5eead4;border-bottom:1.5px solid #5eead4;transform:translateX(-50%) rotate(45deg)}
@@ -147,8 +147,8 @@ import '../styles/global.css';
         <section id="about" class="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24">
           <div class="sticky top-0 z-20 -mx-6 mb-4 w-screen px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0"><h2 class="text-sm font-bold uppercase tracking-widest text-[#e2e8f0]" style="font-family:'Outfit',sans-serif" data-i18n="nav.about">Sobre mi</h2></div>
           <div>
-            <p class="mb-4" data-i18n-html="about.p1">Aprendi a programar a los 15 anios por curiosidad, sin que nadie me lo pidiera. Ese mismo instinto de entender como funcionan las cosas es lo que hoy me lleva a construir sistemas de <span class="text-[#e2e8f0]">automatizacion, agentes de IA e integraciones</span> que resuelven problemas reales en lugar de solo cumplir con un requisito.</p>
-            <p class="mb-4" data-i18n-html="about.p2">Me muevo comodo entre frontend y backend, pero donde realmente disfruto es en el espacio entre sistemas: conectar APIs, orquestar flujos, hacer que herramientas distintas hablen entre si. Si hay una tarea manual y repetitiva en un proceso, mi primer instinto es <span class="text-[#e2e8f0]">automatizarla</span>.</p>
+            <p class="mb-4" data-i18n-html="about.p1">Aprendi a programar a los 15 anios por curiosidad, sin que nadie me lo pidiera. Ese mismo instinto de entender como funcionan las cosas es lo que hoy me lleva a construir sistemas de <span class="text-[#e2e8f0]">automatizacion, agentes de IA e integraciones</span> que resuelven problemas reales.</p>
+            <p class="mb-4" data-i18n-html="about.p2">Me muevo comodo entre frontend y backend, pero donde realmente disfruto es en el espacio entre sistemas: conectar APIs, orquestar flujos, hacer que herramientas distintas hablen entre si. Si hay una tarea manual repetitiva, mi primer instinto es <span class="text-[#e2e8f0]">automatizarla</span>.</p>
             <p class="mb-4" data-i18n-html="about.p3">Estoy disponible para proyectos de <span class="text-[#e2e8f0]">automatizacion, desarrollo full-stack, integraciones de APIs y sistemas con IA</span>. Me interesa trabajar en productos que importen, con personas que quieran construir algo bien hecho desde el principio.</p>
           </div>
         </section>
@@ -156,9 +156,9 @@ import '../styles/global.css';
         <section id="experience" class="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24">
           <div class="sticky top-0 z-20 -mx-6 mb-4 w-screen px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0"><h2 class="text-sm font-bold uppercase tracking-widest text-[#e2e8f0]" style="font-family:'Outfit',sans-serif" data-i18n="nav.experience">Experiencia</h2></div>
           <ol class="group/list">
-            <li class="mb-12"><div class="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50"><div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition lg:-inset-x-6 lg:block lg:group-hover:bg-[#1e293b]/50"></div><header class="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-[#64748b] sm:col-span-2" style="font-family:'JetBrains Mono',monospace" data-i18n="exp.bb.date">Dic 2025 — Presente</header><div class="z-10 sm:col-span-6"><h3 class="font-medium leading-snug text-[#e2e8f0]" style="font-family:'Outfit',sans-serif"><a class="inline-flex items-baseline font-medium leading-tight text-[#e2e8f0] hover:text-[#5eead4] group/link" href="#"><span data-i18n="exp.bb.title">Desarrollador IA · Blackbird Labs</span><i class="fa-solid fa-arrow-up-right-from-square inline-block ml-1.5 text-[.6rem] shrink-0 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"></i></a></h3><p class="mt-2 text-sm leading-normal" data-i18n="exp.bb.desc">Disenio e implementacion de sistemas inteligentes con modelos de lenguaje y agentes de IA. Conexion de plataformas mediante APIs REST, protocolos MCP y orquestacion. Arquitecturas escalables para productos de inteligencia artificial.</p><ul class="mt-2 flex flex-wrap"><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">AI Agents</div></li><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">MCP</div></li><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">APIs REST</div></li></ul></div></div></li>
-            <li class="mb-12"><div class="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50"><div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition lg:-inset-x-6 lg:block lg:group-hover:bg-[#1e293b]/50"></div><header class="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-[#64748b] sm:col-span-2" style="font-family:'JetBrains Mono',monospace" data-i18n="exp.ret.date">Ene 2026 — Presente</header><div class="z-10 sm:col-span-6"><h3 class="font-medium leading-snug text-[#e2e8f0]" style="font-family:'Outfit',sans-serif"><a class="inline-flex items-baseline font-medium leading-tight text-[#e2e8f0] hover:text-[#5eead4] group/link" href="#"><span data-i18n="exp.ret.title">Desarrollador IA · Retycol</span><i class="fa-solid fa-arrow-up-right-from-square inline-block ml-1.5 text-[.6rem] shrink-0 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"></i></a></h3><p class="mt-2 text-sm leading-normal" data-i18n="exp.ret.desc">Ecosistema de automatizacion hibrido con n8n (84+ nodos) y Power Automate, integrando Microsoft Graph API, ClickUp y SheetJS. Verificacion documental farmaceutica con Google Gemini. Dashboards operativos con reportes HTML y KPIs.</p><ul class="mt-2 flex flex-wrap"><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">n8n</div></li><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">Power Automate</div></li><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">Gemini</div></li><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">Angular</div></li></ul></div></div></li>
-            <li class="mb-12"><div class="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50"><div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition lg:-inset-x-6 lg:block lg:group-hover:bg-[#1e293b]/50"></div><header class="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-[#64748b] sm:col-span-2" style="font-family:'JetBrains Mono',monospace" data-i18n="exp.icas.date">Ene 2023 — Mar 2024</header><div class="z-10 sm:col-span-6"><h3 class="font-medium leading-snug text-[#e2e8f0]" style="font-family:'Outfit',sans-serif"><a class="inline-flex items-baseline font-medium leading-tight text-[#e2e8f0] hover:text-[#5eead4] group/link" href="#"><span data-i18n="exp.icas.title">Web Developer & Data Analyst · ICAS LTDA</span><i class="fa-solid fa-arrow-up-right-from-square inline-block ml-1.5 text-[.6rem] shrink-0 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"></i></a></h3><p class="mt-1 text-xs text-[#64748b]" style="font-family:'JetBrains Mono',monospace" data-i18n="exp.icas.badge">Permiso de trabajo menor de edad</p><p class="mt-2 text-sm leading-normal" data-i18n="exp.icas.desc">Dashboards interactivos para pipeline I+D farmaceutico con Node.js, Microsoft Graph API y Chart.js. Procesamiento de datos con Python (Pandas, NumPy, Matplotlib). Orquestacion de APIs REST conectando SharePoint, OneDrive y ClickUp.</p><ul class="mt-2 flex flex-wrap"><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">Node.js</div></li><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">Python</div></li><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">Graph API</div></li></ul></div></div></li>
+            <li class="mb-12"><div class="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50"><div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition lg:-inset-x-6 lg:block lg:group-hover:bg-[#1e293b]/50"></div><header class="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-[#64748b] sm:col-span-2" style="font-family:'JetBrains Mono',monospace" data-i18n="exp.bb.date">Dic 2025 — Presente</header><div class="z-10 sm:col-span-6"><h3 class="font-medium leading-snug text-[#e2e8f0]" style="font-family:'Outfit',sans-serif"><a class="inline-flex items-baseline font-medium leading-tight text-[#e2e8f0] hover:text-[#5eead4] group/link" href="#"><span data-i18n="exp.bb.title">Desarrollador IA · Blackbird Labs</span><i class="fa-solid fa-arrow-up-right-from-square inline-block ml-1.5 text-[.6rem] shrink-0 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"></i></a></h3><p class="mt-2 text-sm leading-normal" data-i18n="exp.bb.desc">Disenio e implementacion de sistemas inteligentes con modelos de lenguaje y agentes de IA. Conexion de plataformas mediante APIs REST, protocolos MCP y orquestacion.</p><ul class="mt-2 flex flex-wrap"><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">AI Agents</div></li><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">MCP</div></li><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">APIs REST</div></li></ul></div></div></li>
+            <li class="mb-12"><div class="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50"><div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition lg:-inset-x-6 lg:block lg:group-hover:bg-[#1e293b]/50"></div><header class="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-[#64748b] sm:col-span-2" style="font-family:'JetBrains Mono',monospace" data-i18n="exp.ret.date">Ene 2026 — Presente</header><div class="z-10 sm:col-span-6"><h3 class="font-medium leading-snug text-[#e2e8f0]" style="font-family:'Outfit',sans-serif"><a class="inline-flex items-baseline font-medium leading-tight text-[#e2e8f0] hover:text-[#5eead4] group/link" href="#"><span data-i18n="exp.ret.title">Desarrollador IA · Retycol</span><i class="fa-solid fa-arrow-up-right-from-square inline-block ml-1.5 text-[.6rem] shrink-0 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"></i></a></h3><p class="mt-2 text-sm leading-normal" data-i18n="exp.ret.desc">Ecosistema de automatizacion hibrido con n8n (84+ nodos) y Power Automate, integrando Microsoft Graph API, ClickUp y SheetJS. Verificacion documental farmaceutica con Google Gemini.</p><ul class="mt-2 flex flex-wrap"><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">n8n</div></li><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">Power Automate</div></li><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">Gemini</div></li><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">Angular</div></li></ul></div></div></li>
+            <li class="mb-12"><div class="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50"><div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition lg:-inset-x-6 lg:block lg:group-hover:bg-[#1e293b]/50"></div><header class="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-[#64748b] sm:col-span-2" style="font-family:'JetBrains Mono',monospace" data-i18n="exp.icas.date">Ene 2023 — Mar 2024</header><div class="z-10 sm:col-span-6"><h3 class="font-medium leading-snug text-[#e2e8f0]" style="font-family:'Outfit',sans-serif"><a class="inline-flex items-baseline font-medium leading-tight text-[#e2e8f0] hover:text-[#5eead4] group/link" href="#"><span data-i18n="exp.icas.title">Web Developer & Data Analyst · ICAS LTDA</span><i class="fa-solid fa-arrow-up-right-from-square inline-block ml-1.5 text-[.6rem] shrink-0 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"></i></a></h3><p class="mt-1 text-xs text-[#64748b]" style="font-family:'JetBrains Mono',monospace" data-i18n="exp.icas.badge">Permiso de trabajo menor de edad</p><p class="mt-2 text-sm leading-normal" data-i18n="exp.icas.desc">Dashboards interactivos para pipeline I+D farmaceutico con Node.js, Microsoft Graph API y Chart.js. Procesamiento de datos con Python.</p><ul class="mt-2 flex flex-wrap"><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">Node.js</div></li><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">Python</div></li><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">Graph API</div></li></ul></div></div></li>
           </ol>
         </section>
 
@@ -168,8 +168,7 @@ import '../styles/global.css';
             <li class="mb-12"><div class="group relative grid gap-4 pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50"><div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition lg:-inset-x-6 lg:block lg:group-hover:bg-[#1e293b]/50"></div><div class="z-10 sm:order-2 sm:col-span-6"><h3 style="font-family:'Outfit',sans-serif"><a class="inline-flex items-baseline font-medium leading-tight text-[#e2e8f0] hover:text-[#5eead4] group/link" href="https://github.com/Luisr26/CoopCredit" target="_blank" rel="noopener">CoopCredit<i class="fa-solid fa-arrow-up-right-from-square inline-block ml-1.5 text-[.55rem] transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"></i></a></h3><p class="mt-2 text-sm leading-normal" data-i18n="proj.coopcredit.desc">Sistema integral de creditos para cooperativas. Arquitectura Hexagonal, seguridad enterprise-grade, evaluacion automatizada de riesgo y 109 tests.</p><ul class="mt-2 flex flex-wrap"><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">Java 21</div></li><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">Spring Boot</div></li><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">PostgreSQL</div></li><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">Docker</div></li></ul></div><div class="z-10 sm:order-1 sm:col-span-2 mt-1 text-xs font-semibold uppercase tracking-wide text-[#64748b]" style="font-family:'JetBrains Mono',monospace"><i class="fa-solid fa-star text-[#5eead4] mr-1"></i><span data-i18n="proj.featured">Destacado</span></div></div></li>
             <li class="mb-12"><div class="group relative grid gap-4 pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50"><div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition lg:-inset-x-6 lg:block lg:group-hover:bg-[#1e293b]/50"></div><div class="z-10 sm:order-2 sm:col-span-6"><h3 style="font-family:'Outfit',sans-serif"><a class="inline-flex items-baseline font-medium leading-tight text-[#e2e8f0] hover:text-[#5eead4] group/link" href="https://github.com/Luisr26/NovaBook" target="_blank" rel="noopener">NovaBook<i class="fa-solid fa-arrow-up-right-from-square inline-block ml-1.5 text-[.55rem] transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"></i></a></h3><p class="mt-2 text-sm leading-normal" data-i18n="proj.novabook.desc">Gestion de bibliotecas con GUI JavaFX, MySQL, RBAC, CRUD completo e import/export CSV.</p><ul class="mt-2 flex flex-wrap"><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">Java</div></li><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">JavaFX</div></li><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">MySQL</div></li></ul></div><div class="z-10 sm:order-1 sm:col-span-2 mt-1 text-xs font-semibold uppercase tracking-wide text-[#64748b]" style="font-family:'JetBrains Mono',monospace">Desktop App</div></div></li>
             <li class="mb-12"><div class="group relative grid gap-4 pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50"><div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition lg:-inset-x-6 lg:block lg:group-hover:bg-[#1e293b]/50"></div><div class="z-10 sm:order-2 sm:col-span-6"><h3 style="font-family:'Outfit',sans-serif"><a class="inline-flex items-baseline font-medium leading-tight text-[#e2e8f0] hover:text-[#5eead4] group/link" href="https://github.com/Luisr26/LoginAngular" target="_blank" rel="noopener">LoginAngular<i class="fa-solid fa-arrow-up-right-from-square inline-block ml-1.5 text-[.55rem] transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"></i></a></h3><p class="mt-2 text-sm leading-normal" data-i18n="proj.loginangular.desc">Autenticacion full-stack con Angular + Tailwind CSS conectado a Spring Boot. JWT, responsive, rutas protegidas.</p><ul class="mt-2 flex flex-wrap"><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">Angular</div></li><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">TypeScript</div></li><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">Spring Boot</div></li></ul></div><div class="z-10 sm:order-1 sm:col-span-2 mt-1 text-xs font-semibold uppercase tracking-wide text-[#64748b]" style="font-family:'JetBrains Mono',monospace">Full-Stack</div></div></li>
-            <li class="mb-12"><div class="group relative grid gap-4 pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50"><div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition lg:-inset-x-6 lg:block lg:group-hover:bg-[#1e293b]/50"></div><div class="z-10 sm:order-2 sm:col-span-6"><h3 style="font-family:'Outfit',sans-serif"><a class="inline-flex items-baseline font-medium leading-tight text-[#e2e8f0] hover:text-[#5eead4] group/link" href="https://github.com/Luisr26/JavaSpringM6" target="_blank" rel="noopener">API Hexagonal<i class="fa-solid fa-arrow-up-right-from-square inline-block ml-1.5 text-[.55rem] transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"></i></a></h3><p class="mt-2 text-sm leading-normal" data-i18n="proj.apihex.desc">REST API con Arquitectura Hexagonal (Ports & Adapters), Spring Data JPA, Swagger UI y frontend Angular.</p><ul class="mt-2 flex flex-wrap"><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">Java 17</div></li><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">Angular</div></li><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">Swagger</div></li></ul></div><div class="z-10 sm:order-1 sm:col-span-2 mt-1 text-xs font-semibold uppercase tracking-wide text-[#64748b]" style="font-family:'JetBrains Mono',monospace">Clean Arch</div></div></li>
-            <li class="mb-12"><div class="group relative grid gap-4 pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50"><div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition lg:-inset-x-6 lg:block lg:group-hover:bg-[#1e293b]/50"></div><div class="z-10 sm:order-2 sm:col-span-6"><h3 style="font-family:'Outfit',sans-serif"><a class="inline-flex items-baseline font-medium leading-tight text-[#e2e8f0] hover:text-[#5eead4] group/link" href="https://github.com/Luisr26/NearMe" target="_blank" rel="noopener">NearMe<i class="fa-solid fa-arrow-up-right-from-square inline-block ml-1.5 text-[.55rem] transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"></i></a></h3><p class="mt-2 text-sm leading-normal" data-i18n="proj.nearme.desc">Plataforma de negocios locales. Landing profesional con diseno responsive y animaciones interactivas.</p><ul class="mt-2 flex flex-wrap"><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">HTML5</div></li><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">Bootstrap</div></li><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">JavaScript</div></li></ul></div><div class="z-10 sm:order-1 sm:col-span-2 mt-1 text-xs font-semibold uppercase tracking-wide text-[#64748b]" style="font-family:'JetBrains Mono',monospace">Landing</div></div></li>
+            <li class="mb-12"><div class="group relative grid gap-4 pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50"><div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition lg:-inset-x-6 lg:block lg:group-hover:bg-[#1e293b]/50"></div><div class="z-10 sm:order-2 sm:col-span-6"><h3 style="font-family:'Outfit',sans-serif"><a class="inline-flex items-baseline font-medium leading-tight text-[#e2e8f0] hover:text-[#5eead4] group/link" href="https://github.com/Luisr26/NearMe" target="_blank" rel="noopener">NearMe<i class="fa-solid fa-arrow-up-right-from-square inline-block ml-1.5 text-[.55rem] transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"></i></a></h3><p class="mt-2 text-sm leading-normal" data-i18n="proj.nearme.desc">Plataforma de negocios locales. Landing con diseno responsive y animaciones interactivas.</p><ul class="mt-2 flex flex-wrap"><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">HTML5</div></li><li class="mr-1.5 mt-2"><div class="flex items-center rounded-full bg-[#5eead4]/10 px-3 py-1 text-xs font-medium leading-5 text-[#5eead4]" style="font-family:'JetBrains Mono',monospace">Bootstrap</div></li></ul></div><div class="z-10 sm:order-1 sm:col-span-2 mt-1 text-xs font-semibold uppercase tracking-wide text-[#64748b]" style="font-family:'JetBrains Mono',monospace">Landing</div></div></li>
           </ul>
         </section>
 
@@ -195,188 +194,26 @@ import '../styles/global.css';
   <!-- I18N -->
   <script is:inline>
   var i18n={
-    es:{
-      "hero.title":"AI & Automation Developer",
-      "hero.subtitle":"Construyo soluciones de hiperautomatizacion, full-stack e inteligencia artificial.",
-      "nav.about":"Sobre mi","nav.experience":"Experiencia","nav.projects":"Proyectos","nav.stack":"Stack",
-      "about.p1":'Aprendi a programar a los 15 anios por curiosidad, sin que nadie me lo pidiera. Ese mismo instinto de entender como funcionan las cosas es lo que hoy me lleva a construir sistemas de <span class="text-[#e2e8f0]">automatizacion, agentes de IA e integraciones</span> que resuelven problemas reales.',
-      "about.p2":'Me muevo comodo entre frontend y backend, pero donde realmente disfruto es en el espacio entre sistemas: conectar APIs, orquestar flujos, hacer que herramientas distintas hablen entre si. Si hay una tarea manual repetitiva, mi primer instinto es <span class="text-[#e2e8f0]">automatizarla</span>.',
-      "about.p3":'Estoy disponible para proyectos de <span class="text-[#e2e8f0]">automatizacion, desarrollo full-stack, integraciones de APIs y sistemas con IA</span>. Me interesa trabajar en productos que importen, con personas que quieran construir algo bien hecho desde el principio.',
-      "exp.bb.date":"Dic 2025 — Presente","exp.bb.title":"Desarrollador IA · Blackbird Labs",
-      "exp.bb.desc":"Disenio e implementacion de sistemas inteligentes con modelos de lenguaje y agentes de IA. Conexion de plataformas mediante APIs REST, protocolos MCP y orquestacion.",
-      "exp.ret.date":"Ene 2026 — Presente","exp.ret.title":"Desarrollador IA · Retycol",
-      "exp.ret.desc":"Ecosistema de automatizacion hibrido con n8n (84+ nodos) y Power Automate, integrando Microsoft Graph API, ClickUp y SheetJS. Verificacion documental farmaceutica con Google Gemini.",
-      "exp.icas.date":"Ene 2023 — Mar 2024","exp.icas.title":"Web Developer & Data Analyst · ICAS LTDA","exp.icas.badge":"Permiso de trabajo menor de edad",
-      "exp.icas.desc":"Dashboards interactivos para pipeline I+D farmaceutico con Node.js, Microsoft Graph API y Chart.js. Procesamiento de datos con Python.",
-      "proj.featured":"Destacado",
-      "proj.coopcredit.desc":"Sistema integral de creditos para cooperativas. Arquitectura Hexagonal, seguridad enterprise-grade, evaluacion automatizada de riesgo y 109 tests.",
-      "proj.novabook.desc":"Gestion de bibliotecas con GUI JavaFX, MySQL, RBAC, CRUD completo e import/export CSV.",
-      "proj.loginangular.desc":"Autenticacion full-stack con Angular + Tailwind CSS conectado a Spring Boot. JWT, responsive, rutas protegidas.",
-      "proj.apihex.desc":"REST API con Arquitectura Hexagonal (Ports & Adapters), Spring Data JPA, Swagger UI y frontend Angular.",
-      "proj.nearme.desc":"Plataforma de negocios locales. Landing profesional con diseno responsive y animaciones interactivas.",
-      "footer.credit":'Coded in <a href="https://code.visualstudio.com/" class="font-medium text-[#94a3b8] hover:text-[#5eead4]">Visual Studio Code</a>. Built with <a href="https://astro.build/" class="font-medium text-[#94a3b8] hover:text-[#5eead4]">Astro</a> and <a href="https://tailwindcss.com/" class="font-medium text-[#94a3b8] hover:text-[#5eead4]">Tailwind CSS</a>. Set in the <a href="https://fonts.google.com/specimen/Outfit" class="font-medium text-[#94a3b8] hover:text-[#5eead4]">Outfit</a> typeface.'
-    },
-    en:{
-      "hero.title":"AI & Automation Developer",
-      "hero.subtitle":"I build hyperautomation, full-stack and artificial intelligence solutions.",
-      "nav.about":"About","nav.experience":"Experience","nav.projects":"Projects","nav.stack":"Stack",
-      "about.p1":'I taught myself to code at 15 out of pure curiosity. That same instinct drives me today to build <span class="text-[#e2e8f0]">automation systems, AI agents, and integrations</span> that solve real problems instead of just checking a box.',
-      "about.p2":'I’m comfortable across frontend and backend, but where I truly enjoy working is in the space between systems: connecting APIs, orchestrating flows, making tools talk to each other. If there’s a repetitive manual task, my first instinct is to <span class="text-[#e2e8f0]">automate it</span>.',
-      "about.p3":'I’m open to <span class="text-[#e2e8f0]">automation projects, full-stack development, API integrations, and AI-powered systems</span>. I want to work on products that matter, with people who care about building things the right way.',
-      "exp.bb.date":"Dec 2025 — Present","exp.bb.title":"AI Developer · Blackbird Labs",
-      "exp.bb.desc":"Design and implementation of intelligent systems with language models and AI agents. Platform integration via REST APIs, MCP protocols and orchestration.",
-      "exp.ret.date":"Jan 2026 — Present","exp.ret.title":"AI Developer · Retycol",
-      "exp.ret.desc":"Hybrid automation ecosystem with n8n (84+ nodes) and Power Automate, integrating Microsoft Graph API, ClickUp and SheetJS. Pharmaceutical document verification with Google Gemini.",
-      "exp.icas.date":"Jan 2023 — Mar 2024","exp.icas.title":"Web Developer & Data Analyst · ICAS LTDA","exp.icas.badge":"Legal work permit as a minor",
-      "exp.icas.desc":"Interactive dashboards for pharmaceutical R&D pipeline with Node.js, Microsoft Graph API and Chart.js. Data processing with Python.",
-      "proj.featured":"Featured",
-      "proj.coopcredit.desc":"Comprehensive credit system for cooperatives. Hexagonal Architecture, enterprise-grade security, automated risk evaluation and 109 tests.",
-      "proj.novabook.desc":"Library management with JavaFX GUI, MySQL, RBAC, full CRUD, CSV import/export.",
-      "proj.loginangular.desc":"Full-stack authentication with Angular + Tailwind CSS connected to Spring Boot. JWT, responsive, protected routes.",
-      "proj.apihex.desc":"REST API with Hexagonal Architecture (Ports & Adapters), Spring Data JPA, Swagger UI and Angular frontend.",
-      "proj.nearme.desc":"Local business platform. Professional landing with responsive design and interactive animations.",
-      "footer.credit":'Coded in <a href="https://code.visualstudio.com/" class="font-medium text-[#94a3b8] hover:text-[#5eead4]">Visual Studio Code</a>. Built with <a href="https://astro.build/" class="font-medium text-[#94a3b8] hover:text-[#5eead4]">Astro</a> and <a href="https://tailwindcss.com/" class="font-medium text-[#94a3b8] hover:text-[#5eead4]">Tailwind CSS</a>. Set in the <a href="https://fonts.google.com/specimen/Outfit" class="font-medium text-[#94a3b8] hover:text-[#5eead4]">Outfit</a> typeface.'
-    }
+    es:{"hero.title":"AI & Automation Developer","hero.subtitle":"Construyo soluciones de hiperautomatizacion, full-stack e inteligencia artificial.","nav.about":"Sobre mi","nav.experience":"Experiencia","nav.projects":"Proyectos","nav.stack":"Stack","about.p1":'Aprendi a programar a los 15 anios por curiosidad, sin que nadie me lo pidiera. Ese mismo instinto es lo que hoy me lleva a construir sistemas de <span class="text-[#e2e8f0]">automatizacion, agentes de IA e integraciones</span> que resuelven problemas reales.',"about.p2":'Me muevo comodo entre frontend y backend, pero donde realmente disfruto es en el espacio entre sistemas. Si hay una tarea manual repetitiva, mi primer instinto es <span class="text-[#e2e8f0]">automatizarla</span>.',"about.p3":'Estoy disponible para proyectos de <span class="text-[#e2e8f0]">automatizacion, desarrollo full-stack, integraciones de APIs y sistemas con IA</span>. Me interesa trabajar en productos que importen, con personas que quieran construir algo bien hecho.',"exp.bb.date":"Dic 2025 — Presente","exp.bb.title":"Desarrollador IA · Blackbird Labs","exp.bb.desc":"Disenio e implementacion de sistemas inteligentes con modelos de lenguaje y agentes de IA. Conexion de plataformas mediante APIs REST, protocolos MCP y orquestacion.","exp.ret.date":"Ene 2026 — Presente","exp.ret.title":"Desarrollador IA · Retycol","exp.ret.desc":"Ecosistema de automatizacion hibrido con n8n (84+ nodos) y Power Automate, integrando Microsoft Graph API, ClickUp y SheetJS. Verificacion documental farmaceutica con Google Gemini.","exp.icas.date":"Ene 2023 — Mar 2024","exp.icas.title":"Web Developer & Data Analyst · ICAS LTDA","exp.icas.badge":"Permiso de trabajo menor de edad","exp.icas.desc":"Dashboards interactivos para pipeline I+D farmaceutico con Node.js, Microsoft Graph API y Chart.js. Procesamiento de datos con Python.","proj.featured":"Destacado","proj.coopcredit.desc":"Sistema integral de creditos para cooperativas. Arquitectura Hexagonal, seguridad enterprise-grade, evaluacion automatizada de riesgo y 109 tests.","proj.novabook.desc":"Gestion de bibliotecas con GUI JavaFX, MySQL, RBAC, CRUD completo e import/export CSV.","proj.loginangular.desc":"Autenticacion full-stack con Angular + Tailwind CSS conectado a Spring Boot. JWT, responsive, rutas protegidas.","proj.nearme.desc":"Plataforma de negocios locales. Landing con diseno responsive y animaciones interactivas.","footer.credit":'Coded in <a href="https://code.visualstudio.com/" class="font-medium text-[#94a3b8] hover:text-[#5eead4]">Visual Studio Code</a>. Built with <a href="https://astro.build/" class="font-medium text-[#94a3b8] hover:text-[#5eead4]">Astro</a> and <a href="https://tailwindcss.com/" class="font-medium text-[#94a3b8] hover:text-[#5eead4]">Tailwind CSS</a>. Set in the <a href="https://fonts.google.com/specimen/Outfit" class="font-medium text-[#94a3b8] hover:text-[#5eead4]">Outfit</a> typeface.'},
+    en:{"hero.title":"AI & Automation Developer","hero.subtitle":"I build hyperautomation, full-stack and artificial intelligence solutions.","nav.about":"About","nav.experience":"Experience","nav.projects":"Projects","nav.stack":"Stack","about.p1":'I taught myself to code at 15 out of pure curiosity. That same instinct drives me today to build <span class="text-[#e2e8f0]">automation systems, AI agents, and integrations</span> that solve real problems.',"about.p2":'I’m comfortable across frontend and backend, but where I truly enjoy working is in the space between systems. If there’s a repetitive manual task, my first instinct is to <span class="text-[#e2e8f0]">automate it</span>.',"about.p3":'I’m open to <span class="text-[#e2e8f0]">automation projects, full-stack development, API integrations, and AI-powered systems</span>. I want to work on products that matter, with people who care about building things the right way.',"exp.bb.date":"Dec 2025 — Present","exp.bb.title":"AI Developer · Blackbird Labs","exp.bb.desc":"Design and implementation of intelligent systems with language models and AI agents. Platform integration via REST APIs, MCP protocols and orchestration.","exp.ret.date":"Jan 2026 — Present","exp.ret.title":"AI Developer · Retycol","exp.ret.desc":"Hybrid automation ecosystem with n8n (84+ nodes) and Power Automate, integrating Microsoft Graph API, ClickUp and SheetJS. Pharmaceutical document verification with Google Gemini.","exp.icas.date":"Jan 2023 — Mar 2024","exp.icas.title":"Web Developer & Data Analyst · ICAS LTDA","exp.icas.badge":"Legal work permit as a minor","exp.icas.desc":"Interactive dashboards for pharmaceutical R&D pipeline with Node.js, Microsoft Graph API and Chart.js. Data processing with Python.","proj.featured":"Featured","proj.coopcredit.desc":"Comprehensive credit system for cooperatives. Hexagonal Architecture, enterprise-grade security, automated risk evaluation and 109 tests.","proj.novabook.desc":"Library management with JavaFX GUI, MySQL, RBAC, full CRUD, CSV import/export.","proj.loginangular.desc":"Full-stack authentication with Angular + Tailwind CSS connected to Spring Boot. JWT, responsive, protected routes.","proj.nearme.desc":"Local business platform. Landing with responsive design and interactive animations.","footer.credit":'Coded in <a href="https://code.visualstudio.com/" class="font-medium text-[#94a3b8] hover:text-[#5eead4]">Visual Studio Code</a>. Built with <a href="https://astro.build/" class="font-medium text-[#94a3b8] hover:text-[#5eead4]">Astro</a> and <a href="https://tailwindcss.com/" class="font-medium text-[#94a3b8] hover:text-[#5eead4]">Tailwind CSS</a>. Set in the <a href="https://fonts.google.com/specimen/Outfit" class="font-medium text-[#94a3b8] hover:text-[#5eead4]">Outfit</a> typeface.'}
   };
-  function _apply(lang){
-    document.documentElement.lang=lang;
-    localStorage.setItem('portfolio-lang',lang);
-    document.querySelectorAll('[data-i18n]').forEach(function(el){var k=el.getAttribute('data-i18n');if(i18n[lang]&&i18n[lang][k]!==undefined)el.textContent=i18n[lang][k];});
-    document.querySelectorAll('[data-i18n-html]').forEach(function(el){var k=el.getAttribute('data-i18n-html');if(i18n[lang]&&i18n[lang][k]!==undefined)el.innerHTML=i18n[lang][k];});
-    document.querySelectorAll('.lang-label').forEach(function(el){el.textContent=lang==='es'?'EN':'ES';});
-  }
-  function applyTranslations(lang){
-    var c=document.getElementById('content'),h=document.querySelector('header');
-    if(c)c.style.opacity='0';if(h)h.style.opacity='0';
-    setTimeout(function(){_apply(lang);if(c)c.style.opacity='1';if(h)h.style.opacity='1';},120);
-  }
+  function _apply(lang){document.documentElement.lang=lang;localStorage.setItem('portfolio-lang',lang);document.querySelectorAll('[data-i18n]').forEach(function(el){var k=el.getAttribute('data-i18n');if(i18n[lang]&&i18n[lang][k]!==undefined)el.textContent=i18n[lang][k];});document.querySelectorAll('[data-i18n-html]').forEach(function(el){var k=el.getAttribute('data-i18n-html');if(i18n[lang]&&i18n[lang][k]!==undefined)el.innerHTML=i18n[lang][k];});document.querySelectorAll('.lang-label').forEach(function(el){el.textContent=lang==='es'?'EN':'ES';});}
+  function applyTranslations(lang){var c=document.getElementById('content'),h=document.querySelector('header');if(c)c.style.opacity='0';if(h)h.style.opacity='0';setTimeout(function(){_apply(lang);if(c)c.style.opacity='1';if(h)h.style.opacity='1';},120);}
   function toggleLang(){applyTranslations(localStorage.getItem('portfolio-lang')==='en'?'es':'en');}
   window.toggleLang=toggleLang;
-  document.addEventListener('DOMContentLoaded',function(){
-    var s=localStorage.getItem('portfolio-lang')||'es';
-    _apply(s);
-    var c=document.getElementById('content'),h=document.querySelector('header');
-    if(c)c.style.transition='opacity .12s ease';
-    if(h)h.style.transition='opacity .12s ease';
-  });
+  document.addEventListener('DOMContentLoaded',function(){var s=localStorage.getItem('portfolio-lang')||'es';_apply(s);var c=document.getElementById('content'),h=document.querySelector('header');if(c)c.style.transition='opacity .12s ease';if(h)h.style.transition='opacity .12s ease';});
   </script>
 
   <!-- BOT SCRIPT -->
   <script is:inline>
   (function(){
-    // To get emails directly to your inbox:
-    // 1. Visit https://web3forms.com
-    // 2. Enter luisoro009@gmail.com and get your access key
-    // 3. Replace YOUR_ACCESS_KEY_HERE below
-    // Until then, the form opens your email client as a fallback.
+    // To receive emails directly: visit https://web3forms.com, enter luisoro009@gmail.com, get your key, replace below.
     var W3F='YOUR_ACCESS_KEY_HERE';
     var MAIL='luisoro009@gmail.com';
 
     var MSGS={
-      es:[
-        "¿Tienes una idea sin resolver? Yo la hago realidad 🚀",
-        "Automatizo lo que más tiempo te consume ⚡",
-        "Tu competencia ya usa IA. ¿Y tú? 🤖",
-        "De requisito a producción, sin rodeos 💪",
-        "¿n8n, APIs, IA? Ese es mi idioma 🔧",
-        "Cada tarea manual es una automatización esperando 🎯",
-        "Construyo más rápido de lo que imaginas 🔥",
-        "¿Datos sin explotar? Los convierto en insights 📊",
-        "Full-stack real: frontend, backend y lo que hay en el medio",
-        "¿Frustrado con tu proceso actual? Cuéntame 💬",
-        "No vendo humo. Entrego resultados ✅",
-        "¿Cuántas horas pierdes en tareas repetitivas? Escríbeme",
-        "Integro tus herramientas para que trabajen solas 🔗",
-        "¿Proyecto complejo? Mejor. Eso es lo que me gusta 🧩",
-        "Código limpio, arquitectura sólida, sin deuda técnica",
-        "De 0 a MVP en tiempo récord 🏃",
-        "¿Quieres un agente de IA en tu empresa? Tenemos que hablar",
-        "+2 años automatizando procesos reales en empresas reales",
-        "Spring Boot + Angular + IA = stack que escala 📈",
-        "¿Tienes un Excel con 500 filas manuales? Eso tiene solución 😅",
-        "Cada integración que construyo ahorra horas cada semana",
-        "¿Buscas a alguien que entienda negocio y código? Ese soy yo",
-        "No esperes el momento perfecto. Hablemos hoy 📱",
-        "¿Cuellos de botella en tu flujo? Los identifico y elimino",
-        "Trabajar conmigo es simple: tú traes el problema, yo traigo la solución",
-        "¿Necesitas dashboards que se actualicen solos? Puedo construirlos",
-        "Automatización + IA = ventaja competitiva real",
-        "¿Tienes un MVP que necesita escalar? Cuéntame",
-        "Empecé a los 15. Hoy construyo sistemas en producción 📈",
-        "¿Facturas, reportes, notificaciones? Los automatizo todos",
-        "Construyo cosas que funcionan la primera vez 💯",
-        "¿API de terceros problemática? Tengo experiencia con eso 🔌",
-        "Mi trabajo hace que el tuyo sea más fácil",
-        "¿Quieres implementar IA pero no sabes por dónde empezar? Yo te guío",
-        "Disponible para proyectos cortos y de largo plazo",
-        "¿Microservicios o monolito? Analizamos qué necesitas realmente",
-        "Tu problema técnico tiene solución. Solo toca aquí 👇",
-        "Cada proyecto es una oportunidad de hacer algo brillante ✨",
-        "¿Presupuesto ajustado? Hablemos, siempre hay opciones",
-        "84+ workflows automatizados en producción. El siguiente puede ser el tuyo",
-        "¿Quieres conectar tus apps en un solo flujo? Es mi especialidad",
-        "Dedicación total. Sin tercerizar nada",
-        "¿Necesitas alguien que entienda tus datos? Soy tu persona 📊",
-        "IA aplicada a negocios reales, no demos que no funcionan",
-        "¿Cansado de herramientas que no se integran? Las uno yo 🔗",
-        "Tu próximo desarrollador ya te está esperando 👋",
-        "¿Tienes WhatsApp Business caótico? Lo automatizo con IA",
-        "PostgreSQL, MongoDB, MySQL... los datos donde deben estar",
-        "Código que puedo explicar, mantener y mejorar",
-        "Una conversación puede cambiar tu proyecto. ¿Hablamos? 💬"
-      ],
-      en:[
-        "Have an idea that needs building? I'll make it real 🚀",
-        "I automate what's eating your time ⚡",
-        "Your competition is already using AI. Are you? 🤖",
-        "From requirement to production. No detours 💪",
-        "n8n, APIs, AI? That's my language 🔧",
-        "Every manual task is an automation waiting to happen 🎯",
-        "I build faster than you'd expect 🔥",
-        "Untapped data? I turn it into insights 📊",
-        "Real full-stack: frontend, backend, and everything in between",
-        "Frustrated with your current process? Tell me about it 💬",
-        "No empty promises. Just results ✅",
-        "How many hours do you lose on repetitive tasks? Message me",
-        "I integrate your tools so they work on their own 🔗",
-        "Complex project? Even better. That's what I like 🧩",
-        "Clean code, solid architecture, zero technical debt",
-        "From 0 to MVP in record time 🏃",
-        "Want an AI agent for your business? We need to talk",
-        "2+ years automating real processes in real companies",
-        "Spring Boot + Angular + AI = a stack that scales 📈",
-        "Got a 500-row manual spreadsheet? That's solvable 😅",
-        "Every integration I build saves hours every week",
-        "Looking for someone who gets both business and code? That's me",
-        "Don't wait for the perfect moment. Let's talk today 📱",
-        "Your workflow has bottlenecks. I find them and remove them",
-        "Working with me is simple: you bring the problem, I bring the solution",
-        "Need dashboards that update themselves? I can build that",
-        "Automation + AI = real competitive advantage",
-        "Got an MVP that needs to scale? Tell me about it",
-        "Started coding at 15. Building production systems today 📈",
-        "Invoices, reports, notifications? I automate them all",
-        "I build things that work on the first try 💯",
-        "Third-party API giving you trouble? I've handled that 🔌",
-        "My work makes your work easier",
-        "Want to implement AI but don't know where to start? I'll guide you",
-        "Available for short and long-term projects",
-        "Microservices or monolith? Let's figure out what you actually need",
-        "Your technical problem has a solution. Just tap here 👇",
-        "Every project is a chance to build something brilliant ✨",
-        "Tight budget? Let's talk. There's always a way",
-        "84+ automated workflows in production. Yours could be next",
-        "Want to connect your apps into one flow? That's my specialty",
-        "Full dedication. I don't outsource anything",
-        "Need someone who understands your data? I'm your person 📊",
-        "AI applied to real businesses, not demos that don't work",
-        "Tired of tools that don't integrate? I'll connect them 🔗",
-        "Your next developer is already waiting 👋",
-        "Chaotic WhatsApp Business? I'll automate it with AI",
-        "PostgreSQL, MongoDB, MySQL... data where it belongs",
-        "Code I can explain, maintain, and improve",
-        "One conversation can change your project. Shall we talk? 💬"
-      ]
+      es:["¿Tienes una idea sin resolver? Yo la hago realidad 🚀","Automatizo lo que más tiempo te consume ⚡","Tu competencia ya usa IA. ¿Y tú? 🤖","De requisito a producción, sin rodeos 💪","¿n8n, APIs, IA? Ese es mi idioma 🔧","Cada tarea manual es una automatización esperando 🎯","Construyo más rápido de lo que imaginas 🔥","¿Datos sin explotar? Los convierto en insights 📊","Full-stack real: frontend, backend y lo que hay en el medio","¿Frustrado con tu proceso? Cuéntame 💬","No vendo humo. Entrego resultados ✅","¿Cuántas horas pierdes en tareas repetitivas? Escríbeme","Integro tus herramientas para que trabajen solas 🔗","¿Proyecto complejo? Mejor. Eso me gusta 🧩","Código limpio, arquitectura sólida, sin deuda técnica","De 0 a MVP en tiempo récord 🏃","¿Quieres un agente de IA en tu empresa? Tenemos que hablar","+2 años automatizando procesos reales en empresas reales","Spring Boot + Angular + IA = stack que escala 📈","¿Tienes 500 filas manuales en Excel? Eso tiene solución 😅","Cada integración que construyo ahorra horas cada semana","¿Buscas a alguien que entienda negocio y código? Ese soy yo","No esperes el momento perfecto. Hablemos hoy 📱","¿Cuellos de botella en tu flujo? Los identifico y elimino","Tú traes el problema, yo traigo la solución","¿Necesitas dashboards que se actualicen solos? Puedo construirlos","Automatización + IA = ventaja competitiva real","¿Tienes un MVP que necesita escalar? Cuéntame","Empecé a los 15. Hoy construyo sistemas en producción 📈","¿Facturas, reportes, notificaciones? Los automatizo todos","Construyo cosas que funcionan la primera vez 💯","¿API de terceros problemática? Tengo experiencia con eso","Mi trabajo hace que el tuyo sea más fácil","¿Quieres implementar IA pero no sabes por dónde empezar? Yo te guío","Disponible para proyectos cortos y de largo plazo","Tu problema técnico tiene solución. Solo toca aquí 👇","Cada proyecto es una oportunidad de hacer algo brillante ✨","¿Presupuesto ajustado? Hablemos, siempre hay opciones","84+ workflows automatizados en producción. El siguiente puede ser el tuyo","Dedicación total. Sin tercerizar nada","¿Necesitas alguien que entienda tus datos? Soy tu persona 📊","IA aplicada a negocios reales, no demos que no funcionan","¿Cansado de herramientas que no se integran? Las uno yo","Tu próximo desarrollador ya te está esperando 👋","¿Tienes WhatsApp Business caótico? Lo automatizo con IA","Código que puedo explicar, mantener y mejorar","Una conversación puede cambiar tu proyecto. ¿Hablamos? 💬","¿Quieres conectar tus apps en un solo flujo? Es mi especialidad","PostgreSQL, MongoDB, MySQL... los datos donde deben estar","Haz clic y cuéntame qué necesitas 🚀"],
+      en:["Have an idea that needs building? I'll make it real 🚀","I automate what's eating your time ⚡","Your competition is already using AI. Are you? 🤖","From requirement to production. No detours 💪","n8n, APIs, AI? That's my language 🔧","Every manual task is an automation waiting to happen 🎯","I build faster than you'd expect 🔥","Untapped data? I turn it into insights 📊","Real full-stack: frontend, backend, and everything in between","Frustrated with your current process? Tell me 💬","No empty promises. Just results ✅","How many hours do you lose on repetitive tasks? Message me","I integrate your tools so they work on their own 🔗","Complex project? Even better. That's what I like 🧩","Clean code, solid architecture, zero technical debt","From 0 to MVP in record time 🏃","Want an AI agent for your business? We need to talk","2+ years automating real processes in real companies","Spring Boot + Angular + AI = a stack that scales 📈","Got a 500-row manual spreadsheet? That's solvable 😅","Every integration I build saves hours every week","Looking for someone who gets both business and code? That's me","Don't wait for the perfect moment. Let's talk today 📱","Your workflow has bottlenecks. I find them and remove them","You bring the problem, I bring the solution","Need dashboards that update themselves? I can build that","Automation + AI = real competitive advantage","Got an MVP that needs to scale? Tell me about it","Started coding at 15. Building production systems today 📈","Invoices, reports, notifications? I automate them all","I build things that work on the first try 💯","Third-party API giving you trouble? I've handled that","My work makes your work easier","Want to implement AI but don't know where to start? I'll guide you","Available for short and long-term projects","Your technical problem has a solution. Just tap here 👇","Every project is a chance to build something brilliant ✨","Tight budget? Let's talk. There's always a way","84+ automated workflows in production. Yours could be next","Full dedication. I don't outsource anything","Need someone who understands your data? I'm your person 📊","AI applied to real businesses, not demos that don't work","Tired of tools that don't integrate? I'll connect them","Your next developer is already waiting 👋","Chaotic WhatsApp Business? I'll automate it with AI","Code I can explain, maintain, and improve","One conversation can change your project. Shall we talk? 💬","Want to connect your apps into one flow? That's my specialty","PostgreSQL, MongoDB, MySQL... data where it belongs","Click me and tell me what you need 🚀"]
     };
 
     var wrap=document.getElementById('bot-wrap');
@@ -389,31 +226,89 @@ import '../styles/global.css';
     var submitBtn=document.getElementById('bsub');
     var resEl=document.getElementById('bres');
 
-    // Scroll-based horizontal movement
-    var posX=20,targetX=20,locked=false;
+    // ── AUTONOMOUS WANDERING MOVEMENT ──
+    var BOT_W = 80, BOT_H = 100; // bot footprint approx
+    var bx = 40;
+    var by = window.innerHeight - 200;
+    var vx = 1.4, vy = -0.9;
+    var locked = false;
+    var pausing = false;
+    var pauseTimer = null;
+
+    function bounds(){
+      return {
+        minX: 10,
+        maxX: window.innerWidth  - BOT_W  - 10,
+        minY: 10,
+        maxY: window.innerHeight - BOT_H  - 10
+      };
+    }
+
+    // Randomize velocity with consistent speed
+    function randVel(){
+      var speed = 1.2 + Math.random() * 1.6;
+      var angle = Math.random() * Math.PI * 2;
+      vx = Math.cos(angle) * speed;
+      vy = Math.sin(angle) * speed;
+    }
+
+    // Random direction tweak (doesn't fully reverse, feels natural)
+    function nudge(){
+      vx += (Math.random() - 0.5) * 0.8;
+      vy += (Math.random() - 0.5) * 0.8;
+      // Clamp speed
+      var spd = Math.sqrt(vx*vx + vy*vy);
+      var target = 1.2 + Math.random() * 1.6;
+      vx = (vx/spd)*target;
+      vy = (vy/spd)*target;
+    }
+
+    // Occasional pause (robot "thinking")
+    function maybePause(){
+      if(!pausing && Math.random() < 0.18){
+        pausing = true;
+        clearTimeout(pauseTimer);
+        pauseTimer = setTimeout(function(){ pausing = false; }, 800 + Math.random() * 1600);
+      }
+    }
+
+    var dirChangeTimer = setInterval(function(){
+      if(!locked){ nudge(); maybePause(); }
+    }, 2200 + Math.random() * 1800);
+
     (function tick(){
-      if(!locked){
-        var ms=Math.max(document.body.scrollHeight-window.innerHeight,1);
-        var pct=Math.min(window.scrollY/ms,1);
-        targetX=20+(window.innerWidth-110)*pct;
-        posX+=(targetX-posX)*0.04;
-        wrap.style.left=posX+'px';
+      if(!locked && !pausing){
+        var b = bounds();
+        bx += vx;
+        by += vy;
+        // Bounce
+        if(bx <= b.minX){ bx = b.minX; vx = Math.abs(vx); nudge(); }
+        if(bx >= b.maxX){ bx = b.maxX; vx = -Math.abs(vx); nudge(); }
+        if(by <= b.minY){ by = b.minY; vy = Math.abs(vy); nudge(); }
+        if(by >= b.maxY){ by = b.maxY; vy = -Math.abs(vy); nudge(); }
+        // Slight tilt toward movement direction
+        var tilt = Math.max(-12, Math.min(12, vx * 3));
+        wrap.style.left = bx + 'px';
+        wrap.style.bottom = 'auto';
+        wrap.style.top = by + 'px';
+        wrap.style.transform = 'rotate(' + tilt + 'deg)';
       }
       requestAnimationFrame(tick);
     })();
 
-    widget.addEventListener('mouseenter',function(){locked=true;});
-    widget.addEventListener('mouseleave',function(){if(!modal.classList.contains('open'))locked=false;});
-    widget.addEventListener('touchstart',function(){locked=true;},{passive:true});
+    // Freeze on hover / touch
+    widget.addEventListener('mouseenter', function(){ locked = true; wrap.style.transform = 'rotate(0deg)'; });
+    widget.addEventListener('mouseleave', function(){ if(!modal.classList.contains('open')){ locked = false; } });
+    widget.addEventListener('touchstart', function(){ locked = true; wrap.style.transform = 'rotate(0deg)'; }, { passive: true });
 
-    // Rotating messages
+    // ── MESSAGES ──
     var used=[];
     function pickMsg(){
       var lang=localStorage.getItem('portfolio-lang')||'es';
       var list=MSGS[lang]||MSGS.es;
-      if(used.length>=list.length)used=[];
+      if(used.length>=list.length) used=[];
       var avail=[];
-      for(var i=0;i<list.length;i++)if(used.indexOf(i)===-1)avail.push(i);
+      for(var i=0;i<list.length;i++) if(used.indexOf(i)===-1) avail.push(i);
       var idx=avail[Math.floor(Math.random()*avail.length)];
       used.push(idx);
       return list[idx];
@@ -422,24 +317,20 @@ import '../styles/global.css';
       msgEl.textContent=pickMsg();
       bubble.classList.remove('hide');
       bubble.classList.add('show');
-      setTimeout(function(){
-        bubble.classList.remove('show');
-        bubble.classList.add('hide');
-      },4500);
+      setTimeout(function(){ bubble.classList.remove('show'); bubble.classList.add('hide'); }, 4500);
     }
-    setTimeout(showBubble,1800);
-    setInterval(showBubble,8000);
+    setTimeout(showBubble, 1800);
+    setInterval(showBubble, 8000);
 
-    // Modal strings
+    // ── MODAL ──
     var MS={
       es:{t:'¡Hablemos!',s:'Cuéntame sobre tu proyecto.',n:'Nombre *',e:'Email *',p:'Teléfono',sj:'Asunto *',m:'Mensaje *',btn:'Enviar mensaje',sending:'Enviando...',ok:'¡Mensaje enviado! Te respondo pronto 🚀',fail:'Error al enviar. Intenta de nuevo.',en:'Nombre requerido (mín. 2 caracteres)',ee:'Email inválido',ep:'Teléfono inválido',es2:'Asunto requerido (mín. 3 caracteres)',em:'Mensaje requerido (mín. 10 caracteres)'},
       en:{t:"Let's talk!",s:'Tell me about your project.',n:'Name *',e:'Email *',p:'Phone',sj:'Subject *',m:'Message *',btn:'Send message',sending:'Sending...',ok:"Message sent! I'll reply soon 🚀",fail:'Error sending. Please try again.',en:'Name required (min. 2 chars)',ee:'Invalid email',ep:'Invalid phone',es2:'Subject required (min. 3 chars)',em:'Message required (min. 10 chars)'}
     };
-    function lang(){return localStorage.getItem('portfolio-lang')||'es';}
-    function s(){return MS[lang()]||MS.es;}
-
+    function glang(){ return localStorage.getItem('portfolio-lang')||'es'; }
+    function gs(){ return MS[glang()]||MS.es; }
     function updateML(){
-      var x=s();
+      var x=gs();
       document.getElementById('bmt').textContent=x.t;
       document.getElementById('bms').textContent=x.s;
       document.getElementById('lbn').textContent=x.n;
@@ -449,69 +340,60 @@ import '../styles/global.css';
       document.getElementById('lbmsg').textContent=x.m;
       submitBtn.textContent=x.btn;
     }
-
-    widget.addEventListener('click',function(){openM();});
-    closeBtn.addEventListener('click',closeM);
-    modal.addEventListener('click',function(e){if(e.target===modal)closeM();});
-    document.addEventListener('keydown',function(e){if(e.key==='Escape')closeM();});
-
-    function openM(){locked=true;modal.classList.add('open');resEl.style.display='none';resEl.className='';updateML();}
-    function closeM(){modal.classList.remove('open');setTimeout(function(){locked=false;},200);}
+    widget.addEventListener('click', function(){ openM(); });
+    closeBtn.addEventListener('click', closeM);
+    modal.addEventListener('click', function(e){ if(e.target===modal) closeM(); });
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeM(); });
+    function openM(){ locked=true; modal.classList.add('open'); resEl.style.display='none'; resEl.className=''; updateML(); }
+    function closeM(){ modal.classList.remove('open'); setTimeout(function(){ locked=false; }, 200); }
 
     // Input focus styles
     ['bn','be2','bph','bsj','bmsg'].forEach(function(id){
       var el=document.getElementById(id);
-      el.addEventListener('focus',function(){if(this.style.borderColor!=='#f87171')this.style.borderColor='#5eead4';});
-      el.addEventListener('blur',function(){if(this.style.borderColor!=='#f87171')this.style.borderColor='#334155';});
+      el.addEventListener('focus',function(){ if(this.style.borderColor!=='#f87171') this.style.borderColor='#5eead4'; });
+      el.addEventListener('blur',function(){ if(this.style.borderColor!=='#f87171') this.style.borderColor='#334155'; });
     });
-
     function setE(fid,eid,msg){
       document.getElementById(fid).style.borderColor=msg?'#f87171':'#5eead4';
-      var e=document.getElementById(eid);
-      e.textContent=msg||'';
-      e.style.display=msg?'block':'none';
+      var e=document.getElementById(eid); e.textContent=msg||''; e.style.display=msg?'block':'none';
     }
 
-    form.addEventListener('submit',function(ev){
+    // ── FORM SUBMIT ──
+    form.addEventListener('submit', function(ev){
       ev.preventDefault();
-      var x=s();
+      var x=gs();
       var nm=document.getElementById('bn').value.trim();
       var em=document.getElementById('be2').value.trim();
       var ph=document.getElementById('bph').value.trim();
       var sj=document.getElementById('bsj').value.trim();
       var mg=document.getElementById('bmsg').value.trim();
       var ok=true;
-      if(nm.length<2){setE('bn','ebn',x.en);ok=false;}else setE('bn','ebn','');
-      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){setE('be2','ebe',x.ee);ok=false;}else setE('be2','ebe','');
-      if(ph&&!/^[\+\d\s\-\(\)]{7,18}$/.test(ph)){setE('bph','ebph',x.ep);ok=false;}else setE('bph','ebph','');
-      if(sj.length<3){setE('bsj','ebsj',x.es2);ok=false;}else setE('bsj','ebsj','');
-      if(mg.length<10){setE('bmsg','ebmsg',x.em);ok=false;}else setE('bmsg','ebmsg','');
-      if(!ok)return;
-      submitBtn.textContent=x.sending;
-      submitBtn.disabled=true;
-      resEl.style.display='none';
+      if(nm.length<2){ setE('bn','ebn',x.en); ok=false; } else setE('bn','ebn','');
+      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){ setE('be2','ebe',x.ee); ok=false; } else setE('be2','ebe','');
+      if(ph&&!/^[\+\d\s\-\(\)]{7,18}$/.test(ph)){ setE('bph','ebph',x.ep); ok=false; } else setE('bph','ebph','');
+      if(sj.length<3){ setE('bsj','ebsj',x.es2); ok=false; } else setE('bsj','ebsj','');
+      if(mg.length<10){ setE('bmsg','ebmsg',x.em); ok=false; } else setE('bmsg','ebmsg','');
+      if(!ok) return;
+      submitBtn.textContent=x.sending; submitBtn.disabled=true; resEl.style.display='none';
       function done(success){
         if(success){
-          resEl.textContent=x.ok;resEl.className='ok';resEl.style.display='block';
+          resEl.textContent=x.ok; resEl.className='ok'; resEl.style.display='block';
           form.reset();
-          ['bn','be2','bph','bsj','bmsg'].forEach(function(id){document.getElementById(id).style.borderColor='#334155';});
-          setTimeout(closeM,3000);
-        }else{
-          resEl.textContent=x.fail;resEl.className='err';resEl.style.display='block';
-        }
-        submitBtn.textContent=x.btn;
-        submitBtn.disabled=false;
+          ['bn','be2','bph','bsj','bmsg'].forEach(function(id){ document.getElementById(id).style.borderColor='#334155'; });
+          setTimeout(closeM, 3000);
+        } else { resEl.textContent=x.fail; resEl.className='err'; resEl.style.display='block'; }
+        submitBtn.textContent=x.btn; submitBtn.disabled=false;
       }
       if(W3F==='YOUR_ACCESS_KEY_HERE'){
         var body='Nombre: '+nm+'\nEmail: '+em+(ph?'\nTel: '+ph:'')+"\n\n"+mg;
         window.open('mailto:'+MAIL+'?subject='+encodeURIComponent(sj)+'&body='+encodeURIComponent(body));
         done(true);
-      }else{
+      } else {
         fetch('https://api.web3forms.com/submit',{
           method:'POST',
           headers:{'Content-Type':'application/json','Accept':'application/json'},
           body:JSON.stringify({access_key:W3F,name:nm,email:em,phone:ph,subject:sj,message:mg})
-        }).then(function(r){return r.json();}).then(function(d){done(!!d.success);}).catch(function(){done(false);});
+        }).then(function(r){ return r.json(); }).then(function(d){ done(!!d.success); }).catch(function(){ done(false); });
       }
     });
   })();
@@ -520,26 +402,14 @@ import '../styles/global.css';
   <!-- NAV + SPOTLIGHT -->
   <script>
     var sl=document.getElementById('spotlight');
-    document.addEventListener('mousemove',function(e){
-      sl.style.setProperty('--mx',e.clientX+'px');
-      sl.style.setProperty('--my',e.clientY+'px');
-      sl.style.opacity='1';
-    });
+    document.addEventListener('mousemove',function(e){ sl.style.setProperty('--mx',e.clientX+'px'); sl.style.setProperty('--my',e.clientY+'px'); sl.style.opacity='1'; });
     var sections=document.querySelectorAll('section[id]');
     var navLinks=document.querySelectorAll('.nav a');
     function updateNav(){
       var sy=window.scrollY+200;
       sections.forEach(function(sec){
         var top=sec.offsetTop,h=sec.offsetHeight,id=sec.getAttribute('id');
-        if(sy>=top&&sy<top+h){
-          navLinks.forEach(function(link){
-            var active=link.getAttribute('href')==='#'+id;
-            var ind=link.querySelector('.nav-indicator');
-            var txt=link.querySelector('.nav-text');
-            if(active){ind.style.width='4rem';ind.style.backgroundColor='#e2e8f0';txt.style.color='#e2e8f0';}
-            else{ind.style.width='2rem';ind.style.backgroundColor='#475569';txt.style.color='#475569';}
-          });
-        }
+        if(sy>=top&&sy<top+h){ navLinks.forEach(function(link){ var active=link.getAttribute('href')==='#'+id; var ind=link.querySelector('.nav-indicator'); var txt=link.querySelector('.nav-text'); if(active){ind.style.width='4rem';ind.style.backgroundColor='#e2e8f0';txt.style.color='#e2e8f0';}else{ind.style.width='2rem';ind.style.backgroundColor='#475569';txt.style.color='#475569';} }); }
       });
     }
     window.addEventListener('scroll',updateNav);
