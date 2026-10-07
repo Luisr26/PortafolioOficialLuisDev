@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Prototipos del portafolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Bungee&family=Big+Shoulders+Display:wght@300..900&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0F0F10; --surface:#18181A; --surface-2:#202023; --line:#2B2B2F; --text:#EDEDED; --text-2:#9A9AA2; --accent:#EDEDED;
+  --pad:clamp(16px,4vw,48px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:Geist,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:inherit}
+button{font:inherit;color:inherit}
+.mono{font-family:"Geist Mono",ui-monospace,monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-2)}
+.wrap{max-width:1320px;margin:0 auto;padding:0 var(--pad)}
+
+header.top{padding:56px 0 40px;border-bottom:1px solid var(--line)}
+header.top h1{font-family:"Big Shoulders Display";font-weight:900;text-transform:uppercase;font-size:clamp(48px,8vw,112px);line-height:.9;margin:14px 0 18px}
+header.top p{color:var(--text-2);max-width:62ch;line-height:1.55}
+.toc{display:flex;gap:24px;margin-top:28px;flex-wrap:wrap}
+.toc a{text-decoration:none;position:relative;padding-bottom:4px}
+.toc a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--text);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.toc a:hover::after{transform:scaleX(1)}
+
+section{padding:64px 0;border-bottom:1px solid var(--line)}
+h2{font-size:28px;font-weight:600;letter-spacing:-.02em;margin-bottom:6px}
+.sub{color:var(--text-2);margin-bottom:32px;line-height:1.5;max-width:70ch}
+
+/* Prototipos */
+.protos{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.proto{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+.thumb{position:relative;aspect-ratio:16/10;overflow:hidden;background:#000;cursor:pointer}
+.thumb iframe{position:absolute;top:0;left:0;width:1440px;height:900px;border:0;transform-origin:0 0;pointer-events:none}
+.thumb::after{content:"Abrir en el visor";position:absolute;inset:0;display:grid;place-items:center;background:rgba(0,0,0,.55);font-family:"Geist Mono";font-size:12px;letter-spacing:.08em;text-transform:uppercase;opacity:0;transition:opacity .25s}
+.thumb:hover::after{opacity:1}
+.proto-body{padding:20px;display:flex;flex-direction:column;gap:12px;flex:1}
+.proto-body h3{font-size:20px;font-weight:600}
+.proto-body p{color:var(--text-2);line-height:1.5;font-size:14px}
+.feat{list-style:none;display:grid;gap:6px;font-size:13px;color:var(--text-2)}
+.feat li::before{content:"→ ";color:var(--text)}
+.actions{display:flex;gap:8px;margin-top:auto;padding-top:8px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;border:1px solid var(--line);background:transparent;cursor:pointer;text-decoration:none;font-size:13px;font-weight:500;transition:background .2s,border-color .2s}
+.btn:hover{background:var(--surface-2);border-color:#3a3a40}
+.btn.primary{background:var(--text);color:var(--bg);border-color:var(--text)}
+.btn.primary:hover{background:#fff}
+.badge{display:inline-block;font-family:"Geist Mono";font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:999px;background:var(--surface-2);color:var(--text)}
+
+/* Paletas */
+.palettes{display:grid;gap:28px}
+.pal{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--surface)}
+.pal-head{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;gap:12px;flex-wrap:wrap}
+.pal-head h3{font-size:18px;font-weight:600}
+.sw-row{display:grid;grid-template-columns:repeat(var(--n),1fr)}
+.sw{min-height:150px;padding:14px;display:flex;flex-direction:column;justify-content:flex-end;gap:4px;cursor:pointer;border:0;text-align:left;position:relative;transition:transform .2s}
+.sw:hover{z-index:1;transform:translateY(-4px)}
+.sw .role{font-size:12px;font-weight:500;opacity:.85}
+.sw .hex{font-family:"Geist Mono";font-size:13px}
+.sw .cr{font-family:"Geist Mono";font-size:11px;opacity:.75}
+.sw.copied::after{content:"Copiado";position:absolute;top:12px;left:14px;font-family:"Geist Mono";font-size:11px;text-transform:uppercase}
+.pal-demo{display:flex;gap:16px;align-items:center;padding:20px;flex-wrap:wrap;border-top:1px solid var(--line)}
+.pal-demo .chip{padding:10px 18px;border-radius:999px;font-weight:600;font-size:14px}
+.pal-demo .word{font-size:44px;line-height:1}
+
+/* Tipografía */
+.types{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.type{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:14px;min-height:280px}
+.type .spec{font-size:64px;line-height:.9;text-transform:uppercase}
+.type p{color:var(--text-2);font-size:14px;line-height:1.5}
+.a-spec{font-family:Archivo;font-variation-settings:"wdth" 62,"wght" 900;animation:breathe 4s ease-in-out infinite}
+@keyframes breathe{50%{font-variation-settings:"wdth" 125,"wght" 300}}
+.b-spec{font-family:Bungee;color:#C8FF3D;text-shadow:0 0 18px rgba(200,255,61,.5)}
+.c-spec{font-family:"Big Shoulders Display";font-weight:900;color:#FFC226}
+
+/* Recomendación */
+.rec{display:grid;grid-template-columns:1.2fr 1fr;gap:20px}
+.rec .box{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px;line-height:1.6;color:var(--text-2)}
+.rec .box b{color:var(--text);font-weight:600}
+.rec h3{color:var(--text);font-size:18px;margin-bottom:10px;font-weight:600}
+.rec ol{padding-left:18px;display:grid;gap:8px}
+
+/* ===== Visor a tamaño real ===== */
+.viewer{position:fixed;inset:0;background:#08080A;z-index:100;display:none;flex-direction:column}
+.viewer.open{display:flex}
+.vbar{display:flex;align-items:center;gap:12px;padding:10px 16px;border-bottom:1px solid var(--line);background:var(--bg);flex-wrap:wrap}
+.seg{display:flex;gap:4px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:4px}
+.seg button{border:1px solid transparent;background:transparent;padding:6px 12px;border-radius:999px;font-size:12px;cursor:pointer;color:var(--text-2);white-space:nowrap}
+.seg button:hover{color:var(--text)}
+.seg button.on{background:var(--text);color:var(--bg)}
+.vbar .sp{flex:1}
+.vinfo{font-family:"Geist Mono";font-size:12px;color:var(--text-2);white-space:nowrap}
+.icon{width:36px;height:36px;display:grid;place-items:center;border:0;background:transparent;border-radius:999px;cursor:pointer;color:var(--text-2);font-size:18px;text-decoration:none}
+.icon:hover{background:var(--surface-2);color:var(--text)}
+.stage{flex:1;position:relative;overflow:hidden;display:grid;place-items:center}
+.stage.scroll{overflow:auto;place-items:start center}
+.device{position:relative;transform-origin:center center;box-shadow:0 0 0 1px var(--line),0 40px 80px -20px #000;border-radius:var(--r,6px);overflow:hidden;background:#fff;flex:none}
+.stage.scroll .device{transform-origin:top center;margin:24px}
+.device iframe{width:100%;height:100%;border:0;display:block}
+.dims{position:absolute;left:16px;bottom:12px;font-family:"Geist Mono";font-size:11px;color:var(--text-2);pointer-events:none}
+.custom{display:none;align-items:center;gap:6px}
+.custom.on{display:flex}
+.custom input{width:72px;background:var(--surface);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:6px 8px;font-family:"Geist Mono";font-size:12px}
+
+@media (max-width:980px){
+  .protos,.types{grid-template-columns:1fr}
+  .rec{grid-template-columns:1fr}
+  .sw-row{grid-template-columns:repeat(4,1fr)}
+}
+@media (max-width:520px){ .sw-row{grid-template-columns:repeat(2,1fr)} }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <span class="mono">Portafolio · Rediseño v5 · Exploración</span>
+    <h1>Tres direcciones<br>visuales</h1>
+    <p>Prototipos navegables sin contenido real. Los tres son minimalistas, usan tipografía de letrero y animaciones ligadas al scroll (CSS <code>animation-timeline</code>, con respaldo en JS para Firefox/Safari). Ninguno tiene bot flotante; cada uno propone una forma distinta de contacto.</p>
+    <nav class="toc mono"><a href="#protos">Prototipos</a><a href="#paletas">Paletas</a><a href="#tipos">Tipografía</a><a href="#reco">Recomendación</a></nav>
+  </div>
+</header>
+
+<section id="protos">
+  <div class="wrap">
+    <h2>Prototipos</h2>
+    <p class="sub">Haz clic en la miniatura para abrir el visor. Ahí eliges la resolución (tu pantalla, 1920, 1440, 1366, tablet, móvil) y alternas entre <b>Ajustar</b> y <b>1:1</b>, que muestra los píxeles reales. Con <b>Pantalla completa</b> o la pestaña nueva ves la proporción exacta de tu monitor.</p>
+    <div class="protos" id="protoGrid"></div>
+  </div>
+</section>
+
+<section id="paletas">
+  <div class="wrap">
+    <h2>Paletas</h2>
+    <p class="sub">Cada prototipo tiene su paleta. Clic en un color para copiar el hex. El número junto a cada color es su contraste contra el fondo (WCAG: ≥ 4.5 para texto normal, ≥ 3 para texto grande).</p>
+    <div class="palettes" id="palettes"></div>
+  </div>
+</section>
+
+<section id="tipos">
+  <div class="wrap">
+    <h2>Tipografía tipo letrero</h2>
+    <p class="sub">Todas son gratuitas en Google Fonts y se pueden auto-hospedar después con <code>@fontsource</code> en Astro.</p>
+    <div class="types">
+      <div class="type"><span class="mono">A · Letrero</span><div class="spec a-spec">Señal</div><p><b style="color:var(--text)">Archivo</b> variable (ejes de ancho 62–125 y peso 100–900). El ancho se anima con el scroll: es el efecto que hace único al prototipo A. Etiquetas en JetBrains Mono.</p></div>
+      <div class="type"><span class="mono">B · Neón</span><div class="spec b-spec">Neón</div><p><b style="color:var(--text)">Bungee</b> y Bungee Outline, diseñadas a partir de letreros urbanos. Texto corrido en Manrope y etiquetas en IBM Plex Mono.</p></div>
+      <div class="type"><span class="mono">C · Andén</span><div class="spec c-spec">Andén 05</div><p><b style="color:var(--text)">Big Shoulders Display</b>, inspirada en la señalética de Chicago, con <b style="color:var(--text)">Barlow</b> (basada en señales de autopista) para el texto y Space Mono para el tablero.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="reco" style="border-bottom:0">
+  <div class="wrap">
+    <h2>Recomendación</h2>
+    <p class="sub">Mi voto y cómo seguimos.</p>
+    <div class="rec">
+      <div class="box">
+        <h3>Ir con A (Letrero) y tomar el formulario de B</h3>
+        <p>A es la más original y la más minimalista: casi todo es tipografía y los efectos de scroll (ancho variable, carril horizontal, líneas que se dibujan) no dependen de imágenes. Nadie lo confunde con una plantilla. El formulario de frase de A es llamativo, pero el conversacional de B es más amable para quien tiene prisa. Se pueden combinar: pasos uno por uno con la estética de A.</p>
+        <p style="margin-top:12px">C es la más temática y divertida (tablero split-flap, boleto). Funciona si quieres un portafolio con personalidad fuerte, pero tiene más elementos y cuesta más mantenerla minimalista.</p>
+      </div>
+      <div class="box">
+        <h3>Implementación en Astro (después de que elijas)</h3>
+        <ol>
+          <li>Tokens de la paleta en <code>global.css</code> como variables CSS y en <code>tailwind.config.mjs</code>.</li>
+          <li>Retirar el bot flotante y sus estilos.</li>
+          <li>Reescribir Hero, Sobre, Proyectos, Proceso y Contacto como componentes nuevos.</li>
+          <li>Animaciones con <code>animation-timeline</code> nativo y respaldo con IntersectionObserver; respetar <code>prefers-reduced-motion</code>.</li>
+          <li>Contenido real al final, cuando la estructura esté aprobada.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap mono" style="padding-top:32px;padding-bottom:40px">Prototipos locales — no se publican.</footer>
+
+<!-- Visor -->
+<div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Visor de prototipos">
+  <div class="vbar">
+    <div class="seg" id="vProtos"></div>
+    <div class="seg" id="vDevices"></div>
+    <div class="custom" id="vCustom"><input id="cw" type="number" min="280" max="3840" aria-label="Ancho"><span class="mono">×</span><input id="ch" type="number" min="280" max="2400" aria-label="Alto"></div>
+    <div class="seg" id="vMode"><button data-m="fit" class="on">Ajustar</button><button data-m="real">1:1</button></div>
+    <button class="icon" id="vRotate" title="Rotar">⟲</button>
+    <span class="sp"></span>
+    <span class="vinfo" id="vInfo"></span>
+    <button class="icon" id="vFull" title="Pantalla completa (F)">⛶</button>
+    <a class="icon" id="vOpen" target="_blank" title="Abrir en pestaña nueva">↗</a>
+    <button class="icon" id="vClose" title="Cerrar (Esc)">✕</button>
+  </div>
+  <div class="stage" id="stage">
+    <div class="device" id="device"><iframe id="vFrame" title="Prototipo"></iframe></div>
+    <span class="dims mono">← → cambiar prototipo · F pantalla completa · Esc cerrar</span>
+  </div>
+</div>
+
+<script>
+const PROTOS = [
+  { id: 'a', file: 'a-v3.html', name: 'A · Letrero — v3 final', badge: 'Elegido',
+    desc: 'Versión final en paleta Pizarra: pantalla de carga, cursor propio, letrero vivo, scroll con inercia, tablero Ahora mismo, letrero de puerta y carta en vivo en el contacto. Abajo está el dock de versiones.',
+    feat: ['Letrero vivo: el nombre se ensancha cerca del cursor', 'Carril de proyectos con contador e inclinación por velocidad', 'Servicios con vista previa flotante', 'Formulario conversacional + carta que se escribe en vivo'],
+    extra: `<a class="btn" href="a-v1.html" target="_blank">v1</a><a class="btn" href="a-v2.html" target="_blank">v2</a><a class="btn" href="comparar.html?p=a&l=v2&r=v3">Comparar v2 ↔ v3</a>` },
+  { id: 'b', file: 'b-neon.html', name: 'B · Neón', badge: 'Oscuro',
+    desc: 'Fondo nocturno con un letrero de neón lima que parpadea al encender. Foco que sigue al cursor y texto que se ilumina palabra por palabra.',
+    feat: ['Palabras que se iluminan con el scroll', 'Tarjetas de proyecto apiladas', 'Formulario conversacional paso a paso'] },
+  { id: 'c', file: 'c-anden.html', name: 'C · Andén', badge: 'Temático',
+    desc: 'Señalética de transporte: azul vía y amarillo señal. Tablero split-flap en el hero y un riel de metro que se llena mientras bajas.',
+    feat: ['Tablero de salidas animado', 'Riel de estaciones como navegación', 'Formulario boleto que se desprende'] },
+];
+
+const PALETTES = [
+  { name: 'A1 · Grafito — recomendada', pal: 'grafito', bg: '#161513', colors: [
+    ['Fondo', '#161513'], ['Superficie', '#1F1E1B'], ['Línea', '#34322D'], ['Texto 2', '#9C978C'], ['Texto', '#E8E4DA'], ['Acento', '#FF5A2B']],
+    demo: { word: 'Grafito', wordStyle: 'font-family:Archivo;font-variation-settings:"wdth" 62,"wght" 900;text-transform:uppercase;color:#E8E4DA' } },
+  { name: 'A2 · Pizarra', pal: 'pizarra', bg: '#1A1E23', colors: [
+    ['Fondo', '#1A1E23'], ['Superficie', '#22272E'], ['Línea', '#353C46'], ['Texto 2', '#97A0AC'], ['Texto', '#E4E8ED'], ['Acento', '#FF6B3D']],
+    demo: { word: 'Pizarra', wordStyle: 'font-family:Archivo;font-variation-settings:"wdth" 62,"wght" 900;text-transform:uppercase;color:#E4E8ED' } },
+  { name: 'A3 · Oliva', pal: 'oliva', bg: '#191B16', colors: [
+    ['Fondo', '#191B16'], ['Superficie', '#21241E'], ['Línea', '#363A31'], ['Texto 2', '#999D8E'], ['Texto', '#E5E7DC'], ['Acento', '#E8B04B']],
+    demo: { word: 'Oliva', wordStyle: 'font-family:Archivo;font-variation-settings:"wdth" 62,"wght" 900;text-transform:uppercase;color:#E5E7DC' } },
+  { name: 'A4 · Arena (clara atenuada)', pal: 'arena', bg: '#D6D1C4', colors: [
+    ['Fondo', '#D6D1C4'], ['Superficie', '#CBC5B6'], ['Línea', '#ADA695'], ['Texto 2', '#4D4A43'], ['Tinta', '#1A1916'], ['Acento', '#C83C17']],
+    demo: { word: 'Arena', wordStyle: 'font-family:Archivo;font-variation-settings:"wdth" 62,"wght" 900;text-transform:uppercase;color:#1A1916' } },
+  { name: 'A0 · Papel (original, descartada por brillo)', pal: 'papel', bg: '#F2F0EB', colors: [
+    ['Fondo', '#F2F0EB'], ['Superficie', '#E7E4DC'], ['Línea', '#CFCBC1'], ['Texto 2', '#5C5A55'], ['Tinta', '#121211'], ['Acento', '#FF4D1C']],
+    demo: { word: 'Papel', wordStyle: 'font-family:Archivo;font-variation-settings:"wdth" 62,"wght" 900;text-transform:uppercase;color:#121211' } },
+  { name: 'B · Noche & Neón', bg: '#0D0D0F', colors: [
+    ['Fondo', '#0D0D0F'], ['Superficie', '#16161A'], ['Línea', '#26262C'], ['Texto 2', '#8E8E98'], ['Texto', '#ECECEC'], ['Acento', '#C8FF3D'], ['Acento 2', '#FF5FA2']],
+    demo: { word: 'Neón', wordStyle: 'font-family:Bungee;color:#C8FF3D;text-shadow:0 0 18px rgba(200,255,61,.5)' } },
+  { name: 'C · Vía & Señal', bg: '#0B1222', colors: [
+    ['Fondo', '#0B1222'], ['Superficie', '#121B30'], ['Línea', '#24304D'], ['Texto 2', '#97A1BC'], ['Texto', '#F2EFE6'], ['Acento', '#FFC226']],
+    demo: { word: 'Andén', wordStyle: 'font-family:"Big Shoulders Display";font-weight:900;text-transform:uppercase;color:#FFC226' } },
+];
+
+// --- Contraste WCAG ---
+const lum = hex => {
+  const [r, g, b] = hex.match(/\w\w/g).map(h => parseInt(h, 16) / 255).map(c => c <= .03928 ? c / 12.92 : ((c + .055) / 1.055) ** 2.4);
+  return .2126 * r + .7152 * g + .0722 * b;
+};
+const ratio = (a, b) => { const [x, y] = [lum(a), lum(b)].sort((m, n) => n - m); return (x + .05) / (y + .05); };
+const on = hex => lum(hex) > .4 ? '#111' : '#fff';
+
+// --- Tarjetas de prototipos ---
+const grid = document.getElementById('protoGrid');
+PROTOS.forEach((p, i) => {
+  const el = document.createElement('article');
+  el.className = 'proto';
+  el.innerHTML = `
+    <div class="thumb" data-i="${i}"><iframe src="${p.file}?embed" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div>
+    <div class="proto-body">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><h3>${p.name}</h3><span class="badge">${p.badge}</span></div>
+      <p>${p.desc}</p>
+      <ul class="feat">${p.feat.map(f => `<li>${f}</li>`).join('')}</ul>
+      <div class="actions"><button class="btn primary" data-i="${i}">Abrir visor</button><a class="btn" href="${p.file}" target="_blank">Pestaña nueva ↗</a></div>
+      ${p.extra ? `<div class="actions" style="padding-top:0;margin-top:0">${p.extra}</div>` : ''}
+    </div>`;
+  grid.append(el);
+});
+const fitThumbs = () => document.querySelectorAll('.thumb').forEach(t => t.querySelector('iframe').style.transform = `scale(${t.clientWidth / 1440})`);
+addEventListener('resize', fitThumbs); fitThumbs();
+grid.addEventListener('click', e => { const t = e.target.closest('[data-i]'); if (t && !e.target.closest('a')) openViewer(+t.dataset.i); });
+
+// --- Paletas ---
+const pals = document.getElementById('palettes');
+PALETTES.forEach(pal => {
+  const acc = pal.colors.find(c => c[0] === 'Acento')[1];
+  const txt = pal.colors.find(c => c[0] === 'Tinta' || c[0] === 'Texto')[1];
+  const el = document.createElement('div');
+  el.className = 'pal';
+  el.innerHTML = `
+    <div class="pal-head"><h3>${pal.name}</h3><div style="display:flex;gap:8px">${pal.pal ? `<a class="btn" href="a-v3.html?pal=${pal.pal}" target="_blank">Ver en A ↗</a>` : ''}<button class="btn" data-css>Copiar como CSS</button></div></div>
+    <div class="sw-row" style="--n:${pal.colors.length}">
+      ${pal.colors.map(([role, hex]) => `<button class="sw" data-hex="${hex}" style="background:${hex};color:${on(hex)}">
+        <span class="role">${role}</span><span class="hex">${hex}</span>
+        <span class="cr">${hex === pal.bg ? 'fondo' : ratio(hex, pal.bg).toFixed(2) + ' : 1'}</span></button>`).join('')}
+    </div>
+    <div class="pal-demo" style="background:${pal.bg}">
+      <span class="word" style="${pal.demo.wordStyle}">${pal.demo.word}</span>
+      <span class="chip" style="background:${acc};color:${on(acc)}">Botón principal</span>
+      <span class="chip" style="border:1px solid ${txt};color:${txt}">Secundario</span>
+      <span style="color:${txt};font-size:15px">Texto de ejemplo sobre el fondo.</span>
+    </div>`;
+  el.querySelector('[data-css]').addEventListener('click', ev => {
+    const css = ':root{\n' + pal.colors.map(([r, h]) => `  --${r.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/\s+/g, '-')}: ${h};`).join('\n') + '\n}';
+    copy(css, ev.currentTarget, 'Copiado ✓');
+  });
+  pals.append(el);
+});
+pals.addEventListener('click', e => {
+  const sw = e.target.closest('.sw'); if (!sw) return;
+  navigator.clipboard?.writeText(sw.dataset.hex);
+  sw.classList.add('copied'); setTimeout(() => sw.classList.remove('copied'), 900);
+});
+function copy(text, btn, msg) {
+  navigator.clipboard?.writeText(text);
+  const o = btn.textContent; btn.textContent = msg; setTimeout(() => btn.textContent = o, 1200);
+}
+
+// --- Visor ---
+const DEVICES = [
+  { id: 'win', label: 'Ventana', size: () => { const s = stage.getBoundingClientRect(); return [Math.round(s.width), Math.round(s.height)]; } },
+  { id: 'screen', label: 'Tu pantalla', size: () => [screen.width, screen.height] },
+  { id: 'fhd', label: '1920', size: () => [1920, 1080] },
+  { id: 'mac', label: '1440', size: () => [1440, 900] },
+  { id: 'hd', label: '1366', size: () => [1366, 768] },
+  { id: 'tab', label: 'Tablet', size: () => [820, 1180], r: 18 },
+  { id: 'mob', label: 'Móvil', size: () => [390, 844], r: 36 },
+  { id: 'cus', label: 'Otro', size: () => [+cw.value || 1280, +ch.value || 800] },
+];
+const viewer = document.getElementById('viewer'), stage = document.getElementById('stage'), device = document.getElementById('device');
+const frame = document.getElementById('vFrame'), info = document.getElementById('vInfo'), openA = document.getElementById('vOpen');
+const cw = document.getElementById('cw'), ch = document.getElementById('ch'), custom = document.getElementById('vCustom');
+const state = { p: 0, d: 'win', mode: 'fit', rot: false };
+cw.value = 1280; ch.value = 800;
+
+const vP = document.getElementById('vProtos'), vD = document.getElementById('vDevices'), vM = document.getElementById('vMode');
+vP.innerHTML = PROTOS.map((p, i) => `<button data-i="${i}">${p.name}</button>`).join('');
+vD.innerHTML = DEVICES.map(d => `<button data-d="${d.id}">${d.label}</button>`).join('');
+vP.onclick = e => { const b = e.target.closest('button'); if (b) { state.p = +b.dataset.i; load(); } };
+vD.onclick = e => { const b = e.target.closest('button'); if (b) { state.d = b.dataset.d; state.rot = false; layout(); } };
+vM.onclick = e => { const b = e.target.closest('button'); if (b) { state.mode = b.dataset.m; layout(); } };
+document.getElementById('vRotate').onclick = () => { state.rot = !state.rot; layout(); };
+document.getElementById('vClose').onclick = closeViewer;
+document.getElementById('vFull').onclick = full;
+[cw, ch].forEach(x => x.addEventListener('input', layout));
+
+function openViewer(i) {
+  state.p = i; viewer.classList.add('open'); document.body.style.overflow = 'hidden'; load();
+}
+function closeViewer() {
+  if (document.fullscreenElement) document.exitFullscreen();
+  viewer.classList.remove('open'); document.body.style.overflow = '';
+}
+function full() { document.fullscreenElement ? document.exitFullscreen() : viewer.requestFullscreen?.(); }
+function load() {
+  frame.src = PROTOS[state.p].file; openA.href = PROTOS[state.p].file;
+  [...vP.children].forEach((b, i) => b.classList.toggle('on', i === state.p));
+  layout();
+}
+function layout() {
+  const d = DEVICES.find(x => x.id === state.d);
+  let [w, h] = d.size(); if (state.rot) [w, h] = [h, w];
+  [...vD.children].forEach(b => b.classList.toggle('on', b.dataset.d === state.d));
+  [...vM.children].forEach(b => b.classList.toggle('on', b.dataset.m === state.mode));
+  custom.classList.toggle('on', state.d === 'cus');
+  const s = stage.getBoundingClientRect(), gap = state.d === 'win' ? 0 : 48;
+  const k = state.mode === 'fit' ? Math.min(1, (s.width - gap) / w, (s.height - gap) / h) : 1;
+  device.style.width = w + 'px'; device.style.height = h + 'px';
+  device.style.setProperty('--r', (d.r || (state.d === 'win' ? 0 : 6)) + 'px');
+  stage.classList.toggle('scroll', state.mode === 'real' && (w > s.width || h > s.height));
+  if (stage.classList.contains('scroll')) {
+    // En 1:1 con desborde, el tamaño visual es el real y la página hace scroll
+    device.style.transform = 'none';
+  } else device.style.transform = `scale(${k})`;
+  info.textContent = `${w} × ${h}px · ${Math.round(k * 100)}%`;
+}
+addEventListener('resize', () => viewer.classList.contains('open') && layout());
+document.addEventListener('fullscreenchange', () => setTimeout(layout, 60));
+addEventListener('keydown', e => {
+  if (!viewer.classList.contains('open') || e.target.tagName === 'INPUT') return;
+  if (e.key === 'Escape' && !document.fullscreenElement) closeViewer();
+  if (e.key === 'ArrowRight') { state.p = (state.p + 1) % PROTOS.length; load(); }
+  if (e.key === 'ArrowLeft') { state.p = (state.p + PROTOS.length - 1) % PROTOS.length; load(); }
+  if (e.key.toLowerCase() === 'f') full();
+});
+</script>
+</body>
+</html>

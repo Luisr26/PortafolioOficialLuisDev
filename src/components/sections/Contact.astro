@@ -1,0 +1,435 @@
+---
+import { SITE } from '../../config/site';
+import type { Lang } from '../../i18n/ui';
+import { emphasize, useTranslations } from '../../i18n/utils';
+import SectionHead from '../ui/SectionHead.astro';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const topics = [t('contact.t1'), t('contact.t2'), t('contact.t3'), t('contact.t4')];
+// Textos que el script necesita en tiempo de ejecución.
+const strings = {
+  q2: t('contact.q2'),
+  done: t('contact.done'),
+  doneMailto: t('contact.doneMailto'),
+  next: t('contact.next'),
+  send: t('contact.send'),
+  sending: t('contact.sending'),
+  draft: t('letter.draft'),
+  sent: t('letter.sent'),
+  fromPh: t('letter.from.ph'),
+  msgPh: t('letter.msg.ph'),
+  topic: t('contact.subject'),
+  mail: t('contact.mail'),
+  error: t('contact.error'),
+  email: SITE.email,
+  subject: lang === 'es' ? 'Nuevo mensaje desde el portafolio' : 'New message from the portfolio',
+};
+---
+
+<section class="section contact" id="contacto" aria-labelledby="contact-h">
+  <SectionHead id="contact-h" label={t('contact.label')}>
+    <span aria-hidden="true">{t('contact.step')} <span data-c-stepn>1</span> {t('contact.of')} 4</span>
+  </SectionHead>
+
+  <div class="grid">
+    <form class="conv" data-contact data-strings={JSON.stringify(strings)} action={`mailto:${SITE.email}`} method="post" enctype="text/plain" novalidate>
+      <div class="bar" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+      <div class="stage" aria-live="polite">
+        <div class="q active" data-k="name">
+          <label class="ask sign" for="c-name" set:html={emphasize(t('contact.q1'))} />
+          <input id="c-name" name="name" required autocomplete="name" placeholder={t('contact.q1.ph')} />
+          <p class="kbd mono">{t('contact.enter')}</p>
+        </div>
+
+        <fieldset class="q" data-k="topic">
+          <legend class="ask sign" data-c-q2 set:html={emphasize(t('contact.q2', { name: '—' }))} />
+          <div class="chips">
+            {
+              topics.map((tp, i) => (
+                <label class="chip">
+                  <input type="radio" name="topic" value={tp} />
+                  <span><kbd class="mono">{i + 1}</kbd>{tp}</span>
+                </label>
+              ))
+            }
+          </div>
+        </fieldset>
+
+        <div class="q" data-k="email">
+          <label class="ask sign" for="c-mail" set:html={emphasize(t('contact.q3'))} />
+          <input id="c-mail" name="email" type="email" required autocomplete="email" inputmode="email" placeholder="tu@correo.com" />
+          <p class="kbd mono">{t('contact.enter')}</p>
+        </div>
+
+        <div class="q" data-k="message">
+          <label class="ask sign" for="c-msg" set:html={emphasize(t('contact.q4'))} />
+          <textarea id="c-msg" name="message" rows="2" placeholder={t('contact.q4.ph')}></textarea>
+          <p class="kbd mono">{t('contact.ctrlEnter')}</p>
+        </div>
+
+        <div class="q" data-k="done">
+          <p class="ask sign" data-c-done></p>
+          <div class="summary mono" data-c-summary></div>
+        </div>
+      </div>
+
+      <div class="nav">
+        <button type="button" class="back" data-c-back hidden>{t('contact.back')}</button>
+        <span></span>
+        <button type="submit" class="send mag" data-c-next><span data-c-label>{t('contact.next')}</span><span aria-hidden="true">→</span></button>
+      </div>
+    </form>
+
+    <aside class="letter" aria-label={t('letter.aria')}>
+      <div class="lh mono"><span>{t('letter.title')}</span><span data-l-state>{t('letter.draft')}</span></div>
+      <div class="lrow"><span class="mono">{t('letter.to')}</span><span>{SITE.name}</span></div>
+      <div class="lrow"><span class="mono">{t('letter.from')}</span><span class="ph" data-l="name">{t('letter.from.ph')}</span></div>
+      <div class="lrow"><span class="mono">{t('letter.subject')}</span><span class="ph" data-l="topic">—</span></div>
+      <div class="lrow"><span class="mono">{t('letter.mail')}</span><span class="ph" data-l="email">tu@correo.com</span></div>
+      <div class="lmsg"><span class="ph" data-l="message">{t('letter.msg.ph')}</span><span class="caret"></span></div>
+      <div class="sig sign" data-l="sig">—</div>
+      <div class="stamp sign">{t('stamp')}</div>
+    </aside>
+  </div>
+</section>
+
+<style>
+  .contact {
+    background: var(--c-bg);
+    color: var(--c-fg);
+    position: relative;
+    overflow: hidden;
+  }
+  .contact :global(.head) {
+    color: var(--c-muted);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: 1.25fr 0.9fr;
+    gap: clamp(32px, 5vw, 80px);
+    align-items: start;
+  }
+  .hp {
+    position: absolute;
+    left: -9999px;
+  }
+  .bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    margin-bottom: 48px;
+  }
+  .bar i {
+    height: 3px;
+    background: var(--c-line);
+    position: relative;
+    overflow: hidden;
+  }
+  .bar i::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s var(--ease);
+  }
+  .bar :global(i.done)::after {
+    transform: scaleX(1);
+  }
+  fieldset {
+    border: 0;
+    min-width: 0;
+  }
+  .ask {
+    display: block;
+    font-size: clamp(38px, 5.4vw, 88px);
+    margin-bottom: 32px;
+    padding: 0;
+  }
+  input:not([type]),
+  input[type='email'],
+  textarea {
+    width: 100%;
+    font-size: clamp(22px, 2.4vw, 32px);
+    font-variation-settings: 'wdth' 90, 'wght' 500;
+    color: var(--c-fg);
+    background: transparent;
+    border: 0;
+    border-bottom: 3px solid var(--c-line);
+    padding: 10px 0;
+    outline: none;
+    resize: none;
+    border-radius: 0;
+    transition: border-color 0.25s;
+  }
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--c-muted);
+    opacity: 0.7;
+  }
+  input:focus,
+  textarea:focus {
+    border-color: var(--accent);
+  }
+  .conv :global(.err) {
+    border-color: var(--accent) !important;
+    animation: shake 0.35s;
+  }
+  @keyframes shake {
+    25% { transform: translateX(-6px); }
+    75% { transform: translateX(6px); }
+  }
+  .chips {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .chip input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .chip span {
+    font-size: 17px;
+    font-variation-settings: 'wdth' 100, 'wght' 600;
+    border: 2px solid var(--c-line);
+    padding: 14px 18px;
+    border-radius: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    height: 100%;
+    transition: border-color 0.2s, background 0.2s, color 0.2s, transform 0.2s;
+  }
+  .chip kbd {
+    font-size: 11px;
+    border: 1px solid var(--c-line);
+    border-radius: 4px;
+    padding: 2px 6px;
+    color: var(--c-muted);
+  }
+  .chip span:hover {
+    border-color: var(--c-fg);
+    transform: translateY(-2px);
+  }
+  .chip input:checked + span {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--on-accent);
+  }
+  .chip input:checked + span kbd {
+    color: var(--on-accent);
+    border-color: var(--on-accent);
+  }
+  .chip input:focus-visible + span {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+  .kbd {
+    margin-top: 20px;
+    color: var(--c-muted);
+  }
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+    gap: 16px;
+  }
+  .send {
+    font-size: clamp(18px, 1.8vw, 24px);
+    font-variation-settings: 'wdth' 62, 'wght' 900;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    background: var(--accent);
+    color: var(--on-accent);
+    border: 0;
+    padding: 18px 32px;
+    cursor: pointer;
+    display: inline-flex;
+    gap: 14px;
+    align-items: center;
+    border-radius: 999px;
+  }
+  .send:disabled {
+    opacity: 0.6;
+    cursor: progress;
+  }
+  .back {
+    font-size: 13px;
+    background: none;
+    border: 0;
+    color: var(--c-muted);
+    cursor: pointer;
+  }
+  .back:hover {
+    color: var(--c-fg);
+  }
+  .summary {
+    display: grid;
+    gap: 10px;
+    color: var(--c-muted);
+  }
+  .summary :global(b) {
+    color: var(--c-fg);
+    font-weight: 500;
+  }
+  .summary :global(a) {
+    color: var(--accent);
+  }
+
+  /* Modo paso a paso (solo con JS). Sin JS se ven todas las preguntas, en orden. */
+  .q {
+    margin-bottom: 40px;
+  }
+  .q[data-k='done'] {
+    display: none;
+  }
+  :global(.js) .stage {
+    position: relative;
+    min-height: clamp(340px, 46vh, 440px);
+  }
+  :global(.js) .q {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    opacity: 0;
+    transform: translateY(30px);
+    pointer-events: none;
+    visibility: hidden;
+    transition: opacity 0.45s, transform 0.55s var(--ease), visibility 0s 0.55s;
+  }
+  :global(.js) .q[data-k='done'] {
+    display: block;
+  }
+  :global(.js) .q:global(.active) {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+    visibility: visible;
+    transition: opacity 0.45s, transform 0.55s var(--ease), visibility 0s;
+  }
+  :global(.js) .q:global(.leave) {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+
+  /* Carta en vivo */
+  .letter {
+    position: sticky;
+    top: 110px;
+    background: var(--bg);
+    color: var(--ink);
+    border: 1px solid var(--c-line);
+    border-radius: 18px;
+    padding: 28px;
+    display: grid;
+    gap: 18px;
+    transform: rotate(1.2deg);
+    transition: transform 0.5s var(--ease);
+  }
+  .letter:hover {
+    transform: none;
+  }
+  @supports (animation-timeline: view()) {
+    .letter {
+      animation: tilt-in linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 35%;
+    }
+  }
+  @keyframes tilt-in {
+    from { opacity: 0; transform: rotate(8deg) translateY(80px); }
+    to { opacity: 1; transform: rotate(1.2deg); }
+  }
+  .lh {
+    display: flex;
+    justify-content: space-between;
+    color: var(--ink-2);
+  }
+  .lrow {
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    gap: 12px;
+    border-bottom: 1px dashed var(--line);
+    padding-bottom: 10px;
+    font-size: 15px;
+    overflow-wrap: anywhere;
+  }
+  .lrow > span:first-child {
+    color: var(--ink-2);
+  }
+  .lmsg {
+    min-height: 96px;
+    font-size: 18px;
+    line-height: 1.45;
+    font-variation-settings: 'wdth' 90, 'wght' 450;
+    overflow-wrap: anywhere;
+  }
+  .ph {
+    color: color-mix(in srgb, var(--ink) 35%, transparent);
+  }
+  .caret {
+    display: inline-block;
+    width: 2px;
+    height: 1.1em;
+    background: var(--accent);
+    vertical-align: text-bottom;
+    margin-left: 2px;
+    animation: blink 1s steps(1) infinite;
+  }
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+  .sig {
+    font-size: 42px;
+    color: var(--accent);
+  }
+  .stamp {
+    position: absolute;
+    right: -10px;
+    top: -24px;
+    font-size: clamp(44px, 5vw, 72px);
+    color: var(--accent);
+    border: 5px solid var(--accent);
+    padding: 0 0.2em;
+    transform: rotate(-12deg) scale(2.4);
+    opacity: 0;
+    pointer-events: none;
+    background: var(--bg);
+  }
+  .contact:global(.sent) .stamp {
+    animation: stamp 0.5s 0.2s var(--ease-out-back) forwards;
+  }
+  .contact:global(.sent) .caret {
+    display: none;
+  }
+  @keyframes stamp {
+    to { opacity: 1; transform: rotate(-12deg) scale(1); }
+  }
+  @media (max-width: 900px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+    .letter {
+      position: relative;
+      top: 0;
+    }
+  }
+  @media (max-width: 720px) {
+    .chips {
+      grid-template-columns: 1fr;
+    }
+    :global(.js) .stage {
+      min-height: 460px;
+    }
+  }
+</style>

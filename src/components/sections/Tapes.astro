@@ -1,0 +1,72 @@
+---
+import type { Lang } from '../../i18n/ui';
+import { craftTape, stackTape } from '../../data/services';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+// Repetimos para que la cinta nunca quede vacía al desplazarse.
+const loop = (items: readonly string[]) => [...items, ...items, ...items];
+---
+
+<div class="tapes" aria-hidden="true">
+  <div class="tape t2"><div class="track sign">{loop(stackTape).map((s) => <span>{s} ✺</span>)}</div></div>
+  <div class="tape t1"><div class="track sign">{loop(craftTape[lang]).map((s) => <span>{s} ✺</span>)}</div></div>
+</div>
+
+<style>
+  .tapes {
+    position: relative;
+    height: clamp(180px, 24vw, 320px);
+    overflow: hidden;
+    margin: 2vw 0;
+    contain: paint;
+  }
+  .tape {
+    position: absolute;
+    left: -6vw;
+    right: -6vw;
+    top: 50%;
+    padding: 14px 0;
+    overflow: hidden;
+  }
+  .t1 {
+    background: var(--accent);
+    color: var(--on-accent);
+    transform: translateY(-50%) rotate(-4deg);
+    z-index: 2;
+  }
+  .t2 {
+    background: var(--surface);
+    color: var(--ink-2);
+    border-block: 1px solid var(--line);
+    transform: translateY(-50%) rotate(3deg);
+  }
+  .track {
+    display: flex;
+    gap: 44px;
+    white-space: nowrap;
+    width: max-content;
+    font-size: clamp(32px, 5vw, 76px);
+    will-change: transform;
+  }
+  @supports (animation-timeline: view()) {
+    .t1 .track {
+      animation: mq-l linear both;
+      animation-timeline: view();
+    }
+    .t2 .track {
+      animation: mq-r linear both;
+      animation-timeline: view();
+    }
+  }
+  @keyframes mq-l {
+    from { transform: translateX(0); }
+    to { transform: translateX(-30%); }
+  }
+  @keyframes mq-r {
+    from { transform: translateX(-30%); }
+    to { transform: translateX(0); }
+  }
+</style>

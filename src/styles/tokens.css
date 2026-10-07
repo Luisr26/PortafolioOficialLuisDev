@@ -1,0 +1,40 @@
+/* Paleta "Pizarra" — tokens de diseño. Cambiar aquí cambia todo el sitio. */
+:root {
+  color-scheme: dark;
+
+  /* Superficies */
+  --bg: #1a1e23;
+  --surface: #22272e;
+  --line: #353c46;
+
+  /* Texto */
+  --ink: #e4e8ed;
+  --ink-2: #97a0ac;
+
+  /* Acento (señal naranja) */
+  --accent: #ff6b3d;
+  --on-accent: #1a1e23;
+
+  /* Bloque de contacto */
+  --c-bg: #22272e;
+  --c-fg: #e4e8ed;
+  --c-line: #3b434e;
+  --c-muted: #87909c;
+
+  /* Tipografía */
+  --font-sans: 'Archivo Variable', 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Code', monospace;
+
+  /* Espaciado y movimiento */
+  --pad: clamp(16px, 4vw, 56px);
+  --section-y: clamp(88px, 12vw, 180px);
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-out-back: cubic-bezier(0.3, 1.6, 0.5, 1);
+
+  /* Capas */
+  --z-nav: 40;
+  --z-progress: 50;
+  --z-grain: 60;
+  --z-cursor: 70;
+  --z-loader: 80;
+}

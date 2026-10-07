@@ -1,0 +1,248 @@
+---
+import { projects } from '../../data/projects';
+import type { Lang } from '../../i18n/ui';
+import { useTranslations } from '../../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const total = String(projects.length).padStart(2, '0');
+---
+
+<section class="work" id="proyectos" aria-labelledby="work-h" data-work style={`--n:${projects.length}`}>
+  <div class="sticky">
+    <div class="head">
+      <div>
+        <p class="mono muted" data-scramble>{t('work.label')}</p>
+        <h2 class="title sign" id="work-h">{t('work.title')}</h2>
+      </div>
+      <p class="count sign" aria-hidden="true"><span data-work-now>01</span><span class="tot">/ {total}</span></p>
+    </div>
+
+    <ol class="track" data-work-track>
+      {
+        projects.map((p, i) => (
+          <li class="card" data-work-card>
+            <a href={p.repo} target="_blank" rel="noopener noreferrer" data-cursor={t('work.cursor')}>
+              <div class="thumb">
+                <span class="kind mono">{p.kind[lang]}</span>
+                {p.featured && <span class="feat mono">★ {t('work.featured')}</span>}
+                <b class="num sign" aria-hidden="true">{String(i + 1).padStart(2, '0')}</b>
+                <ul class="stack mono" aria-label="Stack">
+                  {p.stack.map((s) => <li>{s}</li>)}
+                </ul>
+              </div>
+              <div class="meta">
+                <h3 class="sign">{p.title}</h3>
+                <span class="mono muted">{t('work.repo')} ↗</span>
+              </div>
+              <p class="sum">{p.summary[lang]}</p>
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+    <div class="bar" aria-hidden="true"><i data-work-bar></i></div>
+  </div>
+</section>
+
+<style>
+  .work {
+    height: calc(100vh + var(--n, 6) * 60vh);
+    view-timeline-name: --work;
+  }
+  .sticky {
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 24px;
+  }
+  .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 0 var(--pad);
+  }
+  .title {
+    font-size: clamp(56px, 9vw, 160px);
+  }
+  .count {
+    font-size: clamp(40px, 5vw, 80px);
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .count [data-work-now] {
+    color: var(--accent);
+    display: inline-block;
+    min-width: 1.1em;
+    text-align: right;
+  }
+  .tot {
+    color: var(--ink-2);
+    font-size: 0.5em;
+  }
+  .track {
+    display: flex;
+    gap: clamp(20px, 3vw, 48px);
+    padding: 0 var(--pad);
+    width: max-content;
+    will-change: transform;
+  }
+  @supports (animation-timeline: view()) {
+    .track {
+      animation: slide linear both;
+      animation-timeline: --work;
+      animation-range: contain 0% contain 100%;
+    }
+  }
+  @keyframes slide {
+    to {
+      transform: translateX(calc(-100% + 100vw));
+    }
+  }
+  .card {
+    width: min(62vw, 560px, (100svh - 380px) * 1.6);
+    min-width: 260px;
+  }
+  .card a {
+    display: block;
+    text-decoration: none;
+  }
+  .thumb {
+    aspect-ratio: 16 / 10;
+    background: var(--surface);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--line);
+  }
+  .thumb::before {
+    content: '';
+    position: absolute;
+    inset: -20%;
+    background: repeating-linear-gradient(-45deg, transparent 0 22px, color-mix(in srgb, var(--ink) 7%, transparent) 22px 23px);
+    transition: transform 1s var(--ease);
+  }
+  .thumb::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--accent);
+    transform: translateY(101%);
+    transition: transform 0.6s var(--ease);
+  }
+  .num {
+    position: absolute;
+    left: 20px;
+    bottom: 6px;
+    font-size: clamp(90px, 12vw, 190px);
+    z-index: 1;
+    transition: color 0.5s, font-variation-settings 0.5s var(--ease);
+  }
+  .kind,
+  .feat {
+    position: absolute;
+    top: 14px;
+    z-index: 1;
+    color: var(--ink-2);
+    transition: color 0.5s;
+  }
+  .kind {
+    left: 16px;
+  }
+  .feat {
+    right: 16px;
+    color: var(--accent);
+  }
+  .stack {
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+    z-index: 1;
+    display: grid;
+    justify-items: end;
+    gap: 4px;
+    font-size: 10px;
+    color: var(--ink-2);
+    transition: color 0.5s;
+  }
+  .card a:hover .thumb::before,
+  .card a:focus-visible .thumb::before {
+    transform: translateX(50px);
+  }
+  .card a:hover .thumb::after,
+  .card a:focus-visible .thumb::after {
+    transform: none;
+  }
+  .card a:hover :is(.num, .kind, .feat, .stack),
+  .card a:focus-visible :is(.num, .kind, .feat, .stack) {
+    color: var(--on-accent);
+  }
+  .card a:hover .num {
+    font-variation-settings: 'wdth' 100, 'wght' 900;
+  }
+  .meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    padding-top: 14px;
+  }
+  .meta h3 {
+    font-size: clamp(26px, 2.6vw, 38px);
+  }
+  .sum {
+    margin-top: 8px;
+    color: var(--ink-2);
+    font-size: 14px;
+    line-height: 1.5;
+    max-width: 52ch;
+  }
+  .bar {
+    margin: 0 var(--pad);
+    height: 2px;
+    background: var(--line);
+    position: relative;
+  }
+  .bar i {
+    position: absolute;
+    inset: 0;
+    background: var(--accent);
+    transform-origin: left;
+    transform: scaleX(0);
+  }
+  @media (max-width: 720px) {
+    .sum {
+      display: none;
+    }
+    .card {
+      width: 78vw;
+    }
+  }
+  /* Sin animaciones: carrusel horizontal nativo */
+  @media (prefers-reduced-motion: reduce) {
+    .work {
+      height: auto;
+    }
+    .sticky {
+      position: static;
+      height: auto;
+      padding: var(--section-y) 0;
+    }
+    .track {
+      width: auto;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+    }
+    .card {
+      scroll-snap-align: start;
+      flex: none;
+    }
+  }
+</style>

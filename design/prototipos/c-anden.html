@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Prototipo C · Andén</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@300..900&family=Barlow:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* Paleta C — "Vía & Señal" */
+:root{
+  --bg:#0B1222; --surface:#121B30; --tile:#0F1628; --line:#24304D; --text:#F2EFE6; --text-2:#97A1BC;
+  --accent:#FFC226; --on-accent:#0B1222;
+  --pad:clamp(16px,4vw,56px); --rail:150px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:Barlow,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--accent);color:var(--on-accent)}
+.mono{font-family:"Space Mono",ui-monospace,monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-2)}
+.sign{font-family:"Big Shoulders Display",sans-serif;font-weight:900;text-transform:uppercase;line-height:.88;letter-spacing:.005em}
+
+/* Riel de metro (navegación lateral) */
+.rail{position:fixed;left:0;top:0;bottom:0;width:var(--rail);padding:40px 0 40px 36px;z-index:10;display:flex;flex-direction:column}
+.rail .brand{font-family:"Big Shoulders Display";font-weight:900;font-size:26px;color:var(--accent);margin-bottom:40px}
+.line{position:relative;flex:1}
+.line::before,.line .fill{content:"";position:absolute;left:5px;top:6px;bottom:6px;width:2px;background:var(--line)}
+.line .fill{background:var(--accent);transform-origin:top;transform:scaleY(0)}
+.line ol{list-style:none;position:relative;height:100%;display:flex;flex-direction:column;justify-content:space-between}
+.line a{display:flex;align-items:center;gap:14px;font-family:"Space Mono";font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-2);transition:color .3s}
+.line a::before{content:"";width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--line);flex:none;transition:all .3s}
+.line a.on,.line a:hover{color:var(--text)}
+.line a.on::before{background:var(--accent);border-color:var(--accent);box-shadow:0 0 0 5px rgba(255,194,38,.18)}
+main{margin-left:var(--rail)}
+
+/* Hero: tablero split-flap */
+.hero{min-height:100svh;padding:72px var(--pad) 40px;display:flex;flex-direction:column;justify-content:center;gap:40px}
+.board{background:#070C18;border:1px solid var(--line);border-radius:14px;padding:clamp(16px,2.4vw,32px);box-shadow:inset 0 2px 0 rgba(255,255,255,.03),0 30px 60px -30px #000}
+.board-top{display:flex;justify-content:space-between;margin-bottom:20px}
+.board-top .live{color:var(--accent)}
+.flaps{display:flex;flex-wrap:wrap;gap:clamp(3px,.4vw,6px);margin-bottom:6px}
+.flap{position:relative;width:clamp(30px,5.4vw,82px);aspect-ratio:.72;background:var(--tile);border-radius:6px;display:grid;place-items:center;
+  font-family:"Big Shoulders Display";font-weight:900;font-size:clamp(30px,5vw,76px);color:var(--text);overflow:hidden}
+.flap::after{content:"";position:absolute;left:0;right:0;top:50%;height:2px;background:#070C18}
+.flap.sp{background:transparent}
+.flap.flip{animation:flip .08s linear}
+@keyframes flip{50%{transform:scaleY(.6);filter:brightness(1.6)}}
+.flap.acc{color:var(--accent)}
+.rows{margin-top:20px;display:grid}
+.row{display:grid;grid-template-columns:90px 1fr 80px 130px;gap:16px;padding:12px 0;border-top:1px solid var(--line);font-family:"Space Mono";font-size:clamp(11px,1.1vw,14px);text-transform:uppercase;letter-spacing:.05em}
+.row.h{color:var(--text-2);font-size:11px}
+.row .ok{color:var(--accent)}
+.hero-foot{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+.hero-foot p{max-width:40ch;font-size:clamp(17px,1.5vw,21px);line-height:1.45;color:var(--text-2)}
+.hero-foot p b{color:var(--text);font-weight:600}
+
+section{padding:clamp(80px,12vw,160px) var(--pad)}
+.sec-label{display:flex;align-items:center;gap:14px;margin-bottom:48px}
+.sec-label .num{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--accent);color:var(--on-accent);font-family:"Space Mono";font-weight:700;font-size:13px}
+
+/* Ruta: paneles que se "instalan" con un barrido */
+.panel-lines{display:grid;gap:10px}
+.panel{font-size:clamp(44px,7.5vw,120px);display:inline-block;width:fit-content;background:var(--surface);padding:.08em .22em .02em;border-radius:6px}
+.panel.y{background:var(--accent);color:var(--on-accent)}
+.panel .arr{display:inline-block;margin-left:.15em}
+
+/* Métricas */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:80px}
+.stat{background:var(--bg);padding:32px}
+.stat b{display:block;font-size:clamp(64px,8vw,120px);color:var(--accent)}
+
+/* Proyectos: tabla de salidas */
+.dep{border-top:2px solid var(--text)}
+.dep a{display:grid;grid-template-columns:70px 1fr 160px 80px 48px;gap:20px;align-items:center;padding:22px 16px;border-bottom:1px solid var(--line);position:relative;isolation:isolate;transition:color .3s}
+.dep a::before{content:"";position:absolute;inset:0;background:var(--accent);transform:scaleY(0);transform-origin:bottom;transition:transform .35s cubic-bezier(.2,.7,.2,1);z-index:-1}
+.dep a:hover{color:var(--on-accent)}
+.dep a:hover::before{transform:scaleY(1)}
+.dep a:hover .mono{color:var(--on-accent)}
+.dep h3{font-size:clamp(34px,4.6vw,72px)}
+.dep .go{font-size:28px;transition:transform .3s}
+.dep a:hover .go{transform:translateX(6px)}
+
+/* Formulario boleto */
+.ticket-wrap{display:grid;place-items:center}
+.ticket{display:grid;grid-template-columns:1fr 220px;width:min(980px,100%);filter:drop-shadow(0 30px 40px rgba(0,0,0,.45));position:relative}
+.t-main,.t-stub{background:var(--text);color:var(--on-accent)}
+.t-main{border-radius:18px 0 0 18px;padding:clamp(20px,3vw,40px);
+  -webkit-mask:radial-gradient(circle 14px at 100% 0,#0000 98%,#000) top right/100% 51% no-repeat,radial-gradient(circle 14px at 100% 100%,#0000 98%,#000) bottom right/100% 51% no-repeat;
+          mask:radial-gradient(circle 14px at 100% 0,#0000 98%,#000) top right/100% 51% no-repeat,radial-gradient(circle 14px at 100% 100%,#0000 98%,#000) bottom right/100% 51% no-repeat}
+.t-stub{border-radius:0 18px 18px 0;padding:28px 24px;border-left:3px dashed rgba(11,18,34,.35);display:flex;flex-direction:column;justify-content:space-between;gap:20px;transform-origin:0 100%;
+  -webkit-mask:radial-gradient(circle 14px at 0 0,#0000 98%,#000) top left/100% 51% no-repeat,radial-gradient(circle 14px at 0 100%,#0000 98%,#000) bottom left/100% 51% no-repeat;
+          mask:radial-gradient(circle 14px at 0 0,#0000 98%,#000) top left/100% 51% no-repeat,radial-gradient(circle 14px at 0 100%,#0000 98%,#000) bottom left/100% 51% no-repeat}
+.t-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:28px}
+.t-head h2{font-size:clamp(36px,4.6vw,64px)}
+.t-head .mono,.t-stub .mono,.t-grid .mono{color:#4A5470}
+.t-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px 28px}
+.t-grid .full{grid-column:1/-1}
+.t-grid label{display:grid;gap:6px}
+.t-grid input,.t-grid textarea{font:inherit;font-family:"Big Shoulders Display";font-weight:800;font-size:clamp(22px,2.4vw,32px);text-transform:uppercase;color:var(--on-accent);background:transparent;border:0;border-bottom:2px solid rgba(11,18,34,.25);padding:4px 0;outline:none;resize:none;transition:border-color .2s}
+.t-grid textarea{font-family:Barlow;font-weight:500;font-size:18px;text-transform:none}
+.t-grid input::placeholder,.t-grid textarea::placeholder{color:rgba(11,18,34,.3)}
+.t-grid input:focus,.t-grid textarea:focus{border-color:var(--on-accent)}
+.t-grid .bad{border-color:#D9381E!important;animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.dest{display:flex;flex-wrap:wrap;gap:8px}
+.dest input{position:absolute;opacity:0;pointer-events:none}
+.dest span{display:inline-block;font-family:"Space Mono";font-size:12px;text-transform:uppercase;padding:8px 14px;border:2px solid var(--on-accent);border-radius:6px;cursor:pointer;transition:all .2s}
+.dest input:checked+span{background:var(--on-accent);color:var(--accent)}
+.dest input:focus-visible+span{outline:2px solid var(--on-accent);outline-offset:2px}
+.stub-name{font-family:"Big Shoulders Display";font-weight:900;font-size:30px;text-transform:uppercase;line-height:1;word-break:break-word;min-height:1em}
+.barcode{height:64px;background:repeating-linear-gradient(90deg,var(--on-accent) 0 2px,transparent 2px 4px,var(--on-accent) 4px 7px,transparent 7px 9px,var(--on-accent) 9px 10px,transparent 10px 14px)}
+.issue{font-family:"Big Shoulders Display";font-weight:900;font-size:22px;text-transform:uppercase;letter-spacing:.04em;background:var(--on-accent);color:var(--accent);border:0;border-radius:10px;padding:16px;cursor:pointer;transition:transform .2s}
+.issue:hover{transform:translateY(-2px)}
+.stamp{position:absolute;left:38%;top:40%;font-family:"Big Shoulders Display";font-weight:900;font-size:clamp(56px,8vw,110px);text-transform:uppercase;color:#D9381E;border:6px solid #D9381E;border-radius:10px;padding:0 .2em;transform:rotate(-10deg) scale(2.2);opacity:0;pointer-events:none;mix-blend-mode:multiply}
+.ticket.sent .t-stub{animation:tear .9s cubic-bezier(.5,0,.7,.4) forwards}
+.ticket.sent .stamp{animation:stamp .45s .35s cubic-bezier(.3,1.6,.5,1) forwards}
+@keyframes tear{30%{transform:rotate(6deg)}100%{transform:translate(60px,140px) rotate(28deg);opacity:0}}
+@keyframes stamp{to{opacity:.9;transform:rotate(-10deg) scale(1)}}
+
+footer{margin-left:var(--rail);padding:40px var(--pad);display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;border-top:1px solid var(--line)}
+
+/* ===== Animaciones ligadas al scroll ===== */
+@supports (animation-timeline: view()){
+  .line .fill{animation:fillY linear both;animation-timeline:scroll(root)}
+  .panel{animation:wipe linear both;animation-timeline:view();animation-range:entry 10% cover 40%}
+  .dep a{animation:slideIn linear both;animation-timeline:view();animation-range:entry 0% entry 100%}
+  .rv{animation:fadeUp linear both;animation-timeline:view();animation-range:entry 0% entry 70%}
+  .ticket{animation:tilt linear both;animation-timeline:view();animation-range:entry 0% cover 45%}
+  .board{animation:recede linear both;animation-timeline:scroll(root);animation-range:0 100vh}
+}
+@keyframes fillY{to{transform:scaleY(1)}}
+@keyframes wipe{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes slideIn{from{opacity:0;transform:translateX(-40px)}to{opacity:1;transform:none}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:none}}
+@keyframes tilt{from{transform:perspective(1200px) rotateX(28deg) translateY(80px);opacity:0}to{transform:none;opacity:1}}
+@keyframes recede{to{transform:perspective(1200px) rotateX(18deg) scale(.92);opacity:.3}}
+.no-sda .rv,.no-sda .panel,.no-sda .dep a{opacity:0;transform:translateY(30px);transition:opacity .8s,transform .8s}
+.no-sda .in{opacity:1!important;transform:none!important}
+
+@media (max-width:900px){
+  :root{--rail:0px}
+  .rail{inset:0 0 auto 0;width:auto;height:auto;padding:14px var(--pad);flex-direction:row;align-items:center;gap:20px;background:rgba(11,18,34,.85);backdrop-filter:blur(10px)}
+  .rail .brand{margin:0}
+  .line{flex:1;height:14px}
+  .line::before,.line .fill{left:0;right:0;top:6px;bottom:auto;width:auto;height:2px}
+  .line .fill{transform-origin:left;transform:scaleX(0)}
+  .line ol{flex-direction:row}
+  .line a{font-size:0;gap:0}
+  @supports (animation-timeline: view()){ .line .fill{animation-name:fillX} }
+  .row{grid-template-columns:70px 1fr 90px}.row>:nth-child(3){display:none}
+  .dep a{grid-template-columns:44px 1fr 32px}.dep a>:nth-child(3),.dep a>:nth-child(4){display:none}
+  .stats{grid-template-columns:1fr}
+  .ticket{grid-template-columns:1fr}
+  .t-main{border-radius:18px 18px 0 0;-webkit-mask:none;mask:none}
+  .t-stub{border-radius:0 0 18px 18px;border-left:0;border-top:3px dashed rgba(11,18,34,.35);-webkit-mask:none;mask:none}
+  .t-grid{grid-template-columns:1fr}
+  .stamp{left:10%;top:30%}
+}
+@keyframes fillX{to{transform:scaleX(1)}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<aside class="rail">
+  <a class="brand" href="#">N/A</a>
+  <div class="line">
+    <span class="fill"></span>
+    <ol>
+      <li><a href="#inicio" class="on">Inicio</a></li>
+      <li><a href="#ruta">Ruta</a></li>
+      <li><a href="#salidas">Proyectos</a></li>
+      <li><a href="#boleto">Contacto</a></li>
+    </ol>
+  </div>
+</aside>
+
+<main>
+  <header class="hero" id="inicio">
+    <div class="board" aria-label="Nombre Apellido — próxima salida">
+      <div class="board-top mono"><span>Próxima salida</span><span class="live">● En vivo <span class="clock">00:00</span></span></div>
+      <div class="flaps" data-flap="NOMBRE"></div>
+      <div class="flaps" data-flap="APELLIDO" data-accent></div>
+      <div class="rows">
+        <div class="row h"><span>Hora</span><span>Destino</span><span>Andén</span><span>Estado</span></div>
+        <div class="row"><span>09:00</span><span data-flaptext>Proyecto uno</span><span>01</span><span class="ok">A tiempo</span></div>
+        <div class="row"><span>11:30</span><span data-flaptext>Proyecto dos</span><span>02</span><span class="ok">A tiempo</span></div>
+        <div class="row"><span>14:15</span><span data-flaptext>Proyecto tres</span><span>03</span><span>Abordando</span></div>
+      </div>
+    </div>
+    <div class="hero-foot">
+      <p><b>Rol o título profesional.</b> Una frase sobre el tipo de problemas que resuelves y a dónde llevas a tus clientes.</p>
+      <span class="mono">Desliza para abordar ↓</span>
+    </div>
+  </header>
+
+  <section id="ruta">
+    <div class="sec-label rv"><span class="num">01</span><span class="mono">La ruta</span></div>
+    <div class="panel-lines">
+      <span class="panel sign">Primera idea</span>
+      <span class="panel sign">del recorrido</span>
+      <span class="panel sign y">tu enfoque <span class="arr">→</span></span>
+      <span class="panel sign">en cuatro líneas</span>
+    </div>
+    <div class="stats rv">
+      <div class="stat"><b class="sign" data-count="12">00</b><span class="mono">Métrica uno</span></div>
+      <div class="stat"><b class="sign" data-count="5">00</b><span class="mono">Métrica dos</span></div>
+      <div class="stat"><b class="sign" data-count="30">00</b><span class="mono">Métrica tres</span></div>
+    </div>
+  </section>
+
+  <section id="salidas">
+    <div class="sec-label rv"><span class="num">02</span><span class="mono">Salidas — proyectos</span></div>
+    <div class="dep">
+      <a href="#"><span class="mono">01</span><h3 class="sign">Proyecto uno</h3><span class="mono">Categoría</span><span class="mono">2026</span><span class="go">→</span></a>
+      <a href="#"><span class="mono">02</span><h3 class="sign">Proyecto dos</h3><span class="mono">Categoría</span><span class="mono">2026</span><span class="go">→</span></a>
+      <a href="#"><span class="mono">03</span><h3 class="sign">Proyecto tres</h3><span class="mono">Categoría</span><span class="mono">2025</span><span class="go">→</span></a>
+      <a href="#"><span class="mono">04</span><h3 class="sign">Proyecto cuatro</h3><span class="mono">Categoría</span><span class="mono">2025</span><span class="go">→</span></a>
+      <a href="#"><span class="mono">05</span><h3 class="sign">Proyecto cinco</h3><span class="mono">Categoría</span><span class="mono">2024</span><span class="go">→</span></a>
+    </div>
+  </section>
+
+  <section id="boleto">
+    <div class="sec-label rv"><span class="num">03</span><span class="mono">Emite tu boleto — contacto</span></div>
+    <div class="ticket-wrap">
+      <form class="ticket" novalidate>
+        <div class="t-main">
+          <div class="t-head"><h2 class="sign">Boleto de contacto</h2><span class="mono">N° <span class="tno">000127</span></span></div>
+          <div class="t-grid">
+            <label><span class="mono">Pasajero</span><input name="n" placeholder="Tu nombre" required autocomplete="off"></label>
+            <label><span class="mono">Origen</span><input name="o" placeholder="Empresa / ciudad" autocomplete="off"></label>
+            <div class="full"><span class="mono" style="display:block;margin-bottom:8px">Destino</span>
+              <div class="dest" role="radiogroup" aria-label="Destino">
+                <label><input type="radio" name="d" value="Proyecto" checked><span>Proyecto nuevo</span></label>
+                <label><input type="radio" name="d" value="Asesoría"><span>Asesoría</span></label>
+                <label><input type="radio" name="d" value="Colaboración"><span>Colaboración</span></label>
+                <label><input type="radio" name="d" value="Saludo"><span>Solo saludar</span></label>
+              </div>
+            </div>
+            <label class="full"><span class="mono">Contacto</span><input name="m" type="email" placeholder="tu@correo.com" required autocomplete="off" style="text-transform:none"></label>
+            <label class="full"><span class="mono">Nota de viaje</span><textarea name="t" rows="2" placeholder="Cuéntame brevemente la idea…"></textarea></label>
+          </div>
+        </div>
+        <div class="t-stub">
+          <div><span class="mono">Pasajero</span><div class="stub-name">—</div></div>
+          <div><span class="mono">Destino</span><div class="stub-name stub-dest" style="font-size:22px">Proyecto</div></div>
+          <div class="barcode" aria-hidden="true"></div>
+          <button class="issue" type="submit">Emitir boleto →</button>
+        </div>
+        <div class="stamp" aria-live="polite">Emitido</div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="mono"><span>© 2026 — Nombre Apellido</span><span>Red uno · Red dos · Red tres</span></footer>
+
+<script>
+const sda = CSS.supports('animation-timeline: view()');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const CH = 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ0123456789';
+
+// Tablero split-flap: cada letra gira por caracteres aleatorios antes de asentarse
+document.querySelectorAll('[data-flap]').forEach((row, r) => {
+  [...row.dataset.flap].forEach((c, i) => {
+    const f = document.createElement('span');
+    f.className = 'flap' + (c === ' ' ? ' sp' : '') + (row.hasAttribute('data-accent') ? ' acc' : '');
+    f.textContent = reduce ? c : ' ';
+    row.append(f);
+    if (reduce || c === ' ') return;
+    let n = 8 + i * 2 + r * 6;
+    const t = setInterval(() => {
+      f.classList.remove('flip'); void f.offsetWidth; f.classList.add('flip');
+      f.textContent = --n <= 0 ? c : CH[Math.random() * CH.length | 0];
+      if (n <= 0) clearInterval(t);
+    }, 70);
+  });
+});
+// Texto de filas con efecto de cambio
+document.querySelectorAll('[data-flaptext]').forEach((el, k) => {
+  if (reduce) return;
+  const final = el.textContent; let n = 14 + k * 5;
+  const t = setInterval(() => {
+    el.textContent = --n <= 0 ? final : [...final].map(c => c === ' ' ? ' ' : CH[Math.random() * CH.length | 0]).join('');
+    if (n <= 0) clearInterval(t);
+  }, 60);
+});
+// Reloj del tablero
+const clock = document.querySelector('.clock');
+const tickClock = () => clock.textContent = new Date().toLocaleTimeString('es-CO', { hour: '2-digit', minute: '2-digit', hour12: false });
+tickClock(); setInterval(tickClock, 10000);
+
+// Estaciones activas en el riel
+const links = [...document.querySelectorAll('.line a')];
+const navIO = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) links.forEach(a => a.classList.toggle('on', a.hash === '#' + e.target.id));
+}), { rootMargin: '-45% 0px -50% 0px' });
+document.querySelectorAll('header[id],section[id]').forEach(s => navIO.observe(s));
+
+// Contadores al entrar en vista
+const cIO = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return; cIO.unobserve(e.target);
+  const el = e.target, to = +el.dataset.count, t0 = performance.now();
+  const step = t => { const p = Math.min(1, (t - t0) / 1200); el.textContent = String(Math.round(to * (1 - Math.pow(1 - p, 3)))).padStart(2, '0'); if (p < 1) requestAnimationFrame(step); };
+  requestAnimationFrame(step);
+}), { threshold: .6 });
+document.querySelectorAll('[data-count]').forEach(el => cIO.observe(el));
+
+if (!sda) {
+  document.documentElement.classList.add('no-sda');
+  const io = new IntersectionObserver(es => es.forEach(e => e.isIntersecting && e.target.classList.add('in')), { threshold: .15 });
+  document.querySelectorAll('.rv,.panel,.dep a').forEach(el => io.observe(el));
+  const fill = document.querySelector('.line .fill');
+  const tick = () => { const h = document.documentElement, p = h.scrollTop / (h.scrollHeight - innerHeight); fill.style.transform = innerWidth > 900 ? `scaleY(${p})` : `scaleX(${p})`; };
+  addEventListener('scroll', () => requestAnimationFrame(tick), { passive: true }); tick();
+}
+
+// Boleto
+const form = document.querySelector('.ticket'), stubName = form.querySelector('.stub-name'), stubDest = form.querySelector('.stub-dest');
+form.n.addEventListener('input', () => stubName.textContent = form.n.value.trim() || '—');
+form.querySelectorAll('[name=d]').forEach(r => r.addEventListener('change', () => stubDest.textContent = r.value));
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  const bad = [form.n, form.m].filter(x => !x.value.trim() || !x.checkValidity());
+  bad.forEach(x => { x.classList.remove('bad'); void x.offsetWidth; x.classList.add('bad'); });
+  if (bad.length) { bad[0].focus(); return; }
+  form.classList.add('sent');
+});
+</script>
+</body>
+</html>

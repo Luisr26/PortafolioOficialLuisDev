@@ -1,0 +1,58 @@
+---
+interface Props {
+  label: string;
+}
+const { label } = Astro.props;
+---
+
+<div class="loader" aria-hidden="true">
+  <div class="top mono"><span>Luis Orozco — 2026</span><span>{label}</span></div>
+  <div>
+    <div class="count sign"><span data-loader-count>000</span><em>%</em></div>
+    <div class="bar"><i data-loader-bar></i></div>
+  </div>
+</div>
+
+<style>
+  /* Oculta por defecto: solo aparece si el script inline marcó .has-loader (1ª visita). */
+  .loader {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-loader);
+    background: var(--surface);
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 28px var(--pad);
+    clip-path: inset(0 0 0 0);
+    transition: clip-path 0.9s cubic-bezier(0.8, 0, 0.2, 1);
+  }
+  :global(.has-loader) .loader {
+    display: flex;
+  }
+  :global(.loader-out) .loader {
+    clip-path: inset(0 0 100% 0);
+  }
+  .top {
+    display: flex;
+    justify-content: space-between;
+    color: var(--ink-2);
+  }
+  .count {
+    font-size: clamp(120px, 26vw, 420px);
+    line-height: 0.8;
+  }
+  .bar {
+    height: 2px;
+    background: var(--line);
+    position: relative;
+    overflow: hidden;
+  }
+  .bar i {
+    position: absolute;
+    inset: 0;
+    background: var(--accent);
+    transform-origin: left;
+    transform: scaleX(0);
+  }
+</style>

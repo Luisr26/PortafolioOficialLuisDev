@@ -1,0 +1,90 @@
+---
+/** Letrero colgante de puerta: "Abierto" que gira a una llamada a la acción. */
+interface Props {
+  front: string;
+  back: string;
+  label: string;
+  href: string;
+}
+const { front, back, label, href } = Astro.props;
+---
+
+<a class="plate" href={href} aria-label={label} data-cursor="→">
+  <span class="inner">
+    <span class="face front sign">{front}</span>
+    <span class="face back sign" aria-hidden="true">{back}</span>
+  </span>
+</a>
+
+<style>
+  .plate {
+    display: inline-block;
+    text-decoration: none;
+    perspective: 600px;
+    position: relative;
+    margin-top: 16px;
+    transform-origin: 50% -14px;
+    animation: swing 2.4s var(--ease-out-back) 1.6s 1 both;
+  }
+  /* Cordel y clavo */
+  .plate::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: -14px;
+    width: 28px;
+    height: 14px;
+    translate: -50% 0;
+    border: 1px solid var(--ink-2);
+    border-bottom: 0;
+    clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  }
+  .plate::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: -17px;
+    width: 5px;
+    height: 5px;
+    translate: -50% 0;
+    border-radius: 50%;
+    background: var(--ink-2);
+  }
+  .inner {
+    display: grid;
+    transform-style: preserve-3d;
+    transition: transform 0.7s var(--ease);
+  }
+  .face {
+    grid-area: 1 / 1;
+    backface-visibility: hidden;
+    font-size: 20px;
+    letter-spacing: 0.08em;
+    padding: 9px 16px 7px;
+    border: 2px solid var(--ink);
+    border-radius: 4px;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .back {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--on-accent);
+    transform: rotateX(180deg);
+  }
+  .plate:hover .inner,
+  .plate:focus-visible .inner {
+    transform: rotateX(180deg);
+  }
+  .plate:hover {
+    animation: swing 1.6s var(--ease-out-back) 1;
+  }
+  @keyframes swing {
+    0% { transform: rotate(0); }
+    15% { transform: rotate(7deg); }
+    35% { transform: rotate(-5deg); }
+    55% { transform: rotate(3deg); }
+    75% { transform: rotate(-1.5deg); }
+    100% { transform: rotate(0); }
+  }
+</style>

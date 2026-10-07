@@ -1,0 +1,177 @@
+---
+import { services } from '../../data/services';
+import type { Lang } from '../../i18n/ui';
+import { useTranslations } from '../../i18n/utils';
+import SectionHead from '../ui/SectionHead.astro';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section class="section" id="servicios" aria-labelledby="svc-h">
+  <SectionHead id="svc-h" label={t('svc.label')} aside={t('svc.aside')} />
+  <ul class="svc" data-svc>
+    {
+      services.map((s, i) => (
+        <li>
+          <a href="#contacto" data-cursor={t('svc.cursor')} data-pv-num={String(i + 1).padStart(2, '0')} data-pv-tools={s.tools.join('|')}>
+            <span class="mono n">{String(i + 1).padStart(2, '0')}</span>
+            <div class="body">
+              <h3 class="sign">{s.title[lang]}</h3>
+              <span class="sum">{s.summary[lang]}</span>
+            </div>
+            <span class="arr" aria-hidden="true">→</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<div class="preview" aria-hidden="true" data-pv>
+  <div class="pv-in">
+    <b class="sign" data-pv-n>01</b>
+    <ul class="mono" data-pv-list></ul>
+  </div>
+</div>
+
+<style>
+  .svc a {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    gap: 24px;
+    align-items: center;
+    padding: clamp(20px, 2.6vw, 34px) 0;
+    text-decoration: none;
+    position: relative;
+  }
+  .svc a::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 1px;
+    background: var(--line);
+    transform-origin: left;
+  }
+  @supports (animation-timeline: view()) {
+    .svc a::before {
+      animation: draw linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 90%;
+    }
+    .svc a > * {
+      animation: fade-up linear both;
+      animation-timeline: view();
+      animation-range: entry 20% entry 100%;
+    }
+  }
+  @keyframes draw {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(32px); }
+    to { opacity: 1; transform: none; }
+  }
+  .n {
+    color: var(--ink-2);
+    transition: color 0.3s;
+  }
+  .body {
+    display: grid;
+    gap: 10px;
+  }
+  h3 {
+    font-size: clamp(42px, 6.6vw, 108px);
+    transition: font-variation-settings 0.5s var(--ease), transform 0.5s var(--ease), color 0.3s;
+  }
+  .sum {
+    color: var(--ink-2);
+    max-width: 50ch;
+    font-size: 15px;
+    transition: transform 0.5s var(--ease);
+  }
+  .arr {
+    font-size: clamp(28px, 3vw, 44px);
+    transform: translateX(-12px) rotate(-45deg);
+    opacity: 0;
+    transition: all 0.4s var(--ease);
+    color: var(--accent);
+  }
+  .svc a:hover h3,
+  .svc a:focus-visible h3 {
+    font-variation-settings: 'wdth' 110, 'wght' 900;
+    transform: translateX(16px);
+    color: var(--accent);
+  }
+  .svc a:hover .sum {
+    transform: translateX(16px);
+  }
+  .svc a:hover .n {
+    color: var(--ink);
+  }
+  .svc a:hover .arr,
+  .svc a:focus-visible .arr {
+    opacity: 1;
+    transform: none;
+  }
+  .svc:global(.dim) a:not(:hover) h3 {
+    color: color-mix(in srgb, var(--ink) 28%, transparent);
+  }
+
+  .preview {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 300px;
+    aspect-ratio: 4 / 3;
+    z-index: 30;
+    pointer-events: none;
+    translate: -50% -50%;
+    scale: 0;
+    transition: scale 0.4s var(--ease);
+    overflow: hidden;
+    border-radius: 4px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    will-change: transform;
+  }
+  .preview:global(.on) {
+    scale: 1;
+  }
+  .pv-in {
+    position: absolute;
+    inset: 0;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background:
+      repeating-linear-gradient(45deg, transparent 0 16px, color-mix(in srgb, var(--accent) 18%, transparent) 16px 17px),
+      radial-gradient(circle at 25% 25%, color-mix(in srgb, var(--accent) 30%, transparent), transparent 60%);
+  }
+  .pv-in b {
+    font-size: 96px;
+  }
+  .pv-in ul {
+    display: grid;
+    gap: 6px;
+    color: var(--ink);
+  }
+  .pv-in :global(li)::before {
+    content: '— ';
+    color: var(--accent);
+  }
+  @media (max-width: 720px), (pointer: coarse) {
+    .svc a {
+      grid-template-columns: 44px 1fr;
+    }
+    .arr,
+    .preview {
+      display: none;
+    }
+  }
+</style>

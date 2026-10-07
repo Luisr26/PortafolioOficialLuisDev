@@ -1,0 +1,50 @@
+---
+import '@fontsource-variable/archivo/wdth.css';
+import '@fontsource/jetbrains-mono/latin-400.css';
+import '../styles/tokens.css';
+import '../styles/base.css';
+---
+
+<!doctype html>
+<html lang="es-CO">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>404 — Luis Orozco</title>
+  </head>
+  <body>
+    <main class="nf">
+      <p class="mono muted">Error 404 · Página no encontrada / Page not found</p>
+      <h1 class="sign">Cerrado<em>.</em></h1>
+      <p class="muted">Esta puerta no lleva a ningún lado. / This door leads nowhere.</p>
+      <p class="links mono"><a href="/">← Volver al inicio</a><a href="/en/">← Back home</a></p>
+    </main>
+  </body>
+</html>
+
+<style>
+  .nf {
+    min-height: 100svh;
+    display: grid;
+    align-content: center;
+    gap: 24px;
+    padding: var(--pad);
+  }
+  h1 {
+    font-size: clamp(96px, 24vw, 360px);
+  }
+  .links {
+    display: flex;
+    gap: 24px;
+  }
+  .links a {
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 4px;
+  }
+  .links a:hover {
+    color: var(--accent);
+  }
+</style>

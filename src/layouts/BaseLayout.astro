@@ -1,0 +1,116 @@
+---
+import '@fontsource-variable/archivo/wdth.css';
+import '@fontsource/jetbrains-mono/latin-400.css';
+import '@fontsource/jetbrains-mono/latin-500.css';
+import '../styles/tokens.css';
+import '../styles/base.css';
+import archivoLatin from '@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2?url';
+
+import SEO from '../components/seo/SEO.astro';
+import Nav from '../components/layout/Nav.astro';
+import Footer from '../components/layout/Footer.astro';
+import Loader from '../components/layout/Loader.astro';
+import Cursor from '../components/layout/Cursor.astro';
+import { useTranslations } from '../i18n/utils';
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<!doctype html>
+<html lang={lang === 'es' ? 'es-CO' : 'en-US'}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preload" href={archivoLatin} as="font" type="font/woff2" crossorigin />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <SEO lang={lang} title={t('meta.title')} description={t('meta.description')} />
+
+    <!-- Antes del primer pintado: clases de capacidad y pantalla de carga (solo 1ª visita por sesión). -->
+    <script is:inline>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add('js');
+        if (!(window.CSS && CSS.supports('animation-timeline: view()'))) d.classList.add('no-sda');
+        var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var seen = false;
+        try { seen = sessionStorage.getItem('lo-intro') === '1'; } catch (e) {}
+        if (!reduce && !seen) d.classList.add('has-loader');
+        // Seguro: si el JS principal falla, el contenido se muestra igual.
+        setTimeout(function () { d.classList.add('ready'); d.classList.remove('has-loader'); }, 3500);
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="skip mono" href="#main">{t('skip')}</a>
+    <div class="grain" aria-hidden="true"></div>
+    <div class="progress" aria-hidden="true"></div>
+    <Cursor />
+    <Loader label={t('loader.label')} />
+    <Nav lang={lang} />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer lang={lang} />
+
+    <script>
+      import '../scripts/main';
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  .skip {
+    position: fixed;
+    left: 16px;
+    top: -60px;
+    z-index: 100;
+    background: var(--accent);
+    color: var(--on-accent);
+    padding: 10px 14px;
+    text-decoration: none;
+    transition: top 0.2s;
+  }
+  .skip:focus {
+    top: 16px;
+  }
+
+  /* Grano estático (sin animación: cero costo por frame) */
+  .grain {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-grain);
+    pointer-events: none;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .progress {
+    position: fixed;
+    inset: 0 0 auto 0;
+    height: 3px;
+    background: var(--accent);
+    transform-origin: left;
+    transform: scaleX(0);
+    z-index: var(--z-progress);
+  }
+  @supports (animation-timeline: scroll()) {
+    .progress {
+      animation: progress-grow linear both;
+      animation-timeline: scroll(root);
+    }
+  }
+  @keyframes progress-grow {
+    to {
+      transform: scaleX(1);
+    }
+  }
+</style>

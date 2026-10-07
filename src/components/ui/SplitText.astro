@@ -1,0 +1,28 @@
+---
+/**
+ * Divide un texto en letras (`.ch`) en el servidor, sin JS.
+ * Los lectores de pantalla leen el texto completo (copia oculta), no letra por letra.
+ */
+interface Props {
+  text: string;
+  /** Índice inicial para escalonar la animación de entrada. */
+  offset?: number;
+  /** Carácter final en color de acento (p. ej. el punto del nombre). */
+  tail?: string;
+}
+const { text, offset = 0, tail } = Astro.props;
+const chars = [...text];
+---
+
+<span class="sr-only">{text}</span><span class="split" aria-hidden="true"
+  >{chars.map((c, i) => <span class="ch" style={`--i:${offset + i}`}>{c === ' ' ? ' ' : c}</span>)}{
+    tail && <em class="ch" style={`--i:${offset + chars.length}`}>{tail}</em>
+  }</span
+>
+
+<style>
+  .ch {
+    display: inline-block;
+    transition: font-variation-settings 0.35s var(--ease), color 0.35s;
+  }
+</style>

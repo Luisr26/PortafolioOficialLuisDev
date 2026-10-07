@@ -1,0 +1,149 @@
+---
+import { SITE } from '../../config/site';
+import type { Lang } from '../../i18n/ui';
+import { useTranslations } from '../../i18n/utils';
+import SplitText from '../ui/SplitText.astro';
+import DoorSign from '../ui/DoorSign.astro';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section class="hero" id="inicio" aria-labelledby="hero-title">
+  <span class="hint mono" aria-hidden="true">{t('hero.scroll')} ↓</span>
+  <div></div>
+  <h1 class="giant sign" id="hero-title" data-prox>
+    <span class="row l1"><SplitText text="Luis" /></span>
+    <span class="row l2"><SplitText text="Orozco" offset={4} tail="." /></span>
+    <span class="sr-only"> — {t('hero.role')}</span>
+  </h1>
+  <dl class="grid">
+    <div><dt class="mono" data-scramble>{t('hero.role.label')}</dt><dd>{t('hero.role')}</dd></div>
+    <div><dt class="mono" data-scramble>{t('hero.focus.label')}</dt><dd>{t('hero.focus')}</dd></div>
+    <div><dt class="mono" data-scramble>{t('hero.based.label')}</dt><dd>{SITE.location.city}, {SITE.location.country}</dd></div>
+    <div>
+      <dt class="mono" data-scramble>{t('hero.status.label')}</dt>
+      <dd><DoorSign front={t('hero.plate.front')} back={t('hero.plate.back')} label={t('hero.plate.aria')} href="#contacto" /></dd>
+    </div>
+  </dl>
+</section>
+
+<style>
+  .hero {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 96px var(--pad) 32px;
+    position: relative;
+  }
+  .giant {
+    font-size: clamp(84px, 21vw, 380px);
+    display: flex;
+    flex-direction: column;
+    user-select: none;
+  }
+  .row {
+    display: block;
+    overflow: hidden;
+    padding-bottom: 0.04em;
+    white-space: nowrap;
+  }
+  .l2 {
+    align-self: flex-end;
+  }
+  /* Entrada: las letras suben cuando la página está lista */
+  :global(.js:not(.ready)) .giant :global(.ch) {
+    transform: translateY(105%);
+  }
+  :global(.ready) .giant :global(.ch) {
+    animation: rise 1s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    animation-delay: calc(var(--i, 0) * 40ms);
+  }
+  @keyframes rise {
+    from {
+      transform: translateY(105%);
+    }
+    to {
+      transform: none;
+    }
+  }
+  @supports (animation-timeline: scroll()) {
+    .l1 {
+      animation: push-l linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 100vh;
+    }
+    .l2 {
+      animation: push-r linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 100vh;
+    }
+    .grid {
+      animation: fade-out linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 60vh;
+    }
+  }
+  @keyframes push-l {
+    to {
+      transform: translateX(-12vw);
+    }
+  }
+  @keyframes push-r {
+    to {
+      transform: translateX(8vw);
+      opacity: 0.12;
+    }
+  }
+  @keyframes fade-out {
+    to {
+      opacity: 0;
+      transform: translateY(-30px);
+    }
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    border-top: 1px solid var(--line);
+    padding-top: 16px;
+  }
+  .grid > div {
+    display: grid;
+    gap: 6px;
+    align-content: start;
+  }
+  dt {
+    color: var(--ink-2);
+  }
+  dd {
+    font-size: 15px;
+    line-height: 1.4;
+    max-width: 28ch;
+  }
+  .hint {
+    position: absolute;
+    right: var(--pad);
+    top: 96px;
+    writing-mode: vertical-rl;
+    color: var(--ink-2);
+  }
+  @media (max-width: 900px) {
+    .grid {
+      grid-template-columns: 1fr 1fr;
+      row-gap: 28px;
+    }
+  }
+  @media (max-width: 720px) {
+    .hint {
+      display: none;
+    }
+    .giant {
+      font-size: clamp(56px, 23vw, 200px);
+    }
+  }
+</style>

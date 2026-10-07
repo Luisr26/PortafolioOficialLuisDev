@@ -1,0 +1,30 @@
+---
+interface Props {
+  label: string;
+  aside?: string;
+  id?: string;
+}
+const { label, aside, id } = Astro.props;
+---
+
+<div class="head mono rv">
+  <h2 id={id} data-scramble>{label}</h2>
+  {aside && <span>{aside}</span>}
+  <slot />
+</div>
+
+<style>
+  .head {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    border-top: 1px solid currentColor;
+    padding-top: 14px;
+    margin-bottom: clamp(40px, 6vw, 80px);
+    color: var(--ink-2);
+  }
+  h2 {
+    font: inherit;
+    letter-spacing: inherit;
+  }
+</style>

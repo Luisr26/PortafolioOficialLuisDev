@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Comparar versiones</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0F0F10;--surface:#18181A;--surface-2:#202023;--line:#2B2B2F;--text:#EDEDED;--text-2:#9A9AA2}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{background:var(--bg);color:var(--text);font:500 13px/1.3 Geist,system-ui,sans-serif;-webkit-font-smoothing:antialiased;display:flex;flex-direction:column;overflow:hidden}
+a{color:inherit;text-decoration:none}
+button,select{font:inherit;color:inherit}
+.mono{font-family:"Geist Mono",ui-monospace,monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-2)}
+.bar{display:flex;align-items:center;gap:10px;padding:10px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.bar .sp{flex:1}
+.seg{display:flex;gap:4px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:4px}
+.seg button{border:0;background:transparent;padding:6px 12px;border-radius:999px;cursor:pointer;color:var(--text-2);white-space:nowrap}
+.seg button:hover{color:var(--text)}
+.seg button.on{background:var(--text);color:var(--bg)}
+select{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:7px 12px;cursor:pointer}
+.back{padding:7px 12px;border-radius:999px}
+.back:hover{background:var(--surface-2)}
+.panes{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);min-height:0}
+.pane{background:#08080A;display:flex;flex-direction:column;min-height:0;min-width:0}
+.pane-head{display:flex;justify-content:space-between;align-items:center;padding:8px 14px;border-bottom:1px solid var(--line);background:var(--bg)}
+.pane-head b{font-weight:600}
+.view{flex:1;position:relative;overflow:hidden}
+.view iframe{position:absolute;left:0;top:0;border:0;transform-origin:0 0;background:#fff}
+.changes{padding:10px 14px;border-top:1px solid var(--line);background:var(--bg);max-height:28vh;overflow:auto;display:none}
+.show-changes .changes{display:block}
+.changes li{list-style:none;padding:3px 0 3px 16px;position:relative;color:#CFCFD4;font-size:12px}
+.changes li::before{content:"+";position:absolute;left:0;color:#7CFF9B;font-family:"Geist Mono"}
+@media (max-width:760px){.panes{grid-template-columns:1fr;grid-template-rows:1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="bar">
+  <a class="back" href="index.html">← Prototipos</a>
+  <span class="mono" id="pname"></span>
+  <span class="sp"></span>
+  <span class="mono">Ancho simulado</span>
+  <div class="seg" id="widths"><button data-w="1440" class="on">1440</button><button data-w="1920">1920</button><button data-w="1024">1024</button><button data-w="390">Móvil</button></div>
+  <div class="seg" id="opts"><button data-o="sync" class="on">Scroll sincronizado</button><button data-o="changes">Ver cambios</button></div>
+</div>
+<div class="panes">
+  <div class="pane" data-side="l"><div class="pane-head"><select aria-label="Versión izquierda"></select><a class="mono" target="_blank">Abrir ↗</a></div><div class="view"><iframe title="Versión izquierda"></iframe></div><ul class="changes"></ul></div>
+  <div class="pane" data-side="r"><div class="pane-head"><select aria-label="Versión derecha"></select><a class="mono" target="_blank">Abrir ↗</a></div><div class="view"><iframe title="Versión derecha"></iframe></div><ul class="changes"></ul></div>
+</div>
+
+<script src="versions.js"></script>
+<script>
+const qp = new URLSearchParams(location.search);
+const pid = qp.get('p') || 'a';
+const proto = window.PROTO_VERSIONS[pid];
+const list = proto.list;
+const st = { l: qp.get('l') || list[Math.max(0, list.length - 2)].v, r: qp.get('r') || list[list.length - 1].v, w: 1440, sync: true };
+document.getElementById('pname').textContent = proto.name;
+let syncing = false;
+
+const panes = [...document.querySelectorAll('.pane')];
+panes.forEach(p => {
+  const side = p.dataset.side, sel = p.querySelector('select');
+  sel.innerHTML = list.map(x => `<option value="${x.v}">${x.v} · ${x.title}</option>`).join('');
+  sel.value = st[side];
+  sel.onchange = () => { st[side] = sel.value; load(p); updateUrl(); };
+  const fr = p.querySelector('iframe');
+  fr.addEventListener('load', () => {
+    fit(p);
+    fr.contentWindow.addEventListener('scroll', () => {
+      if (!st.sync || syncing) return;
+      const other = panes.find(x => x !== p).querySelector('iframe').contentWindow;
+      const w = fr.contentWindow, h = w.document.documentElement;
+      const ratio = w.scrollY / Math.max(1, h.scrollHeight - w.innerHeight);
+      const oh = other.document.documentElement;
+      syncing = true; other.scrollTo({ top: ratio * (oh.scrollHeight - other.innerHeight), behavior: 'instant' });
+      requestAnimationFrame(() => syncing = false);
+    }, { passive: true });
+  });
+  load(p);
+});
+
+function load(p) {
+  const v = list.find(x => x.v === st[p.dataset.side]);
+  p.querySelector('iframe').src = `${v.file}?embed`;
+  p.querySelector('.pane-head a').href = v.file;
+  p.querySelector('.changes').innerHTML = v.changes.map(c => `<li>${c}</li>`).join('');
+}
+function fit(p) {
+  const view = p.querySelector('.view'), fr = p.querySelector('iframe');
+  const k = Math.min(1, view.clientWidth / st.w);
+  fr.style.width = st.w + 'px';
+  fr.style.height = (view.clientHeight / k) + 'px';
+  fr.style.transform = `scale(${k})`;
+}
+function updateUrl() { history.replaceState(null, '', `?p=${pid}&l=${st.l}&r=${st.r}`); }
+
+document.getElementById('widths').onclick = e => {
+  const b = e.target.closest('button'); if (!b) return;
+  st.w = +b.dataset.w; [...e.currentTarget.children].forEach(x => x.classList.toggle('on', x === b)); panes.forEach(fit);
+};
+document.getElementById('opts').onclick = e => {
+  const b = e.target.closest('button'); if (!b) return;
+  if (b.dataset.o === 'sync') { st.sync = !st.sync; b.classList.toggle('on', st.sync); }
+  else { const on = document.body.classList.toggle('show-changes'); b.classList.toggle('on', on); setTimeout(() => panes.forEach(fit), 0); }
+};
+addEventListener('resize', () => panes.forEach(fit));
+updateUrl();
+</script>
+</body>
+</html>
